@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Slider } from '@/components/ui/slider';
 import { 
   Download, 
   Linkedin, 
@@ -130,10 +132,11 @@ export default function Portfolio() {
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
   const [ninjaName, setNinjaName] = useState('');
   const [password, setPassword] = useState('');
-  const [timerTime, setTimerTime] = useState(180);
+  const [eggDoneness, setEggDoneness] = useState<'soft' | 'medium' | 'hard'>('medium');
+  const [timerTime, setTimerTime] = useState(420); // Default to medium (7 minutes)
   const [timerActive, setTimerActive] = useState(false);
   const [randomBook, setRandomBook] = useState('');
-  const [coffeeInput, setCoffeeInput] = useState('');
+  const [coffeeMood, setCoffeeMood] = useState(0);
   const [mood, setMood] = useState('');
   const [showThemeSelector, setShowThemeSelector] = useState(false);
   
@@ -142,6 +145,16 @@ export default function Portfolio() {
   useEffect(() => {
     document.documentElement.className = currentTheme;
   }, [currentTheme]);
+  
+  useEffect(() => {
+    // Update timer duration when egg doneness changes
+    const durations = {
+      soft: 300,  // 5 minutes
+      medium: 420,  // 7 minutes
+      hard: 540   // 9 minutes
+    };
+    setTimerTime(durations[eggDoneness]);
+  }, [eggDoneness]);
 
   useEffect(() => {
     if (timerActive && timerTime > 0) {
@@ -186,7 +199,12 @@ export default function Portfolio() {
 
   const resetTimer = () => {
     setTimerActive(false);
-    setTimerTime(180);
+    const durations = {
+      soft: 300,  // 5 minutes
+      medium: 420,  // 7 minutes
+      hard: 540   // 9 minutes
+    };
+    setTimerTime(durations[eggDoneness]);
   };
 
   const pickRandomBook = () => {
@@ -195,14 +213,13 @@ export default function Portfolio() {
   };
 
   const checkCoffeeMood = () => {
-    const cups = parseInt(coffeeInput);
-    if (isNaN(cups) || cups <= 0) {
+    if (coffeeMood <= 0) {
       setMood('You need coffee! ☕');
-    } else if (cups <= 2) {
+    } else if (coffeeMood <= 2) {
       setMood('Mildly caffeinated 😊');
-    } else if (cups <= 4) {
+    } else if (coffeeMood <= 4) {
       setMood('Fully energized! ⚡');
-    } else if (cups <= 6) {
+    } else if (coffeeMood <= 6) {
       setMood('Coffee master! 🚀');
     } else {
       setMood('Probably vibrating! 🤯');
@@ -214,16 +231,19 @@ export default function Portfolio() {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-40 bg-background/90 backdrop-blur-sm border-b border-border">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-xl font-bold">{personalInfo.name}</h1>
+          <div className="flex items-center gap-2">
+            <img src="/logo.svg" alt="Logo" className="h-8 w-8" />
+            <h1 className="text-xl font-bold">{personalInfo.name}</h1>
+          </div>
           <button
             onClick={() => setShowThemeSelector(!showThemeSelector)}
             className="btn btn-ghost btn-sm relative"
           >
-            <Palette className="w-4 h-4" />
+            <Palette className="w-4 h-4 mr-1" />
             Theme
             {showThemeSelector && (
               <div className="absolute top-full right-0 mt-2 p-4 bg-background border border-border rounded-lg shadow-lg min-w-[200px]">
-                <div className="grid grid-cols-4 gap-2">
+                <div className="flex flex-col gap-2">
                   {themes.map((theme) => (
                     <button
                       key={theme.value}
@@ -231,14 +251,13 @@ export default function Portfolio() {
                         setCurrentTheme(theme.value);
                         setShowThemeSelector(false);
                       }}
-                      className={`theme-option ${currentTheme === theme.value ? 'active' : ''}`}
-                      style={{ backgroundColor: theme.color }}
-                      title={theme.name}
-                    />
+                      className={`px-3 py-2 rounded text-left ${
+                        currentTheme === theme.value ? 'bg-primary/10 text-primary' : 'hover:bg-muted'
+                      }`}
+                    >
+                      {theme.name}
+                    </button>
                   ))}
-                </div>
-                <div className="mt-2 text-xs text-muted-foreground text-center">
-                  Choose a theme
                 </div>
               </div>
             )}
@@ -264,11 +283,12 @@ export default function Portfolio() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href={personalInfo.cvUrl}
-                download
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn btn-primary btn-lg inline-flex items-center gap-2"
               >
                 <Download className="w-5 h-5" />
-                Download CV
+                View CV
               </a>
               <a
                 href={personalInfo.linkedinUrl}
@@ -409,118 +429,154 @@ export default function Portfolio() {
           <p className="text-center text-muted-foreground mb-12">
             Fun tools to keep recruiters engaged!
           </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {/* Ninja Name Generator */}
-            <div className="tool-card">
-              <div className="flex items-center gap-2 mb-4">
-                <Wand2 className="w-5 h-5 text-[hsl(var(--tool-highlight))]" />
-                <h3 className="font-semibold">Ninja Name Generator</h3>
-              </div>
-              <button
-                onClick={generateNinjaName}
-                className="btn btn-primary btn-sm mb-3 w-full"
-              >
-                Generate Ninja Name
-              </button>
-              {ninjaName && (
-                <div className="p-2 bg-secondary rounded text-center font-medium">
-                  {ninjaName}
-                </div>
-              )}
-            </div>
+          <div className="max-w-4xl mx-auto bg-card rounded-lg shadow-sm p-6">
+            <Tabs defaultValue="ninja">
+              <TabsList className="w-full mb-6">
+                <TabsTrigger value="ninja">Ninja Name</TabsTrigger>
+                <TabsTrigger value="password">Password</TabsTrigger>
+                <TabsTrigger value="egg">Egg Timer</TabsTrigger>
+                <TabsTrigger value="book">Book Picker</TabsTrigger>
+                <TabsTrigger value="coffee">Coffee Mood</TabsTrigger>
+              </TabsList>
 
-            {/* Password Generator */}
-            <div className="tool-card">
-              <div className="flex items-center gap-2 mb-4">
-                <Shield className="w-5 h-5 text-[hsl(var(--tool-highlight))]" />
-                <h3 className="font-semibold">Password Generator</h3>
-              </div>
-              <button
-                onClick={generatePassword}
-                className="btn btn-primary btn-sm mb-3 w-full"
-              >
-                Generate Password
-              </button>
-              {password && (
-                <div className="p-2 bg-secondary rounded text-center font-mono text-sm break-all">
-                  {password}
+              <TabsContent value="ninja" className="space-y-4">
+                <div className="flex items-center gap-2 mb-4">
+                  <Wand2 className="w-5 h-5 text-[hsl(var(--tool-highlight))]" />
+                  <h3 className="font-semibold">Ninja Name Generator</h3>
                 </div>
-              )}
-            </div>
-
-            {/* Egg Timer */}
-            <div className="tool-card">
-              <div className="flex items-center gap-2 mb-4">
-                <Timer className="w-5 h-5 text-[hsl(var(--tool-highlight))]" />
-                <h3 className="font-semibold">Boiled Egg Timer</h3>
-              </div>
-              <div className="text-center text-2xl font-bold mb-3">
-                {formatTime(timerTime)}
-              </div>
-              <div className="flex gap-2">
                 <button
-                  onClick={startTimer}
-                  disabled={timerActive}
-                  className="btn btn-primary btn-sm flex-1"
+                  onClick={generateNinjaName}
+                  className="btn btn-primary btn-sm mb-3 w-full"
                 >
-                  Start
+                  Generate Ninja Name
                 </button>
-                <button
-                  onClick={resetTimer}
-                  className="btn btn-outline btn-sm flex-1"
-                >
-                  Reset
-                </button>
-              </div>
-            </div>
+                {ninjaName && (
+                  <div className="p-2 bg-secondary rounded text-center font-medium">
+                    {ninjaName}
+                  </div>
+                )}
+              </TabsContent>
 
-            {/* Book Picker */}
-            <div className="tool-card">
-              <div className="flex items-center gap-2 mb-4">
-                <Book className="w-5 h-5 text-[hsl(var(--tool-highlight))]" />
-                <h3 className="font-semibold">Random Book Picker</h3>
-              </div>
-              <button
-                onClick={pickRandomBook}
-                className="btn btn-primary btn-sm mb-3 w-full"
-              >
-                Pick a Book
-              </button>
-              {randomBook && (
-                <div className="p-2 bg-secondary rounded text-center">
-                  {randomBook}
+              <TabsContent value="password" className="space-y-4">
+                <div className="flex items-center gap-2 mb-4">
+                  <Shield className="w-5 h-5 text-[hsl(var(--tool-highlight))]" />
+                  <h3 className="font-semibold">Password Generator</h3>
                 </div>
-              )}
-            </div>
+                <button
+                  onClick={generatePassword}
+                  className="btn btn-primary btn-sm mb-3 w-full"
+                >
+                  Generate Password
+                </button>
+                {password && (
+                  <div className="p-2 bg-secondary rounded text-center font-mono text-sm break-all">
+                    {password}
+                  </div>
+                )}
+              </TabsContent>
 
-            {/* Coffee Mood Gauge */}
-            <div className="tool-card md:col-span-2">
-              <div className="flex items-center gap-2 mb-4">
-                <Coffee className="w-5 h-5 text-[hsl(var(--tool-highlight))]" />
-                <h3 className="font-semibold">Coffee Mood Gauge</h3>
-              </div>
-              <div className="flex gap-2 mb-3">
-                <input
-                  type="number"
-                  placeholder="Cups of coffee today"
-                  value={coffeeInput}
-                  onChange={(e) => setCoffeeInput(e.target.value)}
-                  className="flex-1 px-3 py-2 border border-input rounded-md bg-background"
-                  min="0"
-                />
+              <TabsContent value="egg" className="space-y-4">
+                <div className="flex items-center gap-2 mb-4">
+                  <Timer className="w-5 h-5 text-[hsl(var(--tool-highlight))]" />
+                  <h3 className="font-semibold">Boiled Egg Timer</h3>
+                </div>
+                
+                <div className="flex gap-4 justify-center mb-4">
+                  {['soft', 'medium', 'hard'].map((type) => (
+                    <button
+                      key={type}
+                      onClick={() => setEggDoneness(type as 'soft' | 'medium' | 'hard')}
+                      className={`px-4 py-2 rounded-md ${eggDoneness === type ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}
+                    >
+                      {type.charAt(0).toUpperCase() + type.slice(1)}
+                    </button>
+                  ))}
+                </div>
+                
+                <div className="text-center mb-2">
+                  <p className="text-sm text-muted-foreground">
+                    Timer set for: {eggDoneness === 'soft' ? '5' : eggDoneness === 'medium' ? '7' : '9'} minutes
+                  </p>
+                </div>
+                
+                <div className="text-center text-2xl font-bold mb-3">
+                  {formatTime(timerTime)}
+                </div>
+                
+                <div className="flex gap-2">
+                  <button
+                    onClick={startTimer}
+                    disabled={timerActive}
+                    className="btn btn-primary btn-sm flex-1"
+                  >
+                    Start
+                  </button>
+                  <button
+                    onClick={resetTimer}
+                    className="btn btn-outline btn-sm flex-1"
+                  >
+                    Reset
+                  </button>
+                </div>
+              </TabsContent>
+
+              <TabsContent value="book" className="space-y-4">
+                <div className="flex items-center gap-2 mb-4">
+                  <Book className="w-5 h-5 text-[hsl(var(--tool-highlight))]" />
+                  <h3 className="font-semibold">Random Book Picker</h3>
+                </div>
+                <button
+                  onClick={pickRandomBook}
+                  className="btn btn-primary btn-sm mb-3 w-full"
+                >
+                  Pick a Book
+                </button>
+                {randomBook && (
+                  <div className="p-2 bg-secondary rounded text-center">
+                    {randomBook}
+                  </div>
+                )}
+              </TabsContent>
+
+              <TabsContent value="coffee" className="space-y-4">
+                <div className="flex items-center gap-2 mb-4">
+                  <Coffee className="w-5 h-5 text-[hsl(var(--tool-highlight))]" />
+                  <h3 className="font-semibold">Coffee Mood Gauge</h3>
+                </div>
+                <div className="mb-4">
+                  <p className="text-sm text-muted-foreground mb-2">How many coffees have you had today?</p>
+                  <Slider
+                    defaultValue={[coffeeMood]}
+                    min={0}
+                    max={5}
+                    step={1}
+                    onValueChange={(value) => setCoffeeMood(value[0])}
+                    className="mb-2"
+                  />
+                  <div className="flex justify-between text-xs text-muted-foreground">
+                    <span>0</span>
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5+</span>
+                  </div>
+                </div>
+                
                 <button
                   onClick={checkCoffeeMood}
-                  className="btn btn-primary btn-sm"
+                  className="btn btn-primary btn-sm w-full"
                 >
                   Check Mood
                 </button>
-              </div>
-              {mood && (
-                <div className="p-2 bg-secondary rounded text-center font-medium">
-                  {mood}
-                </div>
-              )}
-            </div>
+                
+                {mood && (
+                  <div className="p-2 bg-secondary rounded text-center font-medium mt-3">
+                    {mood}
+                  </div>
+                )}
+              </TabsContent>
+            </Tabs>
           </div>
         </div>
       </section>
