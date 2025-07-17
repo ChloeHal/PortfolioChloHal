@@ -137,7 +137,6 @@ export default function Portfolio() {
   const [timerActive, setTimerActive] = useState(false);
   const [randomBook, setRandomBook] = useState('');
   const [coffeeMood, setCoffeeMood] = useState(0);
-  const [mood, setMood] = useState('');
   const [showThemeSelector, setShowThemeSelector] = useState(false);
   
   const timerRef = useRef<NodeJS.Timeout>();
@@ -212,18 +211,16 @@ export default function Portfolio() {
     setRandomBook(book);
   };
 
-  const checkCoffeeMood = () => {
-    if (coffeeMood <= 0) {
-      setMood('You need coffee! ☕');
-    } else if (coffeeMood <= 2) {
-      setMood('Mildly caffeinated 😊');
-    } else if (coffeeMood <= 4) {
-      setMood('Fully energized! ⚡');
-    } else if (coffeeMood <= 6) {
-      setMood('Coffee master! 🚀');
-    } else {
-      setMood('Probably vibrating! 🤯');
-    }
+  const checkCoffeeMood = (cups: number) => {
+    if (cups <= 0) return 'You need coffee! ☕';
+    if (cups === 1) return 'Mildly caffeinated 😊';
+    if (cups === 2) return 'Getting started ☕';
+    if (cups === 3) return 'Fully energized! ⚡';
+    if (cups === 4) return 'Peak productivity! 🚀';
+    if (cups === 5) return 'Super focused! 🎯';
+    if (cups === 6) return 'Slight hand tremors... 👋';
+    if (cups === 7) return 'Heart racing! ❤️‍🔥';
+    return 'Vibrating through walls! 🤯';
   };
 
   return (
@@ -548,7 +545,7 @@ export default function Portfolio() {
                   <Slider
                     defaultValue={[coffeeMood]}
                     min={0}
-                    max={5}
+                    max={8}
                     step={1}
                     onValueChange={(value) => setCoffeeMood(value[0])}
                     className="mb-2"
@@ -559,22 +556,16 @@ export default function Portfolio() {
                     <span>2</span>
                     <span>3</span>
                     <span>4</span>
-                    <span>5+</span>
+                    <span>5</span>
+                    <span>6</span>
+                    <span>7</span>
+                    <span>8+</span>
                   </div>
                 </div>
                 
-                <button
-                  onClick={checkCoffeeMood}
-                  className="btn btn-primary btn-sm w-full"
-                >
-                  Check Mood
-                </button>
-                
-                {mood && (
-                  <div className="p-2 bg-secondary rounded text-center font-medium mt-3">
-                    {mood}
-                  </div>
-                )}
+                <div className="p-2 bg-secondary rounded text-center font-medium mt-3">
+                  {checkCoffeeMood(coffeeMood)}
+                </div>
               </TabsContent>
             </Tabs>
           </div>
