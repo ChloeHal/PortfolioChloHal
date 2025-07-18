@@ -1,156 +1,492 @@
-import { useState, useEffect, useRef } from 'react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Slider } from '@/components/ui/slider';
-import { 
-  Download, 
-  Linkedin, 
-  Github, 
-  Palette, 
-  Timer, 
-  Wand2, 
-  Book, 
+import { useState, useEffect, useRef } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Slider } from "@/components/ui/slider";
+import {
+  Download,
+  Linkedin,
+  Github,
+  Palette,
+  Timer,
+  Wand2,
+  Book,
   Coffee,
   Shield,
-  X
-} from 'lucide-react';
+  X,
+} from "lucide-react";
 
 // Sample data - replace with your actual data
 const personalInfo = {
-  name: "John Doe",
-  photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
-  description: "Full-stack developer passionate about creating beautiful and functional web experiences.",
-  cvUrl: "/path-to-your-cv.pdf",
-  linkedinUrl: "https://linkedin.com/in/yourprofile",
-  githubUrl: "https://github.com/yourprofile"
+  name: "Chloé Halloin",
+  photo: "tete.png",
+  description: "UX/UI designer & Front-end developper.",
+  descriptionplus:
+    "Designer UX/UI et développeuse web passionnée par la création d'expériences digitales qui font sens. J'adore transformer des idées complexes en interfaces intuitives et des objectifs en parcours pertinents. Entre wireframes et lignes de code, je m'amuse à mettre sur pied des projets qui allient esthétique, efficacité et fonctionnalité.",
+  cvUrl: "CV-ChloeHalloin.pdf",
+  linkedinUrl:
+    "https://www.linkedin.com/in/chlo%C3%A9-halloin-front-end-dev-uxui-design/",
+  githubUrl: "https://github.com/yourprofile",
 };
 
-const workPhilosophy = "I believe in writing clean, maintainable code that not only works but tells a story. Every line of code should serve a purpose, and every feature should enhance the user experience. Collaboration and continuous learning are at the heart of my development process.";
+const workPhilosophy =
+  "Je crois en un équilibre entre autonomie et collaboration : savoir avancer seule, mais aussi co-construire avec les autres. J’aborde chaque projet avec curiosité, créativité et une grande adaptabilité, en restant toujours à l’écoute des besoins humains derrière les objectifs. Pour moi, un bon travail repose sur la constance, la remise en question, et l’envie d’apprendre sans cesse. Je préfère avancer avec optimisme, en valorisant l’intelligence collective, la bienveillance et la rigueur.";
 
 const experiences = [
   {
-    year: "2023 - Present",
-    title: "Senior Frontend Developer",
-    company: "TechCorp Inc.",
-    description: "Led the development of responsive web applications using React and TypeScript. Collaborated with design teams to create intuitive user interfaces."
+    year: "Aout 2023 - Present",
+    title: "Front-End Designer & Web Developer",
+    company: "Vertical Design",
+    description:
+      "Gestion de projets web sur mesure de bout en bout — de la conception UX/UI et du prototypage jusqu’au développement, au déploiement et à l’hébergement ainsi que la maintenance et l'accompagnement pour la prise en main — pour garantir des solutions personnalisées qui équilibrent les besoins des utilisateurs, la performance technique et les objectifs du client.",
   },
   {
-    year: "2021 - 2023",
-    title: "Full-Stack Developer",
-    company: "StartupXYZ",
-    description: "Built scalable web applications from scratch using modern technologies. Implemented CI/CD pipelines and maintained high code quality standards."
+    year: "Juillet -  Aout 2023",
+    title: "UX/UI Design Trainee & Web Developer",
+    company: "Codika.io",
+    description:
+      "Conception UX/UI pour des interfaces mobiles, avec un focus sur l’expérience utilisateur, la clarté des parcours et l’engagement au quotidien.",
   },
   {
-    year: "2019 - 2021",
-    title: "Junior Developer",
-    company: "WebSolutions Ltd.",
-    description: "Developed and maintained client websites using various web technologies. Gained experience in both frontend and backend development."
-  }
+    year: "Novembre 2022 - Aout 2023",
+    title: "Web Developer Trainee",
+    company: "BeCode",
+    description:
+      "Apprentissage par la méthodologie active dans l’objectif de devenir développeur front-end.",
+  },
+  {
+    year: "Janvier 2021 - Décembre 2022",
+    title: "Webdesigner",
+    company: "DixNeuf 90",
+    description:
+      "Design UX/UI et création d’identités de marque cohérentes pour des produits digitaux.",
+  },
+  {
+    year: "Octobre 2020 - Avril 2021",
+    title: "e-Commerce Intern",
+    company: "Distriplus (Di & Planet Parfum)",
+    description:
+      "Conception UX/UI et élaboration de concepts digitaux innovants, depuis l’idée initiale jusqu’aux prototypes fonctionnels.",
+  },
+  {
+    year: "Mars 2019 - Aout 2023",
+    title: "Executive Director & Graphic Designer",
+    company: "Thé OK! ASBL",
+    description:
+      "Direction d’une organisation à but non lucratif de 15 membres dédiée à la sensibilisation et à l’éducation autour du consentement. Création de supports visuels pour les réseaux sociaux et les supports imprimés.",
+  },
+  {
+    year: "Février - Mai 2019",
+    title: "Trainee in the Webshop Team",
+    company: "MCS Kick & Rush",
+    description:
+      "Création de supports imprimés et digitaux : cartes de visite, flyers, affiches et newsletters. Direction artistique pour la création de sites web, contribution à la mise en place d’Odoo, et rédaction de contenus optimisés pour le référencement (SEO).",
+  },
 ];
 
 const education = [
   {
-    year: "2015 - 2019",
-    title: "Computer Science Degree",
-    institution: "University of Technology",
-    description: "Graduated with honors. Specialized in software engineering and web development."
+    year: "Septembre 2021 - 2022",
+    title: "Bachelier en Écriture Multimédia",
+    institution: "ISFSC",
+    description:
+      "Grande Distinction - Bachelier créatif à destination des métiers du web comme le marketing, le graphisme ou le web.",
   },
   {
-    year: "2018",
-    title: "Web Development Bootcamp",
-    institution: "CodeAcademy",
-    description: "Intensive 12-week program focusing on modern web development technologies."
-  }
+    year: "Septembre 2026 - Juin 2020",
+    title: "Bachelier en e-Business",
+    institution: "EPHEC",
+    description:
+      "Distinction - Bachelier permettant de développer des compétences dans les différents aspects digitaux d'un business comme le droit, la supply chain, le marketing, le développement web, les bases données, ...",
+  },
 ];
 
 const skills = {
-  soft: ["Problem Solving", "Team Leadership", "Communication", "Adaptability", "Time Management", "Critical Thinking"],
-  hard: ["JavaScript", "TypeScript", "React", "Node.js", "Python", "SQL", "Git", "Docker", "AWS", "TailwindCSS"]
+  soft: [
+    "Indépendance",
+    "Optimisme",
+    "Collaboration",
+    "Empathie",
+    "Curiosité",
+    "Constante",
+    "Créativité",
+    "Polyvalence",
+    "Adaptabilité",
+    "Fiabilité",
+    "Bienveillance",
+  ],
+  hard: [
+    "Scrum Master",
+    "Product Owner",
+    "Odoo",
+    "Prestashop",
+    "Illustrator",
+    "Photoshop",
+    "Html",
+    "CSS",
+    "PHP",
+    "Javascript",
+    "Liquid",
+    "Tailwind",
+    "Bootstrap",
+    "Wordpress",
+    "Shopify",
+    "Figma",
+    "Adobe XD",
+    "Mailchimp",
+    "Google Analytics",
+  ],
 };
 
 const projects = [
   {
     id: 1,
-    title: "E-commerce Platform",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop",
-    tags: ["React", "Node.js", "MongoDB"],
-    services: ["Frontend Development", "Backend API", "Database Design"],
-    fullImage: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
-    description: "A full-featured e-commerce platform with user authentication, product management, shopping cart functionality, and payment integration. Built with modern technologies for optimal performance.",
-    tools: ["React", "Node.js", "Express", "MongoDB", "Stripe API", "JWT", "Cloudinary"]
+    title: "187 Hippies",
+    image: "1872.png",
+    tags: [
+      "E-commerce",
+      "Développement web",
+      "Charte graphique",
+      "UI/UX Design",
+    ],
+    services: [
+      "E-commerce",
+      "Développement web",
+      "Charte graphique",
+      "UI/UX Design",
+    ],
+    fullImage: "1872.png",
+    description: "Description is coming",
+    tools: ["Shopify", "Liquid", "JavaScript", "Photoshop"],
   },
   {
     id: 2,
-    title: "Task Management App",
-    image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop",
-    tags: ["Vue.js", "Firebase", "PWA"],
-    services: ["Frontend Development", "Real-time Updates", "PWA Implementation"],
-    fullImage: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=600&fit=crop",
-    description: "A Progressive Web App for task management with real-time collaboration features. Users can create projects, assign tasks, and track progress with team members.",
-    tools: ["Vue.js", "Firebase", "Vuex", "Service Workers", "Push Notifications"]
+    title: "Ambiance Altitude",
+    image: "ambiancealtitude2.png",
+    tags: ["UI/UX Design"],
+    services: ["UI/UX Design"],
+    fullImage: "ambiancealtitude2.png",
+    description: "Description is coming",
+    tools: ["Figma", "Illustrator"],
   },
   {
     id: 3,
-    title: "Portfolio Website",
-    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&h=300&fit=crop",
-    tags: ["Next.js", "Tailwind", "Framer Motion"],
-    services: ["UI/UX Design", "Animation", "SEO Optimization"],
-    fullImage: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=600&fit=crop",
-    description: "A modern, responsive portfolio website with smooth animations and optimized performance. Features dark mode, multiple themes, and excellent SEO.",
-    tools: ["Next.js", "TailwindCSS", "Framer Motion", "TypeScript", "Vercel"]
-  }
+    title: "Ambiance Cuisine",
+    image: "ambiancecuisine2.png",
+    tags: ["Développement web"],
+    services: ["Développement web"],
+    fullImage: "ambiancecuisine2.png",
+    description: "Description is coming",
+    tools: ["Figma", "Wordpress", "Elementor", "Javascript", "PHP"],
+  },
+  {
+    id: 4,
+    title: "Avril Kids",
+    image: "avril2.png",
+    tags: [
+      "E-commerce",
+      "Développement web",
+      "Charte graphique",
+      "UI/UX Design",
+    ],
+    services: [
+      "E-commerce",
+      "Développement web",
+      "Charte graphique",
+      "UI/UX Design",
+    ],
+    fullImage: "avril2.png",
+    description: "Description is coming",
+    tools: ["Shopify", "Liquid", "JavaScript", "Photoshop", "Illustrator"],
+  },
+  {
+    id: 5,
+    title: "La Bastide",
+    image: "bastide2.png",
+    tags: ["Branding", "Charte graphique", "UI/UX Design"],
+    services: ["Branding", "Charte graphique", "UI/UX Design"],
+    fullImage: "bastide2.png",
+    description: "Description is coming",
+    tools: ["Figma", "Illustrator", "Photoshop"],
+  },
+  {
+    id: 6,
+    title: "Berquin Jewels",
+    image: "berquin2.png",
+    tags: ["Développement web", "Formation", "SEO Optimization"],
+    services: ["Développement web", "Formation", "SEO Optimization"],
+    fullImage: "berquin2.png",
+    description: "Description is coming",
+    tools: ["Figma", "Wordpress", "Elementor", "Javascript", "PHP"],
+  },
+  {
+    id: 7,
+    title: "Damso",
+    image: "damso2.png",
+    tags: [
+      "E-commerce",
+      "Développement web",
+      "Charte graphique",
+      "UI/UX Design",
+    ],
+    services: [
+      "E-commerce",
+      "Développement web",
+      "Charte graphique",
+      "UI/UX Design",
+    ],
+    fullImage: "damso2.png",
+    description: "Description is coming",
+    tools: [
+      "Figma",
+      "Shopify",
+      "Liquid",
+      "JavaScript",
+      "Illustrator",
+      "Photoshop",
+    ],
+  },
+  {
+    id: 8,
+    title: "Digilime",
+    image: "digilime2.png",
+    tags: ["Développement web", "Charte graphique", "UI/UX Design"],
+    services: ["Développement web", "Charte graphique", "UI/UX Design"],
+    fullImage: "digilime2.png",
+    description: "Description is coming",
+    tools: [
+      "Figma",
+      "Wordpress",
+      "Elementor",
+      "Javascript",
+      "PHP",
+      "Illustrator",
+    ],
+  },
+  {
+    id: 9,
+    title: "Gobox",
+    image: "gobox2.png",
+    tags: [
+      "UI/UX Design",
+      "Charte graphique",
+      "Développement web",
+      "Traitement d'images",
+      "SEO Optimization",
+    ],
+    services: [
+      "UI/UX Design",
+      "Charte graphique",
+      "Développement web",
+      "Traitement d'images",
+      "SEO Optimization",
+    ],
+    fullImage: "gobox2.png",
+    description: "Description is coming",
+    tools: [
+      "Figma",
+      "Wordpress",
+      "Understrap",
+      "ACF",
+      "Javascript",
+      "PHP",
+      "Illustrator",
+      "Photoshop",
+    ],
+  },
+  {
+    id: 10,
+    title: "Jump XL",
+    image: "jump2.png",
+    tags: [
+      "UI/UX Design",
+      "Charte graphique",
+      "Développement web",
+      "Traitement d'images",
+      "SEO Optimization",
+    ],
+    services: [
+      "UI/UX Design",
+      "Charte graphique",
+      "Développement web",
+      "Traitement d'images",
+      "SEO Optimization",
+    ],
+    fullImage: "jump2.png",
+    description: "Description is coming",
+    tools: [
+      "Figma",
+      "Wordpress",
+      "Elementor",
+      "Javascript",
+      "PHP",
+      "Illustrator",
+      "Photoshop",
+    ],
+  },
+  {
+    id: 11,
+    title: "Ninja Clicker",
+    image: "ninja2.png",
+    tags: ["Illustration", "UI/UX Design", "Développement web"],
+    services: ["Illustration", "Développement web"],
+    fullImage: "ninja2.png",
+    description: "Description is coming",
+    tools: [
+      "Vite",
+      "Tailwind",
+      "Javascript",
+      "Typescript",
+      "MongoDB",
+      "Figma",
+      "Illustrator",
+    ],
+  },
+  {
+    id: 12,
+    title: "Red Sheep Agency",
+    image: "redsheep2.png",
+    tags: ["Branding", "UI/UX Design", "Développement web", "SEO Optimization"],
+    services: [
+      "Branding",
+      "UI/UX Design",
+      "Développement web",
+      "SEO Optimization",
+    ],
+    fullImage: "redsheep2.png",
+    description: "Description is coming",
+    tools: [
+      "Figma",
+      "Wordpress",
+      "Elementor",
+      "Javascript",
+      "PHP",
+      "Illustrator",
+      "Photoshop",
+    ],
+  },
+  {
+    id: 13,
+    title: "Season Flowers",
+    image: "season2.png",
+    tags: [
+      "UI/UX Design",
+      "Charte graphique",
+      "Développement web",
+      "Illustration",
+      "SEO Optimization",
+    ],
+    services: [
+      "UI/UX Design",
+      "Charte graphique",
+      "Développement web",
+      "Illustration",
+      "SEO Optimization",
+    ],
+    fullImage: "season2.png",
+    description: "Description is coming",
+    tools: [
+      "Figma",
+      "Wordpress",
+      "Elementor",
+      "Javascript",
+      "PHP",
+      "Illustrator",
+      "Photoshop",
+    ],
+  },
+  {
+    id: 14,
+    title: "Vertical Design",
+    image: "vertical2.png",
+    tags: ["Branding", "UI/UX Design", "Développement web", "SEO Optimization"],
+    services: [
+      "Branding",
+      "UI/UX Design",
+      "Développement web",
+      "SEO Optimization",
+    ],
+    fullImage: "vertical2.png",
+    description: "Description is coming",
+    tools: [
+      "Figma",
+      "Wordpress",
+      "Understrap",
+      "ACF",
+      "Javascript",
+      "PHP",
+      "Illustrator",
+      "Photoshop",
+    ],
+  },
 ];
 
 const themes = [
-  { name: 'Default', value: '', color: '#3b82f6' },
-  { name: 'Flower', value: 'theme-flower', color: '#d946ef' },
-  { name: 'Wine', value: 'theme-wine', color: '#dc2626' },
-  { name: 'Box', value: 'theme-box', color: '#0ea5e9' },
-  { name: 'Real Estate', value: 'theme-real-estate', color: '#ea580c' },
-  { name: 'Media', value: 'theme-media', color: '#06b6d4' },
-  { name: 'Agency', value: 'theme-agency', color: '#8b5cf6' },
-  { name: 'Music', value: 'theme-music', color: '#d946ef' },
-  { name: 'Production', value: 'theme-production', color: '#f59e0b' },
-  { name: 'Doudou', value: 'theme-doudou', color: '#eab308' },
-  { name: 'Luxury', value: 'theme-luxury', color: '#fbbf24' }
+  { name: "Par défault", value: "", color: "#3b82f6" },
+  { name: "Fleurs", value: "theme-flower", color: "#d946ef" },
+  { name: "Vin", value: "theme-wine", color: "#dc2626" },
+  { name: "Boxe", value: "theme-box", color: "#0ea5e9" },
+  { name: "Real Estate", value: "theme-real-estate", color: "#ea580c" },
+  { name: "Agence Média", value: "theme-media", color: "#06b6d4" },
+  { name: "Agence Digitale", value: "theme-agency", color: "#8b5cf6" },
+  { name: "Artiste", value: "theme-music", color: "#d946ef" },
+  { name: "Boite de Production", value: "theme-production", color: "#f59e0b" },
+  { name: "Doudou", value: "theme-doudou", color: "#eab308" },
+  { name: "Luxe", value: "theme-luxury", color: "#fbbf24" },
 ];
 
 const books = [
-  "The Pragmatic Programmer",
-  "Clean Code",
-  "Design Patterns",
-  "You Don't Know JS",
-  "Eloquent JavaScript",
-  "The Art of Computer Programming",
-  "Code Complete",
-  "Refactoring",
-  "Head First Design Patterns",
-  "JavaScript: The Good Parts"
+  "Circé de Madeleine Miller",
+  "Propaganda de Edward L. Bernays",
+  "Notre dignité de Nesrine Slaoui",
+  "La ballerine de Kiev de Stéphanie Perez",
+  "La saga Dune de Frank Herbert",
+  "Soeurs dans la guerre de Sarah Hall",
+  "Le livre des reines de Joumana Haddad",
+  "L'illusion du mal de Piergiorgio Pulixi",
+  "Betty de Tiffany McDaniel",
+  "L'oiseau moqueur de Walter Tevis",
+  "Les combustibles de Amélie Nothomb",
+  "Le bal des folles de Victoria Mas",
+  "La tresse de Laetitia Colombani",
+  "Vox de Christina Dalcher",
+  "Malevil de Robert Merle",
+  "Daisy Jones & The Six de Taylor Jenkins Reid",
+  "Madame Einstein de MArie Benedict",
+  "La saga Under the Dome de Stephen King",
+  "Le quatrième mur de Sorj Chalandon",
+  "Acide sulfurique de Amélie Nothomb",
+  "Monsieur Ibrahim et les fleurs du Coran de Eric-Emmanuel Schmitt",
+  "Chien 51 de Laurent Gaudé",
+  "1984 de George Orwell",
 ];
 
 export default function Portfolio() {
-  const [currentTheme, setCurrentTheme] = useState('');
-  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
-  const [ninjaName, setNinjaName] = useState('');
-  const [password, setPassword] = useState('');
-  const [eggDoneness, setEggDoneness] = useState<'soft' | 'medium' | 'hard'>('medium');
+  const [currentTheme, setCurrentTheme] = useState("");
+  const [selectedProject, setSelectedProject] = useState<
+    (typeof projects)[0] | null
+  >(null);
+  const [ninjaName, setNinjaName] = useState("");
+  const [password, setPassword] = useState("");
+  const [eggDoneness, setEggDoneness] = useState<"soft" | "medium" | "hard">(
+    "medium"
+  );
   const [timerTime, setTimerTime] = useState(420); // Default to medium (7 minutes)
   const [timerActive, setTimerActive] = useState(false);
-  const [randomBook, setRandomBook] = useState('');
+  const [randomBook, setRandomBook] = useState("");
   const [coffeeMood, setCoffeeMood] = useState(0);
   const [showThemeSelector, setShowThemeSelector] = useState(false);
-  
+
   const timerRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
     document.documentElement.className = currentTheme;
   }, [currentTheme]);
-  
+
   useEffect(() => {
     // Update timer duration when egg doneness changes
     const durations = {
-      soft: 300,  // 5 minutes
-      medium: 420,  // 7 minutes
-      hard: 540   // 9 minutes
+      soft: 300, // 5 minutes
+      medium: 420, // 7 minutes
+      hard: 540, // 9 minutes
     };
     setTimerTime(durations[eggDoneness]);
   }, [eggDoneness]);
@@ -158,11 +494,11 @@ export default function Portfolio() {
   useEffect(() => {
     if (timerActive && timerTime > 0) {
       timerRef.current = setTimeout(() => {
-        setTimerTime(prev => prev - 1);
+        setTimerTime((prev) => prev - 1);
       }, 1000);
     } else if (timerTime === 0) {
       setTimerActive(false);
-      alert('Your egg is ready! 🥚');
+      alert("Your egg is ready! 🥚");
     }
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
@@ -170,16 +506,52 @@ export default function Portfolio() {
   }, [timerActive, timerTime]);
 
   const generateNinjaName = () => {
-    const firstNames = ['Shadow', 'Silent', 'Swift', 'Hidden', 'Dark', 'Storm', 'Fire', 'Ice'];
-    const lastNames = ['Blade', 'Warrior', 'Master', 'Hunter', 'Dragon', 'Wolf', 'Eagle', 'Tiger'];
+    const firstNames = [
+      "Silent",
+      "Big",
+      "Sad",
+      "Dark",
+      "Agile",
+      "Fragile",
+      "Dumb",
+      "Dead",
+      "Ghost",
+      "Snake",
+      "Mysterious",
+      "Clumsy",
+      "Hollow",
+      "Iron",
+      "Golden",
+      "Gracefull",
+      "Invisible",
+    ];
+    const lastNames = [
+      "Killer",
+      "Soldier",
+      "Assassin",
+      "Demon",
+      "Hunter",
+      "Spider",
+      "Bullet",
+      "Buildozer",
+      "Stalker",
+      "Samaritan",
+      "Ninja",
+      "Thunder",
+      "Wolf",
+      "Shade",
+      "Dagger",
+      "Master",
+    ];
     const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
     const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
     setNinjaName(`${firstName} ${lastName}`);
   };
 
   const generatePassword = () => {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
-    let result = '';
+    const chars =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+    let result = "";
     for (let i = 0; i < 12; i++) {
       result += chars.charAt(Math.floor(Math.random() * chars.length));
     }
@@ -189,7 +561,7 @@ export default function Portfolio() {
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
+    return `${mins}:${secs.toString().padStart(2, "0")}`;
   };
 
   const startTimer = () => {
@@ -199,9 +571,9 @@ export default function Portfolio() {
   const resetTimer = () => {
     setTimerActive(false);
     const durations = {
-      soft: 300,  // 5 minutes
-      medium: 420,  // 7 minutes
-      hard: 540   // 9 minutes
+      soft: 300, // 5 minutes
+      medium: 420, // 7 minutes
+      hard: 540, // 9 minutes
     };
     setTimerTime(durations[eggDoneness]);
   };
@@ -212,15 +584,22 @@ export default function Portfolio() {
   };
 
   const checkCoffeeMood = (cups: number) => {
-    if (cups <= 0) return 'You need coffee! ☕';
-    if (cups === 1) return 'Mildly caffeinated 😊';
-    if (cups === 2) return 'Getting started ☕';
-    if (cups === 3) return 'Fully energized! ⚡';
-    if (cups === 4) return 'Peak productivity! 🚀';
-    if (cups === 5) return 'Super focused! 🎯';
-    if (cups === 6) return 'Slight hand tremors... 👋';
-    if (cups === 7) return 'Heart racing! ❤️‍🔥';
-    return 'Vibrating through walls! 🤯';
+    if (cups <= 0)
+      return "Je sais que tu rêve plus d'un café que de connaître la soirée de Karen! ☕";
+    if (cups === 1)
+      return "Tu sais comment dire bonjour, mais ton regard est encore un peu passif/agressif.";
+    if (cups === 2)
+      return "Sociabilisation tolérée. Tu es apte pour répondre à des questions complexes. ☕";
+    if (cups === 3)
+      return "Tu ris, tu souris, tu peux presque parler météo sans pleurer.";
+    if (cups === 4)
+      return "Feu vert 🚀 Tu proposes même d'aller chercher la prochaine fournée.";
+    if (cups === 5)
+      return "Tu peux tenir un Ted Talk mais essaye quand même de rester focus ";
+    if (cups === 6)
+      return "Même si Lorelai Gilmore te vénère, on n'est pas encore à l'after work 😅";
+    if (cups === 7) return "Oui ... ça s'appelle une tachycardie";
+    return "Explosion ou implosion ... ça va mal finir 🤯";
   };
 
   return (
@@ -229,7 +608,6 @@ export default function Portfolio() {
       <nav className="fixed top-0 left-0 right-0 z-40 bg-background/90 backdrop-blur-sm border-b border-border">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <img src="/logo.svg" alt="Logo" className="h-8 w-8" />
             <h1 className="text-xl font-bold">{personalInfo.name}</h1>
           </div>
           <button
@@ -237,7 +615,7 @@ export default function Portfolio() {
             className="btn btn-ghost btn-sm relative"
           >
             <Palette className="w-4 h-4 mr-1" />
-            Theme
+            Choisis ton thème
             {showThemeSelector && (
               <div className="absolute top-full right-0 mt-2 p-4 bg-background border border-border rounded-lg shadow-lg min-w-[200px]">
                 <div className="flex flex-col gap-2">
@@ -249,7 +627,9 @@ export default function Portfolio() {
                         setShowThemeSelector(false);
                       }}
                       className={`px-3 py-2 rounded text-left ${
-                        currentTheme === theme.value ? 'bg-primary/10 text-primary' : 'hover:bg-muted'
+                        currentTheme === theme.value
+                          ? "bg-primary/10 text-primary"
+                          : "hover:bg-muted"
                       }`}
                     >
                       {theme.name}
@@ -274,8 +654,11 @@ export default function Portfolio() {
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
               {personalInfo.name}
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-muted-foreground mb-4 max-w-2xl mx-auto">
               {personalInfo.description}
+            </p>
+            <p className="text-lg leading-relaxed max-w-4xl mb-8 mx-auto">
+              {personalInfo.descriptionplus}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -285,7 +668,7 @@ export default function Portfolio() {
                 className="btn btn-primary btn-lg inline-flex items-center gap-2"
               >
                 <Download className="w-5 h-5" />
-                View CV
+                Voir le CV
               </a>
               <a
                 href={personalInfo.linkedinUrl}
@@ -294,7 +677,7 @@ export default function Portfolio() {
                 className="btn btn-outline btn-lg inline-flex items-center gap-2"
               >
                 <Linkedin className="w-5 h-5" />
-                LinkedIn Profile
+                Profil LinkedIn
               </a>
             </div>
           </div>
@@ -304,7 +687,7 @@ export default function Portfolio() {
       {/* Philosophy Section */}
       <section className="py-16 px-4 bg-muted/30">
         <div className="container mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-8">My Work Philosophy</h2>
+          <h2 className="text-3xl font-bold mb-8">Ma philosophie de travail</h2>
           <p className="text-lg leading-relaxed max-w-4xl mx-auto">
             {workPhilosophy}
           </p>
@@ -314,16 +697,22 @@ export default function Portfolio() {
       {/* Experience Timeline */}
       <section className="py-16 px-4">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">Professional Experience</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">
+            Experience Professionelle
+          </h2>
           <div className="max-w-3xl mx-auto">
             <div className="timeline">
               {experiences.map((exp, index) => (
                 <div key={index} className="mb-8">
                   <div className="timeline-dot"></div>
                   <div className="bg-card p-6 rounded-lg shadow-sm">
-                    <div className="text-sm text-muted-foreground mb-1">{exp.year}</div>
+                    <div className="text-sm text-muted-foreground mb-1">
+                      {exp.year}
+                    </div>
                     <h3 className="text-xl font-semibold">{exp.title}</h3>
-                    <div className="text-primary font-medium mb-2">{exp.company}</div>
+                    <div className="text-primary font-medium mb-2">
+                      {exp.company}
+                    </div>
                     <p className="text-muted-foreground">{exp.description}</p>
                   </div>
                 </div>
@@ -336,16 +725,22 @@ export default function Portfolio() {
       {/* Education */}
       <section className="py-16 px-4 bg-muted/30">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">Education</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">
+            Parcours d'apprentissage
+          </h2>
           <div className="max-w-3xl mx-auto">
             <div className="timeline">
               {education.map((edu, index) => (
                 <div key={index} className="mb-8">
                   <div className="timeline-dot"></div>
                   <div className="bg-card p-6 rounded-lg shadow-sm">
-                    <div className="text-sm text-muted-foreground mb-1">{edu.year}</div>
+                    <div className="text-sm text-muted-foreground mb-1">
+                      {edu.year}
+                    </div>
                     <h3 className="text-xl font-semibold">{edu.title}</h3>
-                    <div className="text-primary font-medium mb-2">{edu.institution}</div>
+                    <div className="text-primary font-medium mb-2">
+                      {edu.institution}
+                    </div>
                     <p className="text-muted-foreground">{edu.description}</p>
                   </div>
                 </div>
@@ -358,7 +753,7 @@ export default function Portfolio() {
       {/* Skills */}
       <section className="py-16 px-4">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">Skills</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">Compétences</h2>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <div>
               <h3 className="text-xl font-semibold mb-4">Soft Skills</h3>
@@ -371,7 +766,7 @@ export default function Portfolio() {
               </div>
             </div>
             <div>
-              <h3 className="text-xl font-semibold mb-4">Technical Skills</h3>
+              <h3 className="text-xl font-semibold mb-4">Hard Skills</h3>
               <div className="flex flex-wrap">
                 {skills.hard.map((skill, index) => (
                   <span key={index} className="skill-badge">
@@ -387,7 +782,9 @@ export default function Portfolio() {
       {/* Projects */}
       <section className="py-16 px-4 bg-muted/30">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">Projects</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">
+            Projets Réalisés
+          </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project) => (
               <div
@@ -401,7 +798,9 @@ export default function Portfolio() {
                   className="w-full h-48 object-cover"
                 />
                 <div className="p-4">
-                  <h3 className="text-lg font-semibold mb-2">{project.title}</h3>
+                  <h3 className="text-lg font-semibold mb-2">
+                    {project.title}
+                  </h3>
                   <div className="flex flex-wrap gap-1">
                     {project.tags.map((tag, index) => (
                       <span
@@ -422,15 +821,17 @@ export default function Portfolio() {
       {/* Interactive Tools */}
       <section className="py-16 px-4">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-4">Interactive Tools</h2>
+          <h2 className="text-3xl font-bold text-center mb-4">
+            Les Outils Bonus
+          </h2>
           <p className="text-center text-muted-foreground mb-12">
-            Fun tools to keep recruiters engaged!
+            On est pas bien ici? Alors, restons encore un peu ensemble!
           </p>
           <div className="max-w-4xl mx-auto bg-card rounded-lg shadow-sm p-6">
             <Tabs defaultValue="ninja">
               <TabsList className="w-full mb-6">
                 <TabsTrigger value="ninja">Ninja Name</TabsTrigger>
-                <TabsTrigger value="password">Password</TabsTrigger>
+                <TabsTrigger value="password">Password Generator</TabsTrigger>
                 <TabsTrigger value="egg">Egg Timer</TabsTrigger>
                 <TabsTrigger value="book">Book Picker</TabsTrigger>
                 <TabsTrigger value="coffee">Coffee Mood</TabsTrigger>
@@ -439,13 +840,16 @@ export default function Portfolio() {
               <TabsContent value="ninja" className="space-y-4">
                 <div className="flex items-center gap-2 mb-4">
                   <Wand2 className="w-5 h-5 text-[hsl(var(--tool-highlight))]" />
-                  <h3 className="font-semibold">Ninja Name Generator</h3>
+                  <h3 className="font-semibold">
+                    Découvre ton nom de Ninja. Même si il n'est pas italien ...
+                    il est quand même top!
+                  </h3>
                 </div>
                 <button
                   onClick={generateNinjaName}
                   className="btn btn-primary btn-sm mb-3 w-full"
                 >
-                  Generate Ninja Name
+                  Découvrir
                 </button>
                 {ninjaName && (
                   <div className="p-2 bg-secondary rounded text-center font-medium">
@@ -457,13 +861,16 @@ export default function Portfolio() {
               <TabsContent value="password" className="space-y-4">
                 <div className="flex items-center gap-2 mb-4">
                   <Shield className="w-5 h-5 text-[hsl(var(--tool-highlight))]" />
-                  <h3 className="font-semibold">Password Generator</h3>
+                  <h3 className="font-semibold">
+                    Génère ton nouveau mots de passe sécurisé.... Garanti sans
+                    de "mdp123"
+                  </h3>
                 </div>
                 <button
                   onClick={generatePassword}
                   className="btn btn-primary btn-sm mb-3 w-full"
                 >
-                  Generate Password
+                  Générer
                 </button>
                 {password && (
                   <div className="p-2 bg-secondary rounded text-center font-mono text-sm break-all">
@@ -475,38 +882,52 @@ export default function Portfolio() {
               <TabsContent value="egg" className="space-y-4">
                 <div className="flex items-center gap-2 mb-4">
                   <Timer className="w-5 h-5 text-[hsl(var(--tool-highlight))]" />
-                  <h3 className="font-semibold">Boiled Egg Timer</h3>
+                  <h3 className="font-semibold">
+                    Ne plus se tromper sur la cuisson de ses oeufs.
+                  </h3>
                 </div>
-                
+
                 <div className="flex gap-4 justify-center mb-4">
-                  {['soft', 'medium', 'hard'].map((type) => (
+                  {["soft", "medium", "hard"].map((type) => (
                     <button
                       key={type}
-                      onClick={() => setEggDoneness(type as 'soft' | 'medium' | 'hard')}
-                      className={`px-4 py-2 rounded-md ${eggDoneness === type ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}
+                      onClick={() =>
+                        setEggDoneness(type as "soft" | "medium" | "hard")
+                      }
+                      className={`px-4 py-2 rounded-md ${
+                        eggDoneness === type
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-muted"
+                      }`}
                     >
                       {type.charAt(0).toUpperCase() + type.slice(1)}
                     </button>
                   ))}
                 </div>
-                
+
                 <div className="text-center mb-2">
                   <p className="text-sm text-muted-foreground">
-                    Timer set for: {eggDoneness === 'soft' ? '5' : eggDoneness === 'medium' ? '7' : '9'} minutes
+                    C'est parti pour :{" "}
+                    {eggDoneness === "soft"
+                      ? "5"
+                      : eggDoneness === "medium"
+                      ? "7"
+                      : "9"}{" "}
+                    minutes
                   </p>
                 </div>
-                
+
                 <div className="text-center text-2xl font-bold mb-3">
                   {formatTime(timerTime)}
                 </div>
-                
+
                 <div className="flex gap-2">
                   <button
                     onClick={startTimer}
                     disabled={timerActive}
                     className="btn btn-primary btn-sm flex-1"
                   >
-                    Start
+                    Lancer le chrono
                   </button>
                   <button
                     onClick={resetTimer}
@@ -520,13 +941,15 @@ export default function Portfolio() {
               <TabsContent value="book" className="space-y-4">
                 <div className="flex items-center gap-2 mb-4">
                   <Book className="w-5 h-5 text-[hsl(var(--tool-highlight))]" />
-                  <h3 className="font-semibold">Random Book Picker</h3>
+                  <h3 className="font-semibold">
+                    Mon conseil lecture: J'espère qu'on a les mêmes goûts!
+                  </h3>
                 </div>
                 <button
                   onClick={pickRandomBook}
                   className="btn btn-primary btn-sm mb-3 w-full"
                 >
-                  Pick a Book
+                  Découvrir un livre
                 </button>
                 {randomBook && (
                   <div className="p-2 bg-secondary rounded text-center">
@@ -538,10 +961,15 @@ export default function Portfolio() {
               <TabsContent value="coffee" className="space-y-4">
                 <div className="flex items-center gap-2 mb-4">
                   <Coffee className="w-5 h-5 text-[hsl(var(--tool-highlight))]" />
-                  <h3 className="font-semibold">Coffee Mood Gauge</h3>
+                  <h3 className="font-semibold">
+                    Dis moi à combien tu es de café pour aujourd'hui ....
+                  </h3>
                 </div>
                 <div className="mb-4">
-                  <p className="text-sm text-muted-foreground mb-2">How many coffees have you had today?</p>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    ... et je te dirais si ça vaut la peine que tu sociabilise
+                    ou non.
+                  </p>
                   <Slider
                     defaultValue={[coffeeMood]}
                     min={0}
@@ -562,7 +990,7 @@ export default function Portfolio() {
                     <span>8+</span>
                   </div>
                 </div>
-                
+
                 <div className="p-2 bg-secondary rounded text-center font-medium mt-3">
                   {checkCoffeeMood(coffeeMood)}
                 </div>
@@ -575,13 +1003,10 @@ export default function Portfolio() {
       {/* Project Modal */}
       {selectedProject && (
         <div
-          className={`modal-overlay ${selectedProject ? 'open' : ''}`}
+          className={`modal-overlay ${selectedProject ? "open" : ""}`}
           onClick={() => setSelectedProject(null)}
         >
-          <div
-            className="modal-content"
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="relative">
               <button
                 onClick={() => setSelectedProject(null)}
@@ -596,11 +1021,15 @@ export default function Portfolio() {
               />
             </div>
             <div className="p-6">
-              <h3 className="text-2xl font-bold mb-3">{selectedProject.title}</h3>
-              <p className="text-muted-foreground mb-4">{selectedProject.description}</p>
-              
+              <h3 className="text-2xl font-bold mb-3">
+                {selectedProject.title}
+              </h3>
+              <p className="text-muted-foreground mb-4">
+                {selectedProject.description}
+              </p>
+
               <div className="mb-4">
-                <h4 className="font-semibold mb-2">Tools Used:</h4>
+                <h4 className="font-semibold mb-2">Outils utilisés:</h4>
                 <div className="flex flex-wrap gap-1">
                   {selectedProject.tools.map((tool, index) => (
                     <span
@@ -614,7 +1043,7 @@ export default function Portfolio() {
               </div>
 
               <div>
-                <h4 className="font-semibold mb-2">Services Provided:</h4>
+                <h4 className="font-semibold mb-2">Services fournis:</h4>
                 <ul className="space-y-1">
                   {selectedProject.services.map((service, index) => (
                     <li key={index} className="text-muted-foreground">
