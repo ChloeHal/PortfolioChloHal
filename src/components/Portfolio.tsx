@@ -24,7 +24,7 @@ const personalInfo = {
   cvUrl: "CV-ChloeHalloin.pdf",
   linkedinUrl:
     "https://www.linkedin.com/in/chlo%C3%A9-halloin-front-end-dev-uxui-design/",
-  githubUrl: "https://github.com/yourprofile",
+  githubUrl: "https://github.com/ChloeHal/PortfolioChloHal",
 };
 
 const workPhilosophy =

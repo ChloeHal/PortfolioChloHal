@@ -1,73 +1,59 @@
-# Welcome to your Lovable project
+# Portfolio Personnel
 
-## Project info
+## 🎯 À propos du projet
 
-**URL**: https://lovable.dev/projects/726039a3-5309-4e6f-8eb8-8302a7111bbd
+Ce portfolio a été conçu avec passion pour refléter mon identité professionnelle tout en offrant une expérience utilisateur mémorable. Plus qu'une simple vitrine, il s'agit d'un espace où je partage mon essence créative et mes compétences techniques.
 
-## How can I edit this code?
+## 🛠️ Technologies utilisées
 
-There are several ways of editing your application.
+- **React** - Framework JavaScript pour une interface dynamique et interactive
+- **SCSS** - Préprocesseur CSS pour un styling avancé et modulaire
+- **Typescript & JavaScript** - Logique applicative et interactions utilisateur
+- **Bootstrap** - Framework CSS pour un design responsive et professionnel
 
-**Use Lovable**
+## 💡 Philosophie du projet
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/726039a3-5309-4e6f-8eb8-8302a7111bbd) and start prompting.
+En réfléchissant à l'expérience utilisateur, j'ai identifié les KPI essentiels d'un portfolio réussi :
 
-Changes made via Lovable will be committed automatically to this repo.
+1. **Accessibilité de l'information** - Toutes les informations pertinentes pour une collaboration future sont facilement accessibles
+2. **Mémorabilité** - L'objectif ultime est que le portfolio soit sauvegardé et revisité
+3. **Engagement** - Encourager les visiteurs à passer du temps sur le site et à y revenir
 
-**Use your preferred IDE**
+## ✨ Fonctionnalités distinctives
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Système de thèmes dynamiques
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+J'ai développé une fonctionnalité permettant de **changer le thème du site** en temps réel. Cette feature technique illustre :
 
-Follow these steps:
+- **Ma polyvalence** - Capacité à m'adapter à différents univers visuels
+- **Mon expérience sectorielle** - Ayant travaillé pour des clients dans divers secteurs d'activité, je maîtrise les codes graphiques variés
+- **Mon adaptabilité** - Chaque secteur a ses propres attentes esthétiques que je peux satisfaire
+- **L'interactivité** - Engagement immédiat de l'utilisateur avec le site
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Outils interactifs
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Pour maximiser l'engagement et la rétention, j'ai également intégré des **outils interactifs** en fin de portfolio. Ces petits utilitaires, plus ou moins pratiques, ont pour but de :
 
-# Step 3: Install the necessary dependencies.
-npm i
+- Prolonger le temps de visite
+- Créer une expérience unique et mémorable
+- Démontrer mes compétences techniques de manière ludique
+- Inciter au retour sur le site
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+## 🎨 Approche design
 
-**Edit a file directly in GitHub**
+Ce portfolio reflète ma personnalité et mon approche du développement web. J'ai mis l'accent sur :
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- Une interface intuitive et agréable
+- Un équilibre entre professionnalisme et créativité
+- Une expérience utilisateur fluide et engageante
 
-**Use GitHub Codespaces**
+## 📬 Contact
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+J'espère que votre visite sera à la fois agréable et constructive ! Si mon profil vous intéresse, n'hésitez pas à me contacter :
 
-## What technologies are used for this project?
+- **LinkedIn** - Pour une approche professionnelle
+- **Coordonnées** - Disponibles sur mon CV intégré au portfolio
 
-This project is built with:
+---
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/726039a3-5309-4e6f-8eb8-8302a7111bbd) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+_Merci de prendre le temps de découvrir mon travail. J'espère que cette expérience vous donnera envie de revenir et, pourquoi pas, de collaborer ensemble !_
