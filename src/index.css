@@ -37,7 +37,7 @@
     --input: 214 32% 91%;
     --ring: 221 83% 53%;
 
-    --radius: 0.5rem;
+    --radius: 0rem;
 
     /* Timeline colors */
     --timeline-line: 221 83% 53%;
@@ -98,30 +98,30 @@
 
   /* Flower Theme */
   .theme-flower {
-    --background: 0 0% 100%;
-    --foreground: 320 50% 25%;
+    --background: 21.4 77.8% 96.5%;
+    --foreground: 16.4 67.9% 15.9%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 320 50% 25%;
+    --card: 21.4 77.8% 96.5%;
+    --card-foreground: 16.4 67.9% 15.9%;
 
-    --primary: 320 80% 60%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 16.4 67.9% 15.9%;
+    --primary-foreground: 21.4 77.8% 96.5%;
 
-    --secondary: 280 60% 95%;
-    --secondary-foreground: 320 50% 25%;
+    --secondary: 20.7 78.4% 92.7%;
+    --secondary-foreground: 16.4 67.9% 15.9%;
 
-    --muted: 320 30% 90%;
-    --muted-foreground: 320 50% 40%;
+    --muted: 20.7, 78.4%, 92.7%;
+    --muted-foreground: 16.4, 67.9%, 15.9%;
 
-    --accent: 280 80% 85%;
-    --accent-foreground: 320 50% 25%;
+    --accent: 20.7, 78.4%, 92.7%;
+    --accent-foreground: 16.4, 67.9%, 15.9%;
 
-    --timeline-line: 320 80% 60%;
-    --timeline-dot: 320 80% 60%;
+    --timeline-line: 16.4, 67.9%, 15.9%;
+    --timeline-dot: 16.4, 67.9%, 15.9%;
 
     --tool-bg: 320 30% 95%;
     --tool-border: 320 60% 85%;
-    --tool-highlight: 320 80% 60%;
+    --tool-highlight: 16.4, 67.9%, 15.9%;
 
     --font-heading: "Cormorant", serif;
     --font-body: "Figtree", serif;
@@ -130,60 +130,60 @@
   /* Wine Theme */
   .theme-wine {
     --background: 0 0% 100%;
-    --foreground: 340 60% 20%;
+    --foreground: 12.9 87.5% 3.1%;
 
     --card: 0 0% 100%;
-    --card-foreground: 340 60% 20%;
+    --card-foreground: 12.9 87.5% 3.1%;
 
-    --primary: 340 80% 40%;
+    --primary: 350.4 99.2% 49.2%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 340 30% 95%;
-    --secondary-foreground: 340 60% 20%;
+    --secondary: 14 85.1% 76.3%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 340 20% 90%;
-    --muted-foreground: 340 40% 40%;
+    --muted: 0 10% 96.1%;
+    --muted-foreground: 12.9 87.5% 3.1%;
 
-    --accent: 15 80% 90%;
-    --accent-foreground: 340 60% 20%;
+    --accent: 0 10% 96.1%;
+    --accent-foreground: 350.4 99.2% 49.2%;
 
     --timeline-line: 340 80% 40%;
-    --timeline-dot: 15 80% 50%;
+    --timeline-dot: 14 85.1% 76.3%;
 
-    --tool-bg: 340 20% 95%;
-    --tool-border: 340 40% 85%;
+    --tool-bg: 0 10% 96.1%;
+    --tool-border: 14 85.1% 76.3%;
     --tool-highlight: 340 80% 40%;
 
     --font-heading: "Archivo Narrow", serif;
     --font-body: "Poppins", serif;
   }
 
-  /* Box Theme */
+  /* Boxing Theme */
   .theme-box {
-    --background: 210 50% 98%;
-    --foreground: 210 50% 15%;
+    --background: 0 0% 7%;
+    --foreground: 0 0% 95%;
 
-    --card: 210 50% 98%;
-    --card-foreground: 210 50% 15%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 95%;
 
-    --primary: 210 90% 40%;
+    --primary: 264.2, 100%, 71.8%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 200 50% 95%;
-    --secondary-foreground: 210 50% 15%;
+    --secondary: 65.4, 100%, 62.9%;
+    --secondary-foreground: 0 0% 7%;
 
-    --muted: 210 30% 90%;
-    --muted-foreground: 210 40% 40%;
+    --muted: 261.4, 20.6%, 13.3%;
+    --muted-foreground: 0 0% 70%;
 
-    --accent: 190 70% 85%;
-    --accent-foreground: 210 50% 15%;
+    --accent: 241.5, 66.9%, 52.5%;
+    --accent-foreground: 0 0% 95%;
 
-    --timeline-line: 210 90% 40%;
-    --timeline-dot: 210 90% 40%;
+    --timeline-line: 264.2, 100%, 71.8%;
+    --timeline-dot: 65.4, 100%, 62.9%;
 
-    --tool-bg: 200 50% 95%;
-    --tool-border: 210 30% 85%;
-    --tool-highlight: 210 90% 40%;
+    --tool-bg: 261.4, 20.6%, 13.3%;
+    --tool-border: 261.4, 20.6%, 13.3%;
+    --tool-highlight: 264.2, 100%, 71.8%;
 
     --font-heading: "Fjalla One", sans-serif;
     --font-body: "Nunito Sans", sans-serif;
@@ -191,30 +191,30 @@
 
   /* Real Estate Theme */
   .theme-real-estate {
-    --background: 30 30% 98%;
-    --foreground: 30 10% 15%;
+    --background: 45 35% 98%;
+    --foreground: 45 15% 15%;
 
-    --card: 30 30% 98%;
-    --card-foreground: 30 10% 15%;
+    --card: 45 35% 98%;
+    --card-foreground: 45 15% 15%;
 
-    --primary: 30 80% 40%;
+    --primary: 45 85% 45%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 30 30% 94%;
-    --secondary-foreground: 30 10% 15%;
+    --secondary: 45 40% 92%;
+    --secondary-foreground: 45 15% 15%;
 
-    --muted: 30 20% 90%;
-    --muted-foreground: 30 20% 40%;
+    --muted: 45 30% 88%;
+    --muted-foreground: 45 25% 40%;
 
-    --accent: 20 70% 85%;
-    --accent-foreground: 30 10% 15%;
+    --accent: 40 75% 80%;
+    --accent-foreground: 45 15% 15%;
 
-    --timeline-line: 30 80% 40%;
-    --timeline-dot: 30 80% 40%;
+    --timeline-line: 45 85% 45%;
+    --timeline-dot: 45 85% 45%;
 
-    --tool-bg: 30 30% 95%;
-    --tool-border: 30 40% 85%;
-    --tool-highlight: 30 80% 40%;
+    --tool-bg: 45 40% 93%;
+    --tool-border: 45 45% 80%;
+    --tool-highlight: 45 85% 45%;
 
     --font-heading: "Montserrat", sans-serif;
     --font-body: "Poppins", sans-serif;
@@ -222,30 +222,30 @@
 
   /* Media Theme */
   .theme-media {
-    --background: 200 60% 99%;
-    --foreground: 200 80% 10%;
+    --background: 240 3% 19%;
+    --foreground: 0 10% 92%;
 
-    --card: 200 60% 99%;
-    --card-foreground: 200 80% 10%;
+    --card: 240 3% 22%;
+    --card-foreground: 0 10% 92%;
 
-    --primary: 200 100% 40%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 4 53% 43%;
+    --primary-foreground: 0 10% 97%;
 
-    --secondary: 190 60% 95%;
-    --secondary-foreground: 200 80% 10%;
+    --secondary: 240 8% 24%;
+    --secondary-foreground: 0 10% 82%;
 
-    --muted: 200 30% 90%;
-    --muted-foreground: 200 40% 40%;
+    --muted: 240 5% 27%;
+    --muted-foreground: 0 10% 67%;
 
-    --accent: 170 70% 85%;
-    --accent-foreground: 200 80% 10%;
+    --accent: 4 43% 53%;
+    --accent-foreground: 0 10% 92%;
 
-    --timeline-line: 200 100% 40%;
-    --timeline-dot: 170 70% 50%;
+    --timeline-line: 4 53% 43%;
+    --timeline-dot: 4 53% 43%;
 
-    --tool-bg: 190 60% 95%;
-    --tool-border: 200 40% 85%;
-    --tool-highlight: 200 100% 40%;
+    --tool-bg: 240 6% 21%;
+    --tool-border: 240 11% 31%;
+    --tool-highlight: 4 53% 43%;
 
     --font-heading: "Electrolize", serif;
     --font-body: "Kanit", sans-serif;
@@ -253,61 +253,60 @@
 
   /* Agency Theme */
   .theme-agency {
-    --background: 0 0% 99%;
-    --foreground: 240 10% 10%;
+    --background: 36 24% 96%;
+    --foreground: 175 9% 24%;
 
-    --card: 0 0% 99%;
-    --card-foreground: 240 10% 10%;
+    --card: 36 26% 94%;
+    --card-foreground: 175 9% 24%;
 
-    --primary: 240 60% 50%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 208 61% 49%;
+    --primary-foreground: 36 24% 99%;
 
-    --secondary: 250 30% 95%;
-    --secondary-foreground: 240 10% 10%;
+    --secondary: 36 29% 88%;
+    --secondary-foreground: 175 9% 24%;
 
-    --muted: 240 20% 90%;
-    --muted-foreground: 240 20% 40%;
+    --muted: 36 27% 91%;
+    --muted-foreground: 175 4% 39%;
 
-    --accent: 260 40% 85%;
-    --accent-foreground: 240 10% 10%;
+    --accent: 29 89% 58%;
+    --accent-foreground: 175 9% 24%;
 
-    --timeline-line: 240 60% 50%;
-    --timeline-dot: 260 60% 60%;
+    --timeline-line: 191 66% 55%;
+    --timeline-dot: 208 61% 49%;
 
-    --tool-bg: 250 30% 95%;
-    --tool-border: 240 30% 85%;
-    --tool-highlight: 240 60% 50%;
-
+    --tool-bg: 36 27% 93%;
+    --tool-border: 36 32% 84%;
+    --tool-highlight: 29 89% 58%;
     --font-heading: "Rubik", sans-serif;
     --font-body: "Zilla Slab", sans-serif;
   }
 
   /* Music Theme */
   .theme-music {
-    --background: 0 0% 7%;
-    --foreground: 0 0% 95%;
+    --background: 0 0% 98%;
+    --foreground: 0 0% 15%;
 
-    --card: 0 0% 7%;
-    --card-foreground: 0 0% 95%;
+    --card: 0 0% 95%;
+    --card-foreground: 0 0% 15%;
 
-    --primary: 300 100% 50%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 0 0% 25%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 300 50% 15%;
-    --secondary-foreground: 0 0% 95%;
+    --secondary: 0 0% 90%;
+    --secondary-foreground: 0 0% 20%;
 
-    --muted: 300 20% 20%;
-    --muted-foreground: 0 0% 70%;
+    --muted: 0 0% 85%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 260 100% 70%;
-    --accent-foreground: 0 0% 95%;
+    --accent: 0 0% 35%;
+    --accent-foreground: 0 0% 75%;
 
-    --timeline-line: 300 100% 50%;
-    --timeline-dot: 260 100% 70%;
+    --timeline-line: 0 0% 40%;
+    --timeline-dot: 0 0% 25%;
 
-    --tool-bg: 300 50% 15%;
-    --tool-border: 300 30% 25%;
-    --tool-highlight: 300 100% 50%;
+    --tool-bg: 0 0% 92%;
+    --tool-border: 0 0% 75%;
+    --tool-highlight: 0 0% 30%;
 
     --font-heading: "Host Grotesk", cursive;
     --font-body: "Host Grotesk", sans-serif;
@@ -315,30 +314,30 @@
 
   /* Production Theme */
   .theme-production {
-    --background: 0 0% 98%;
-    --foreground: 0 0% 15%;
+    --background: 0 0% 100%;
+    --foreground: 133 13% 20%;
 
     --card: 0 0% 98%;
-    --card-foreground: 0 0% 15%;
+    --card-foreground: 133 13% 20%;
 
-    --primary: 30 100% 50%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 71.1, 99.2%, 48%;
+    --primary-foreground: 133 13% 20%;
 
-    --secondary: 40 30% 95%;
-    --secondary-foreground: 0 0% 15%;
+    --secondary: 133 13% 20%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 30 20% 90%;
-    --muted-foreground: 0 0% 40%;
+    --muted: 0 0% 92%;
+    --muted-foreground: 133 8% 45%;
 
-    --accent: 20 100% 85%;
-    --accent-foreground: 0 0% 15%;
+    --accent: 71.2, 76.3%, 48%;
+    --accent-foreground: 133 13% 20%;
 
-    --timeline-line: 30 100% 50%;
-    --timeline-dot: 20 100% 60%;
+    --timeline-line: 71 99% 54%;
+    --timeline-dot: 81 99% 49%;
 
-    --tool-bg: 40 30% 95%;
-    --tool-border: 30 40% 85%;
-    --tool-highlight: 30 100% 50%;
+    --tool-bg: 0 0% 97%;
+    --tool-border: 71.1, 99.2%, 48%;
+    --tool-highlight: 71.1, 99.2%, 48%;
 
     --font-heading: "Arial", sans-serif;
     --font-body: "Arial", sans-serif;
@@ -346,30 +345,30 @@
 
   /* Doudou Theme */
   .theme-doudou {
-    --background: 50 100% 97%;
-    --foreground: 40 30% 25%;
+    --background: 23 50% 97%;
+    --foreground: 16 41% 20%;
 
-    --card: 50 100% 97%;
-    --card-foreground: 40 30% 25%;
+    --card: 23 50% 93%;
+    --card-foreground: 16 41% 20%;
 
-    --primary: 40 100% 60%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 26 53% 47%;
+    --primary-foreground: 23 50% 99%;
 
-    --secondary: 50 60% 95%;
-    --secondary-foreground: 40 30% 25%;
+    --secondary: 23 50% 90%;
+    --secondary-foreground: 16 41% 20%;
 
-    --muted: 50 30% 90%;
-    --muted-foreground: 40 30% 40%;
+    --muted: 23 40% 88%;
+    --muted-foreground: 16 31% 35%;
 
-    --accent: 30 90% 85%;
-    --accent-foreground: 40 30% 25%;
+    --accent: 26 33% 62%;
+    --accent-foreground: 16 41% 20%;
 
-    --timeline-line: 40 100% 60%;
-    --timeline-dot: 30 90% 70%;
+    --timeline-line: 26 53% 47%;
+    --timeline-dot: 26 43% 57%;
 
-    --tool-bg: 50 60% 95%;
-    --tool-border: 40 60% 85%;
-    --tool-highlight: 40 100% 60%;
+    --tool-bg: 23 50% 91%;
+    --tool-border: 26 23% 57%;
+    --tool-highlight: 26 53% 47%;
 
     --font-heading: "Cormorant", cursive;
     --font-body: "Raleway", cursive;
@@ -377,30 +376,30 @@
 
   /* Luxury Theme */
   .theme-luxury {
-    --background: 0 0% 10%;
-    --foreground: 0 0% 90%;
+    --background: 72 33% 97%;
+    --foreground: 0 0% 0%;
 
-    --card: 0 0% 10%;
-    --card-foreground: 0 0% 90%;
+    --card: 56 25% 89%;
+    --card-foreground: 0 0% 0%;
 
-    --primary: 45 100% 50%;
-    --primary-foreground: 0 0% 10%;
+    --primary: 0 0% 0%;
+    --primary-foreground: 72 33% 97%;
 
-    --secondary: 0 0% 20%;
-    --secondary-foreground: 0 0% 90%;
+    --secondary: 56 25% 89%;
+    --secondary-foreground: 0 0% 0%;
 
-    --muted: 0 0% 20%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 56 25% 89%;
+    --muted-foreground: 0 0% 40%;
 
-    --accent: 45 50% 30%;
-    --accent-foreground: 45 100% 80%;
+    --accent: 56 25% 89%;
+    --accent-foreground: 0 0% 0%;
 
-    --timeline-line: 45 100% 50%;
-    --timeline-dot: 45 100% 50%;
+    --timeline-line: 0 0% 0%;
+    --timeline-dot: 56 25% 89%;
 
-    --tool-bg: 0 0% 15%;
-    --tool-border: 45 50% 30%;
-    --tool-highlight: 45 100% 50%;
+    --tool-bg: 56 25% 89%;
+    --tool-border: 0 0% 20%;
+    --tool-highlight: 0 0% 0%;
 
     --font-heading: "Playfair Display", serif;
     --font-body: sans-serif;
@@ -437,6 +436,7 @@
   select,
   textarea {
     font-family: var(--font-body);
+    white-space: pre-line;
   }
 }
 
@@ -580,6 +580,6 @@
 
   /* GitHub floating button */
   .github-float {
-    @apply fixed bottom-4 right-4 w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg hover:scale-110 transition-transform z-50;
+    @apply fixed bottom-4 right-4 w-32 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg hover:scale-110 transition-transform z-50;
   }
 }

@@ -154,7 +154,8 @@ const projects = [
       "UI/UX Design",
     ],
     fullImage: "1872.png",
-    description: "Description is coming",
+    description:
+      "Défi : Créer de zéro l'univers digital d'une nouvelle boite de production (Caba & Jean Jass), développer une identité e-commerce forte à partir d'un simple logo.\nApproche : Carte blanche exploitée pour concevoir une UX/UI authentique reflétant l'univers des artistes, développement Shopify sur mesure adapté aux besoins spécifiques d'une maison de production musicale. Architecture pensée pour merchandising et contenus exclusifs.\nRésultat : E-commerce complet avec identité visuelle cohérente, plateforme performante qui établit 187hippies dans l'écosystème rap francophone.",
     tools: ["Shopify", "Liquid", "JavaScript", "Photoshop"],
   },
   {
@@ -174,7 +175,8 @@ const projects = [
     tags: ["Développement web"],
     services: ["Développement web"],
     fullImage: "ambiancecuisine2.png",
-    description: "Description is coming",
+    description:
+      "Défi : Créer une landing page promotionnelle performante pour une entreprise de cuisine, maximisant les conversions via un formulaire de contact stratégiquement positionné.\nApproche : Développement web axé conversion avec architecture persuasive, hiérarchisation visuelle guidant vers l'action, optimisation de chaque élément pour réduire les frictions. Formulaire de contact simplifié et rassurant pour maximiser les demandes de devis.\nRésultat : Landing page performante générant un taux de conversion optimal, transformant efficacement les visiteurs en prospects qualifiés.",
     tools: ["Figma", "Wordpress", "Elementor", "Javascript", "PHP"],
   },
   {
@@ -194,7 +196,8 @@ const projects = [
       "UI/UX Design",
     ],
     fullImage: "avril2.png",
-    description: "Description is coming",
+    description:
+      "Défi : Créer une expérience digitale premium pour des doudous en soie, alliant confiance parentale et émotion enfantine, dans un marché ultra-concurrentiel de la puériculture.\nApproche : Charte graphique douce et rassurante, UX/UI privilégiant la qualité et la sécurité des matériaux, parcours d'achat optimisé pour les parents soucieux du bien-être de leurs enfants. Architecture Shopify mettant en valeur le savoir-faire artisanal et les propriétés uniques de la soie.\nRésultat : Plateforme e-commerce élégante qui transforme l'achat utilitaire en expérience émotionnelle premium.",
     tools: ["Shopify", "Liquid", "JavaScript", "Photoshop", "Illustrator"],
   },
   {
@@ -214,7 +217,8 @@ const projects = [
     tags: ["Développement web", "Formation", "SEO Optimization"],
     services: ["Développement web", "Formation", "SEO Optimization"],
     fullImage: "berquin2.png",
-    description: "Description is coming",
+    description:
+      "Défi : Créer un site vitrine premium pour bijoux de luxe à gemmes interchangeables, valoriser l'excellence produit via un catalogue e-commerce dirigeant vers la vente en magasin.\nApproche : Développement WordPress haute qualité reflétant le luxe de la marque, catalogue optimisé mettant en avant le système de gemmes personnalisables. Architecture SEO ciblée pour visibilité bijouterie haut de gamme, parcours utilisateur guidant vers la découverte en boutique physique.\nRésultat : Site vitrine sophistiqué valorisant l'innovation des gemmes interchangeables, plateforme générant du trafic qualifié vers les points de vente.",
     tools: ["Figma", "Wordpress", "Elementor", "Javascript", "PHP"],
   },
   {
@@ -234,7 +238,8 @@ const projects = [
       "UI/UX Design",
     ],
     fullImage: "damso2.png",
-    description: "Description is coming",
+    description:
+      "Défi : Créer une expérience digitale robuste capable de supporter l'audience massive d'un rappeur de premier plan, tout en respectant sa vision artistique unique.\nApproche : Traduction des idées créatives de l'artiste en UX/UI percutante, développement Shopify optimisé pour les pics de trafic, intégration de produits et concepts innovants fédérateurs. SEO agressif pour contrer les grands sites de revente et positionner la boutique officielle en première ligne.\nRésultat : Plateforme e-commerce haute performance qui domine les résultats de recherche et engage sa communauté.",
     tools: [
       "Figma",
       "Shopify",
@@ -248,10 +253,21 @@ const projects = [
     id: 8,
     title: "Digilime",
     image: "digilime2.png",
-    tags: ["Développement web", "Charte graphique", "UI/UX Design"],
-    services: ["Développement web", "Charte graphique", "UI/UX Design"],
+    tags: [
+      "Développement web",
+      "Charte graphique",
+      "UI/UX Design",
+      "Hébergement",
+    ],
+    services: [
+      "Développement web",
+      "Charte graphique",
+      "UI/UX Design",
+      "Hébergement",
+    ],
     fullImage: "digilime2.png",
-    description: "Description is coming",
+    description:
+      "Défi : Créer l'identité complète d'une nouvelle agence média se différenciant par la transparence, concevoir une landing page impactante dans un secteur ultra-concurrentiel.\nApproche : Branding axé sur la transparence et l'authenticité, UX/UI reflétant ces valeurs de confiance, landing page WordPress optimisée pour la conversion. Développement mettant en avant la différenciation par l'honnêteté commerciale, hébergement sécurisé pour lancement professionnel.\nRésultat : Identité forte et différenciante, landing page percutante qui positionne Digilime comme un acteur émergeant de son secteur.",
     tools: [
       "Figma",
       "Wordpress",
@@ -271,6 +287,7 @@ const projects = [
       "Développement web",
       "Traitement d'images",
       "SEO Optimization",
+      "Hébergement",
     ],
     services: [
       "UI/UX Design",
@@ -278,9 +295,11 @@ const projects = [
       "Développement web",
       "Traitement d'images",
       "SEO Optimization",
+      "Hébergement",
     ],
     fullImage: "gobox2.png",
-    description: "Description is coming",
+    description:
+      "Défi : Créer un site web dynamique pour salle de sport spécialisée (spinning, boxe, reformer), optimiser la découverte des nouveaux sports et faciliter réservations/abonnements.\nApproche : UX/UI énergique valorisant les disciplines proposées, développement WordPress avec système de réservation intégré, architecture mettant en avant nouveautés et formules d'abonnement. SEO ciblé fitness pour visibilité régionale, parcours conversion optimisé vers réservation de séances.\nRésultat : Site web performant boostant les inscriptions, plateforme facilitant la gestion cours collectifs et fidélisation clientèle sportive.",
     tools: [
       "Figma",
       "Wordpress",
@@ -302,6 +321,7 @@ const projects = [
       "Développement web",
       "Traitement d'images",
       "SEO Optimization",
+      "Hébergement",
     ],
     services: [
       "UI/UX Design",
@@ -309,9 +329,11 @@ const projects = [
       "Développement web",
       "Traitement d'images",
       "SEO Optimization",
+      "Hébergement",
     ],
     fullImage: "jump2.png",
-    description: "Description is coming",
+    description:
+      "Défi : Créer un site web séduisant enfants et rassurant parents, allier aspect ludique et informations sécuritaires pour un parc de trampolines tout âge.\nApproche : UX/UI ludique respectant la charte graphique Jump XL, développement WordPress privilégiant l'aspect fun tout en mettant en avant les garanties sécurité. Architecture valorisant les activités de groupe, parcours parents optimisé pour informations rassurantes et réservations.\nRésultat : Site web WordPress engageant qui convertit l'envie de s'amuser en réservations, équilibre parfait entre ludique et rassurant.",
     tools: [
       "Figma",
       "Wordpress",
@@ -344,15 +366,23 @@ const projects = [
     id: 12,
     title: "Red Sheep Agency",
     image: "redsheep2.png",
-    tags: ["Branding", "UI/UX Design", "Développement web", "SEO Optimization"],
+    tags: [
+      "Branding",
+      "UI/UX Design",
+      "Développement web",
+      "SEO Optimization",
+      "Hébergement",
+    ],
     services: [
       "Branding",
       "UI/UX Design",
       "Développement web",
       "SEO Optimization",
+      "Hébergement",
     ],
     fullImage: "redsheep2.png",
-    description: "Description is coming",
+    description:
+      "Défi : Refondre l'identité complète d'une agence média en pleine transformation, créer une expérience digitale créative qui impressionne tout en démontrant l'expertise en achat média. \nApproche : Branding et charte graphique alignés sur la nouvelle dynamique d'équipe, UX/UI générant l'effet wow recherché, développement web sur mesure mettant en avant l'expertise. Architecture de contenu équilibrant impact visuel spectaculaire et démonstration de compétences techniques. \nRésultat : Identité renouvelée, site web percutant qui positionne Red Sheep comme référence créative dans l'achat média.",
     tools: [
       "Figma",
       "Wordpress",
@@ -373,6 +403,7 @@ const projects = [
       "Développement web",
       "Illustration",
       "SEO Optimization",
+      "Hébergement",
     ],
     services: [
       "UI/UX Design",
@@ -380,9 +411,11 @@ const projects = [
       "Développement web",
       "Illustration",
       "SEO Optimization",
+      "Hébergement",
     ],
     fullImage: "season2.png",
-    description: "Description is coming",
+    description:
+      "Défi : Créer l'identité complète d'un concept B2B original (abonnement bouquets en soie), faire comprendre et adopter une offre innovante peu commune sur le marché professionnel.\nApproche : Branding valorisant l'innovation du concept, UX/UI structurant clairement l'information pour faciliter la découverte de l'offre. Développement WordPress avec architecture pédagogique expliquant les bénéfices de l'abonnement fleurs artificielles. Parcours B2B optimisé pour conversion.\nRésultat : Site web professionnel démocratisant un concept novateur, identité forte qui positionne Season comme pionnier de l'abonnement floral B2B.",
     tools: [
       "Figma",
       "Wordpress",
@@ -397,12 +430,19 @@ const projects = [
     id: 14,
     title: "Vertical Design",
     image: "vertical2.png",
-    tags: ["Branding", "UI/UX Design", "Développement web", "SEO Optimization"],
+    tags: [
+      "Branding",
+      "UI/UX Design",
+      "Développement web",
+      "SEO Optimization",
+      "Hébergement",
+    ],
     services: [
       "Branding",
       "UI/UX Design",
       "Développement web",
       "SEO Optimization",
+      "Hébergement",
     ],
     fullImage: "vertical2.png",
     description: "Description is coming",
@@ -430,7 +470,7 @@ const themes = [
   { name: "Artiste", value: "theme-music", color: "#d946ef" },
   { name: "Boite de Production", value: "theme-production", color: "#f59e0b" },
   { name: "Doudou", value: "theme-doudou", color: "#eab308" },
-  { name: "Luxe", value: "theme-luxury", color: "#fbbf24" },
+  { name: "Bijoux", value: "theme-luxury", color: "#fbbf24" },
 ];
 
 const books = [
@@ -450,13 +490,14 @@ const books = [
   "Vox de Christina Dalcher",
   "Malevil de Robert Merle",
   "Daisy Jones & The Six de Taylor Jenkins Reid",
-  "Madame Einstein de MArie Benedict",
+  "Madame Einstein de Marie Benedict",
   "La saga Under the Dome de Stephen King",
   "Le quatrième mur de Sorj Chalandon",
   "Acide sulfurique de Amélie Nothomb",
   "Monsieur Ibrahim et les fleurs du Coran de Eric-Emmanuel Schmitt",
   "Chien 51 de Laurent Gaudé",
   "1984 de George Orwell",
+  "C'est le coeur qui lâche en premier de Margaret Atwood",
 ];
 
 export default function Portfolio() {
@@ -657,7 +698,7 @@ export default function Portfolio() {
             <p className="text-lg md:text-xl text-muted-foreground mb-4 max-w-2xl mx-auto">
               {personalInfo.description}
             </p>
-            <p className="text-lg leading-relaxed max-w-4xl mb-8 mx-auto">
+            <p className="text-md leading-relaxed max-w-4xl mb-8 mx-auto">
               {personalInfo.descriptionplus}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -685,10 +726,10 @@ export default function Portfolio() {
       </section>
 
       {/* Philosophy Section */}
-      <section className="py-16 px-4 bg-muted/30">
+      <section className="py-16 px-4 bg-muted">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl font-bold mb-8">Ma philosophie de travail</h2>
-          <p className="text-lg leading-relaxed max-w-4xl mx-auto">
+          <p className="text-md leading-relaxed max-w-4xl mx-auto">
             {workPhilosophy}
           </p>
         </div>
@@ -698,7 +739,7 @@ export default function Portfolio() {
       <section className="py-16 px-4">
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">
-            Experience Professionelle
+            Expérience Professionnelle
           </h2>
           <div className="max-w-3xl mx-auto">
             <div className="timeline">
@@ -723,7 +764,7 @@ export default function Portfolio() {
       </section>
 
       {/* Education */}
-      <section className="py-16 px-4 bg-muted/30">
+      <section className="py-16 px-4 bg-muted">
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">
             Parcours d'apprentissage
@@ -780,7 +821,7 @@ export default function Portfolio() {
       </section>
 
       {/* Projects */}
-      <section className="py-16 px-4 bg-muted/30">
+      <section className="py-16 px-4 bg-muted">
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">
             Projets Réalisés
@@ -852,7 +893,7 @@ export default function Portfolio() {
                   Découvrir
                 </button>
                 {ninjaName && (
-                  <div className="p-2 bg-secondary rounded text-center font-medium">
+                  <div className="p-2 bg-secondary text-secondary-foreground rounded text-center font-medium">
                     {ninjaName}
                   </div>
                 )}
@@ -863,7 +904,7 @@ export default function Portfolio() {
                   <Shield className="w-5 h-5 text-[hsl(var(--tool-highlight))]" />
                   <h3 className="font-semibold">
                     Génère ton nouveau mots de passe sécurisé.... Garanti sans
-                    de "mdp123"
+                    "mdp123"
                   </h3>
                 </div>
                 <button
@@ -873,7 +914,7 @@ export default function Portfolio() {
                   Générer
                 </button>
                 {password && (
-                  <div className="p-2 bg-secondary rounded text-center font-mono text-sm break-all">
+                  <div className="p-2 bg-secondary text-secondary-foreground rounded text-center font-mono text-sm break-all">
                     {password}
                   </div>
                 )}
@@ -952,7 +993,7 @@ export default function Portfolio() {
                   Découvrir un livre
                 </button>
                 {randomBook && (
-                  <div className="p-2 bg-secondary rounded text-center">
+                  <div className="p-2 bg-secondary text-secondary-foreground rounded text-center">
                     {randomBook}
                   </div>
                 )}
@@ -991,7 +1032,7 @@ export default function Portfolio() {
                   </div>
                 </div>
 
-                <div className="p-2 bg-secondary rounded text-center font-medium mt-3">
+                <div className="p-2 bg-secondary text-secondary-foreground rounded text-center font-medium mt-3">
                   {checkCoffeeMood(coffeeMood)}
                 </div>
               </TabsContent>
@@ -1066,6 +1107,7 @@ export default function Portfolio() {
         title="Visit my GitHub"
       >
         <Github className="w-6 h-6" />
+        Read me
       </a>
     </div>
   );
