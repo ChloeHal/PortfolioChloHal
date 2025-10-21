@@ -1,4 +1,4 @@
-# Portfolio Personnel - Chloé Halmenschlager
+# Portfolio Personnel - Chloé Halloin
 
 ## 🎯 À propos du projet
 Ce portfolio a été conçu avec passion pour refléter mon identité de Product Designer tout en offrant une expérience utilisateur mémorable. Plus qu'une simple vitrine, il s'agit d'un espace interactif où je partage mon essence créative, mes projets et ma vision du design.
