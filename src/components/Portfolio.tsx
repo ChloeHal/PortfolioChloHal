@@ -18,21 +18,28 @@ import {
 const personalInfo = {
   name: "Chloé Halloin",
   photo: "tete.png",
-  description: "UX/UI designer & Front-end developper.",
+  description: "Product Designer - UX/UI designer",
   descriptionplus:
-    "Designer UX/UI et développeuse web passionnée par la création d'expériences digitales qui font sens. J'adore transformer des idées complexes en interfaces intuitives et des objectifs en parcours pertinents. Entre wireframes et lignes de code, je m'amuse à mettre sur pied des projets qui allient esthétique, efficacité et fonctionnalité.",
-  cvUrl: "CV-ChloeHalloin.pdf",
+    "Designer UX/UI et Product Designer passionnée par la création d'expériences digitales qui font sens. J'adore transformer des idées complexes en interfaces intuitives et des objectifs business en parcours pertinents. Entre analyse, wireframes et lignes de code, je m'amuse à concevoir des produits qui allient stratégie, impact utilisateur et viabilité technique.",
+  cvUrl: "cv-chloe-halloin.pdf",
   linkedinUrl:
     "https://www.linkedin.com/in/chlo%C3%A9-halloin-front-end-dev-uxui-design/",
   githubUrl: "https://github.com/ChloeHal/PortfolioChloHal",
 };
 
 const workPhilosophy =
-  "Je crois en un équilibre entre autonomie et collaboration : savoir avancer seule, mais aussi co-construire avec les autres. J’aborde chaque projet avec curiosité, créativité et une grande adaptabilité, en restant toujours à l’écoute des besoins humains derrière les objectifs. Pour moi, un bon travail repose sur la constance, la remise en question, et l’envie d’apprendre sans cesse. Je préfère avancer avec optimisme, en valorisant l’intelligence collective, la bienveillance et la rigueur.";
+  "Je crois en un équilibre entre autonomie et collaboration : savoir porter une vision produit, mais aussi la co-construire avec les utilisateurs et les équipes. J'aborde chaque problème avec curiosité, créativité et une grande adaptabilité, en restant toujours à l'écoute des besoins humains derrière les métriques. Pour moi, un bon produit repose sur l'itération constante, la remise en question des hypothèses, et l'envie d'apprendre de chaque test utilisateur. Je préfère avancer avec optimisme, en valorisant l'intelligence collective, la bienveillance dans les feedbacks et la rigueur dans la démarche.";
 
 const experiences = [
   {
-    year: "Aout 2023 - Present",
+    year: "Septembre 2025 - Avril 2026",
+    title: "UX/UI Designer",
+    company: "Interface3",
+    description:
+      "Développement de compétences en design UX/UI et accessibilité par la pratique et des projets concrets.",
+  },
+  {
+    year: "Aout 2023 - Septembre 2025",
     title: "Front-End Designer & Web Developer",
     company: "Vertical Design",
     description:
@@ -106,12 +113,14 @@ const skills = {
     "Collaboration",
     "Empathie",
     "Curiosité",
-    "Constante",
+    "Constance",
     "Créativité",
     "Polyvalence",
     "Adaptabilité",
     "Fiabilité",
     "Bienveillance",
+    "Vulgarisation",
+    "Apprentissage continu",
   ],
   hard: [
     "Scrum Master",
@@ -744,7 +753,7 @@ export default function Portfolio() {
           <div className="max-w-3xl mx-auto">
             <div className="timeline">
               {experiences.map((exp, index) => (
-                <div key={index} className="mb-8">
+                <div key={index}>
                   <div className="timeline-dot"></div>
                   <div className="bg-card p-6 rounded-lg shadow-sm">
                     <div className="text-sm text-muted-foreground mb-1">
