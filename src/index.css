@@ -580,6 +580,17 @@
 
   /* GitHub floating button */
   .github-float {
-    @apply fixed bottom-4 right-4 w-32 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg hover:scale-110 transition-transform z-50;
+    @apply fixed bottom-4 right-4 w-32 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg hover:scale-110 transition-transform;
+    z-index: 9998 !important;
+  }
+
+  /* Drawer customization - Hide handle bar for right-side drawer */
+  [data-vaul-drawer][data-vaul-drawer-direction='right'] > div:first-child {
+    display: none;
+  }
+
+  /* Hide the ::after pseudo-element that can block content */
+  [data-vaul-drawer][data-vaul-drawer-direction='right']::after {
+    display: none !important;
   }
 }

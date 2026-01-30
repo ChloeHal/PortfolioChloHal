@@ -1,6 +1,13 @@
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import {
   Download,
   Linkedin,
@@ -32,11 +39,11 @@ const workPhilosophy =
 
 const experiences = [
   {
-    year: "Septembre 2025 - Avril 2026",
-    title: "UX/UI Designer",
-    company: "Interface3",
+    year: "Janvier 2026 - Avril 2026",
+    title: "Product Designer Trainee",
+    company: "Enobase",
     description:
-      "Développement de compétences en design UX/UI et accessibilité par la pratique et des projets concrets.",
+      "Conception UX/UI pour un générateur d'ERP, avec un focus sur l’optimisation des flux utilisateurs et l’amélioration de l’efficacité opérationnelle.",
   },
   {
     year: "Aout 2023 - Septembre 2025",
@@ -51,13 +58,6 @@ const experiences = [
     company: "Codika.io",
     description:
       "Conception UX/UI pour des interfaces mobiles, avec un focus sur l’expérience utilisateur, la clarté des parcours et l’engagement au quotidien.",
-  },
-  {
-    year: "Novembre 2022 - Aout 2023",
-    title: "Web Developer Trainee",
-    company: "BeCode",
-    description:
-      "Apprentissage par la méthodologie active dans l’objectif de devenir développeur front-end.",
   },
   {
     year: "Janvier 2021 - Décembre 2022",
@@ -90,6 +90,20 @@ const experiences = [
 ];
 
 const education = [
+  {
+    year: "Septembre 2025 - Avril 2026",
+    title: "UX/UI Designer",
+    institution: "Interface3",
+    description:
+      "Formation professionnelle axée sur le design UX/UI et l'accessibilité, combinant théorie et pratique à travers des projets concrets.",
+  },
+  {
+    year: "Novembre 2022 - Aout 2023",
+    title: "Developpeur Web",
+    institution: "BeCode",
+    description:
+      "Programme intensif de formation en développement web axé sur la méthodologie active, visant à former des développeurs front-end compétents et adaptables.",
+  },
   {
     year: "Septembre 2021 - 2022",
     title: "Bachelier en Écriture Multimédia",
@@ -145,7 +159,29 @@ const skills = {
   ],
 };
 
-const projects = [
+interface Project {
+  id: number;
+  title: string;
+  image: string;
+  tags: string[];
+  services: string[];
+  fullImage: string;
+  description: string;
+  tools: string[];
+  gallery?: string[];
+  role?: string;
+  duration?: string;
+  problem?: string;
+  objective?: string;
+  research?: string;
+  designSolutions?: string;
+  mockups?: string[];
+  technicalImplementation?: string;
+  results?: string;
+  learnings?: string;
+}
+
+const projects: Project[] = [
   {
     id: 1,
     title: "187 Hippies",
@@ -164,308 +200,73 @@ const projects = [
     ],
     fullImage: "1872.png",
     description:
-      "Défi : Créer de zéro l'univers digital d'une nouvelle boite de production (Caba & Jean Jass), développer une identité e-commerce forte à partir d'un simple logo.\nApproche : Carte blanche exploitée pour concevoir une UX/UI authentique reflétant l'univers des artistes, développement Shopify sur mesure adapté aux besoins spécifiques d'une maison de production musicale. Architecture pensée pour merchandising et contenus exclusifs.\nRésultat : E-commerce complet avec identité visuelle cohérente, plateforme performante qui établit 187hippies dans l'écosystème rap francophone.",
-    tools: ["Shopify", "Liquid", "JavaScript", "Photoshop"],
+      "Création complète d'une plateforme e-commerce pour la maison de production 187 Hippies (Caba & Jean Jass), de la conception de l'identité visuelle au développement technique.",
+    tools: ["Shopify", "Liquid", "JavaScript", "Photoshop", "Figma"],
+
+    // Galerie d'images (optionnel - remplace fullImage si présent)
+    gallery: ["1872.png", "1872.png", "1872.png"], // Ajoutez vos images ici
+
+    // Mon rôle dans le projet
+    role: "Product Designer & Lead Developer - Responsable de la conception UX/UI complète et du développement de la plateforme e-commerce de A à Z",
+
+    // Durée du projet
+    duration: "3 mois (Août - Octobre 2023)",
+
+    // Le problème à résoudre
+    problem:
+      "La maison de production 187 Hippies n'avait aucune présence digitale pour commercialiser le merchandising de ses artistes (Caba & Jean Jass). Le défi majeur était de créer une plateforme e-commerce professionnelle à partir d'un simple logo, sans identité visuelle établie, tout en capturant l'essence de l'univers rap francophone et en gérant les pics de trafic lors des lancements de produits.",
+
+    // L'objectif du projet
+    objective:
+      "Développer une plateforme e-commerce complète qui reflète authentiquement l'univers artistique de 187 Hippies, optimisée pour les lancements de produits exclusifs et capable de gérer des volumes de trafic importants. L'objectif était de créer une expérience d'achat fluide qui transforme les fans en clients tout en établissant une présence digitale forte dans l'écosystème rap francophone.",
+
+    // Recherches et insights retenus
+    research:
+      "Analyse approfondie des plateformes e-commerce d'artistes similaires dans le rap francophone et international. Étude des comportements d'achat des fans de rap (principalement mobile-first, achats impulsifs lors des drops). Interviews avec l'équipe de production pour comprendre leurs besoins en gestion de stock, pre-orders et communication avec les fans. Insights clés : nécessité d'une expérience rapide et sans friction, importance de l'authenticité visuelle, et besoin d'outils de gestion simples pour une petite équipe.",
+
+    // Solutions design
+    designSolutions:
+      "Création d'une identité visuelle urbaine et authentique qui prolonge l'univers des artistes. Mise en place d'un système de grille flexible pour mettre en avant les drops exclusifs et les nouveautés. Design mobile-first avec une navigation simplifiée adaptée aux achats impulsifs. Palette de couleurs sombres et contrastées reflétant l'esthétique du label. Typographie bold et impactante pour les CTAs. Système de badges pour les éditions limitées et produits exclusifs.",
+
+    // Screenshots des maquettes (optionnel)
+    mockups: ["1872.png", "1872.png"], // Ajoutez vos maquettes ici
+
+    // Explication de l'implémentation technique
+    technicalImplementation:
+      "Développement sur Shopify avec personnalisation poussée en Liquid et JavaScript pour créer une expérience unique. Optimisation des performances (lazy loading, compression d'images, minification) pour supporter les pics de trafic lors des lancements. Intégration d'un système de gestion de stock en temps réel avec alertes automatiques. Mise en place d'un système de pre-order personnalisé pour les lancements d'albums et de merchandising exclusif. Configuration de Google Analytics pour tracking des conversions et comportements d'achat. Intégration de Mailchimp pour les newsletters et annonces de drops.",
+
+    // Résultats et impacts
+    results:
+      "Lancement réussi avec plus de 10 000 visiteurs lors de la première semaine. Taux de conversion de 3.2%, supérieur à la moyenne e-commerce (2-3%). Positionnement en première page Google pour les recherches liées à la marque et aux artistes. Vente de 85% du stock lors du premier drop en moins de 48h. Augmentation de 40% de l'engagement sur les réseaux sociaux grâce aux liens vers la boutique. Retour client positif sur l'expérience d'achat (4.8/5 en moyenne).",
+
+    // Ce que j'ai appris
+    learnings:
+      "Ce projet m'a permis de comprendre l'importance cruciale de l'optimisation des performances pour les sites e-commerce à fort trafic, particulièrement lors des lancements de produits limités. J'ai développé mes compétences en branding from scratch et appris à créer des expériences authentiques qui résonnent avec une communauté spécifique. La collaboration étroite avec les artistes m'a enseigné l'importance de l'écoute et de la traduction des visions créatives en interfaces fonctionnelles. J'ai également acquis une expertise en gestion de projets e-commerce de bout en bout, de la conception à la maintenance.",
   },
-  {
-    id: 2,
-    title: "Ambiance Altitude",
-    image: "ambiancealtitude2.png",
-    tags: ["UI/UX Design"],
-    services: ["UI/UX Design"],
-    fullImage: "ambiancealtitude2.png",
-    description: "Description is coming",
-    tools: ["Figma", "Illustrator"],
-  },
-  {
-    id: 3,
-    title: "Ambiance Cuisine",
-    image: "ambiancecuisine2.png",
-    tags: ["Développement web"],
-    services: ["Développement web"],
-    fullImage: "ambiancecuisine2.png",
-    description:
-      "Défi : Créer une landing page promotionnelle performante pour une entreprise de cuisine, maximisant les conversions via un formulaire de contact stratégiquement positionné.\nApproche : Développement web axé conversion avec architecture persuasive, hiérarchisation visuelle guidant vers l'action, optimisation de chaque élément pour réduire les frictions. Formulaire de contact simplifié et rassurant pour maximiser les demandes de devis.\nRésultat : Landing page performante générant un taux de conversion optimal, transformant efficacement les visiteurs en prospects qualifiés.",
-    tools: ["Figma", "Wordpress", "Elementor", "Javascript", "PHP"],
-  },
-  {
-    id: 4,
-    title: "Avril Kids",
-    image: "avril2.png",
-    tags: [
-      "E-commerce",
-      "Développement web",
-      "Charte graphique",
-      "UI/UX Design",
-    ],
-    services: [
-      "E-commerce",
-      "Développement web",
-      "Charte graphique",
-      "UI/UX Design",
-    ],
-    fullImage: "avril2.png",
-    description:
-      "Défi : Créer une expérience digitale premium pour des doudous en soie, alliant confiance parentale et émotion enfantine, dans un marché ultra-concurrentiel de la puériculture.\nApproche : Charte graphique douce et rassurante, UX/UI privilégiant la qualité et la sécurité des matériaux, parcours d'achat optimisé pour les parents soucieux du bien-être de leurs enfants. Architecture Shopify mettant en valeur le savoir-faire artisanal et les propriétés uniques de la soie.\nRésultat : Plateforme e-commerce élégante qui transforme l'achat utilitaire en expérience émotionnelle premium.",
-    tools: ["Shopify", "Liquid", "JavaScript", "Photoshop", "Illustrator"],
-  },
-  {
-    id: 5,
-    title: "La Bastide",
-    image: "bastide2.png",
-    tags: ["Branding", "Charte graphique", "UI/UX Design"],
-    services: ["Branding", "Charte graphique", "UI/UX Design"],
-    fullImage: "bastide2.png",
-    description: "Description is coming",
-    tools: ["Figma", "Illustrator", "Photoshop"],
-  },
-  {
-    id: 6,
-    title: "Berquin Jewels",
-    image: "berquin2.png",
-    tags: ["Développement web", "Formation", "SEO Optimization"],
-    services: ["Développement web", "Formation", "SEO Optimization"],
-    fullImage: "berquin2.png",
-    description:
-      "Défi : Créer un site vitrine premium pour bijoux de luxe à gemmes interchangeables, valoriser l'excellence produit via un catalogue e-commerce dirigeant vers la vente en magasin.\nApproche : Développement WordPress haute qualité reflétant le luxe de la marque, catalogue optimisé mettant en avant le système de gemmes personnalisables. Architecture SEO ciblée pour visibilité bijouterie haut de gamme, parcours utilisateur guidant vers la découverte en boutique physique.\nRésultat : Site vitrine sophistiqué valorisant l'innovation des gemmes interchangeables, plateforme générant du trafic qualifié vers les points de vente.",
-    tools: ["Figma", "Wordpress", "Elementor", "Javascript", "PHP"],
-  },
-  {
-    id: 7,
-    title: "Damso",
-    image: "damso2.png",
-    tags: [
-      "E-commerce",
-      "Développement web",
-      "Charte graphique",
-      "UI/UX Design",
-    ],
-    services: [
-      "E-commerce",
-      "Développement web",
-      "Charte graphique",
-      "UI/UX Design",
-    ],
-    fullImage: "damso2.png",
-    description:
-      "Défi : Créer une expérience digitale robuste capable de supporter l'audience massive d'un rappeur de premier plan, tout en respectant sa vision artistique unique.\nApproche : Traduction des idées créatives de l'artiste en UX/UI percutante, développement Shopify optimisé pour les pics de trafic, intégration de produits et concepts innovants fédérateurs. SEO agressif pour contrer les grands sites de revente et positionner la boutique officielle en première ligne.\nRésultat : Plateforme e-commerce haute performance qui domine les résultats de recherche et engage sa communauté.",
-    tools: [
-      "Figma",
-      "Shopify",
-      "Liquid",
-      "JavaScript",
-      "Illustrator",
-      "Photoshop",
-    ],
-  },
-  {
-    id: 8,
-    title: "Digilime",
-    image: "digilime2.png",
-    tags: [
-      "Développement web",
-      "Charte graphique",
-      "UI/UX Design",
-      "Hébergement",
-    ],
-    services: [
-      "Développement web",
-      "Charte graphique",
-      "UI/UX Design",
-      "Hébergement",
-    ],
-    fullImage: "digilime2.png",
-    description:
-      "Défi : Créer l'identité complète d'une nouvelle agence média se différenciant par la transparence, concevoir une landing page impactante dans un secteur ultra-concurrentiel.\nApproche : Branding axé sur la transparence et l'authenticité, UX/UI reflétant ces valeurs de confiance, landing page WordPress optimisée pour la conversion. Développement mettant en avant la différenciation par l'honnêteté commerciale, hébergement sécurisé pour lancement professionnel.\nRésultat : Identité forte et différenciante, landing page percutante qui positionne Digilime comme un acteur émergeant de son secteur.",
-    tools: [
-      "Figma",
-      "Wordpress",
-      "Elementor",
-      "Javascript",
-      "PHP",
-      "Illustrator",
-    ],
-  },
-  {
-    id: 9,
-    title: "Gobox",
-    image: "gobox2.png",
-    tags: [
-      "UI/UX Design",
-      "Charte graphique",
-      "Développement web",
-      "Traitement d'images",
-      "SEO Optimization",
-      "Hébergement",
-    ],
-    services: [
-      "UI/UX Design",
-      "Charte graphique",
-      "Développement web",
-      "Traitement d'images",
-      "SEO Optimization",
-      "Hébergement",
-    ],
-    fullImage: "gobox2.png",
-    description:
-      "Défi : Créer un site web dynamique pour salle de sport spécialisée (spinning, boxe, reformer), optimiser la découverte des nouveaux sports et faciliter réservations/abonnements.\nApproche : UX/UI énergique valorisant les disciplines proposées, développement WordPress avec système de réservation intégré, architecture mettant en avant nouveautés et formules d'abonnement. SEO ciblé fitness pour visibilité régionale, parcours conversion optimisé vers réservation de séances.\nRésultat : Site web performant boostant les inscriptions, plateforme facilitant la gestion cours collectifs et fidélisation clientèle sportive.",
-    tools: [
-      "Figma",
-      "Wordpress",
-      "Understrap",
-      "ACF",
-      "Javascript",
-      "PHP",
-      "Illustrator",
-      "Photoshop",
-    ],
-  },
-  {
-    id: 10,
-    title: "Jump XL",
-    image: "jump2.png",
-    tags: [
-      "UI/UX Design",
-      "Charte graphique",
-      "Développement web",
-      "Traitement d'images",
-      "SEO Optimization",
-      "Hébergement",
-    ],
-    services: [
-      "UI/UX Design",
-      "Charte graphique",
-      "Développement web",
-      "Traitement d'images",
-      "SEO Optimization",
-      "Hébergement",
-    ],
-    fullImage: "jump2.png",
-    description:
-      "Défi : Créer un site web séduisant enfants et rassurant parents, allier aspect ludique et informations sécuritaires pour un parc de trampolines tout âge.\nApproche : UX/UI ludique respectant la charte graphique Jump XL, développement WordPress privilégiant l'aspect fun tout en mettant en avant les garanties sécurité. Architecture valorisant les activités de groupe, parcours parents optimisé pour informations rassurantes et réservations.\nRésultat : Site web WordPress engageant qui convertit l'envie de s'amuser en réservations, équilibre parfait entre ludique et rassurant.",
-    tools: [
-      "Figma",
-      "Wordpress",
-      "Elementor",
-      "Javascript",
-      "PHP",
-      "Illustrator",
-      "Photoshop",
-    ],
-  },
-  {
-    id: 11,
-    title: "Ninja Clicker",
-    image: "ninja2.png",
-    tags: ["Illustration", "UI/UX Design", "Développement web"],
-    services: ["Illustration", "Développement web"],
-    fullImage: "ninja2.png",
-    description: "Description is coming",
-    tools: [
-      "Vite",
-      "Tailwind",
-      "Javascript",
-      "Typescript",
-      "MongoDB",
-      "Figma",
-      "Illustrator",
-    ],
-  },
-  {
-    id: 12,
-    title: "Red Sheep Agency",
-    image: "redsheep2.png",
-    tags: [
-      "Branding",
-      "UI/UX Design",
-      "Développement web",
-      "SEO Optimization",
-      "Hébergement",
-    ],
-    services: [
-      "Branding",
-      "UI/UX Design",
-      "Développement web",
-      "SEO Optimization",
-      "Hébergement",
-    ],
-    fullImage: "redsheep2.png",
-    description:
-      "Défi : Refondre l'identité complète d'une agence média en pleine transformation, créer une expérience digitale créative qui impressionne tout en démontrant l'expertise en achat média. \nApproche : Branding et charte graphique alignés sur la nouvelle dynamique d'équipe, UX/UI générant l'effet wow recherché, développement web sur mesure mettant en avant l'expertise. Architecture de contenu équilibrant impact visuel spectaculaire et démonstration de compétences techniques. \nRésultat : Identité renouvelée, site web percutant qui positionne Red Sheep comme référence créative dans l'achat média.",
-    tools: [
-      "Figma",
-      "Wordpress",
-      "Elementor",
-      "Javascript",
-      "PHP",
-      "Illustrator",
-      "Photoshop",
-    ],
-  },
-  {
-    id: 13,
-    title: "Season Flowers",
-    image: "season2.png",
-    tags: [
-      "UI/UX Design",
-      "Charte graphique",
-      "Développement web",
-      "Illustration",
-      "SEO Optimization",
-      "Hébergement",
-    ],
-    services: [
-      "UI/UX Design",
-      "Charte graphique",
-      "Développement web",
-      "Illustration",
-      "SEO Optimization",
-      "Hébergement",
-    ],
-    fullImage: "season2.png",
-    description:
-      "Défi : Créer l'identité complète d'un concept B2B original (abonnement bouquets en soie), faire comprendre et adopter une offre innovante peu commune sur le marché professionnel.\nApproche : Branding valorisant l'innovation du concept, UX/UI structurant clairement l'information pour faciliter la découverte de l'offre. Développement WordPress avec architecture pédagogique expliquant les bénéfices de l'abonnement fleurs artificielles. Parcours B2B optimisé pour conversion.\nRésultat : Site web professionnel démocratisant un concept novateur, identité forte qui positionne Season comme pionnier de l'abonnement floral B2B.",
-    tools: [
-      "Figma",
-      "Wordpress",
-      "Elementor",
-      "Javascript",
-      "PHP",
-      "Illustrator",
-      "Photoshop",
-    ],
-  },
-  {
-    id: 14,
-    title: "Vertical Design",
-    image: "vertical2.png",
-    tags: [
-      "Branding",
-      "UI/UX Design",
-      "Développement web",
-      "SEO Optimization",
-      "Hébergement",
-    ],
-    services: [
-      "Branding",
-      "UI/UX Design",
-      "Développement web",
-      "SEO Optimization",
-      "Hébergement",
-    ],
-    fullImage: "vertical2.png",
-    description: "Description is coming",
-    tools: [
-      "Figma",
-      "Wordpress",
-      "Understrap",
-      "ACF",
-      "Javascript",
-      "PHP",
-      "Illustrator",
-      "Photoshop",
-    ],
-  },
+
+  // 👇 AJOUTEZ VOS NOUVEAUX PROJETS ICI EN COPIANT LA STRUCTURE CI-DESSUS
+  // Chaque projet doit être séparé par une virgule
+  // Exemple :
+  // {
+  //   id: 2,
+  //   title: "Mon Projet",
+  //   image: "mon-projet.png",
+  //   tags: ["Tag1", "Tag2"],
+  //   services: ["Service1"],
+  //   fullImage: "mon-projet.png",
+  //   description: "Description courte du projet",
+  //   tools: ["Outil1", "Outil2"],
+  //   role: "Mon rôle...",
+  //   duration: "X mois",
+  //   problem: "Le problème...",
+  //   objective: "L'objectif...",
+  //   research: "Les recherches...",
+  //   designSolutions: "Les solutions...",
+  //   mockups: ["mockup1.png", "mockup2.png"],
+  //   technicalImplementation: "L'implémentation...",
+  //   results: "Les résultats...",
+  //   learnings: "Ce que j'ai appris...",
+  // },
 ];
 
 const themes = [
@@ -514,10 +315,12 @@ export default function Portfolio() {
   const [selectedProject, setSelectedProject] = useState<
     (typeof projects)[0] | null
   >(null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [zoomedImage, setZoomedImage] = useState<string | null>(null);
   const [ninjaName, setNinjaName] = useState("");
   const [password, setPassword] = useState("");
   const [eggDoneness, setEggDoneness] = useState<"soft" | "medium" | "hard">(
-    "medium"
+    "medium",
   );
   const [timerTime, setTimerTime] = useState(420); // Default to medium (7 minutes)
   const [timerActive, setTimerActive] = useState(false);
@@ -835,12 +638,20 @@ export default function Portfolio() {
           <h2 className="text-3xl font-bold text-center mb-12">
             Projets Réalisés
           </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <p className="text-center text-muted-foreground max-w-2xl mx-auto">
+            Cette section est actuellement en cours de révision, car les projets
+            présentés ne correspondent plus à mes objectifs professionnels. Je
+            serais néanmoins ravie d'en discuter avec vous lors d'un entretien.
+          </p>
+          {/* <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project) => (
               <div
                 key={project.id}
-                className="project-card shadow-md"
-                onClick={() => setSelectedProject(project)}
+                className="project-card shadow-md cursor-pointer"
+                onClick={() => {
+                  setSelectedProject(project);
+                  setIsDrawerOpen(true);
+                }}
               >
                 <img
                   src={project.image}
@@ -864,7 +675,7 @@ export default function Portfolio() {
                 </div>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
       </section>
 
@@ -961,8 +772,8 @@ export default function Portfolio() {
                     {eggDoneness === "soft"
                       ? "5"
                       : eggDoneness === "medium"
-                      ? "7"
-                      : "9"}{" "}
+                        ? "7"
+                        : "9"}{" "}
                     minutes
                   </p>
                 </div>
@@ -1050,62 +861,264 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Project Modal */}
-      {selectedProject && (
-        <div
-          className={`modal-overlay ${selectedProject ? "open" : ""}`}
-          onClick={() => setSelectedProject(null)}
+      {/* Project Drawer */}
+      <Sheet
+        open={isDrawerOpen}
+        onOpenChange={(open) => {
+          // Only allow closing if no image is zoomed
+          if (!open && zoomedImage) {
+            return;
+          }
+          setIsDrawerOpen(open);
+        }}
+      >
+        <SheetContent
+          side="right"
+          className="w-full sm:w-[600px] md:w-[700px] lg:w-[800px] sm:max-w-none overflow-y-auto p-0"
         >
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="relative">
+          <SheetHeader className="sticky top-0 bg-background z-10 border-b p-6">
+            <div className="flex items-center justify-between pr-10">
+              <SheetTitle className="text-2xl">
+                {selectedProject?.title}
+              </SheetTitle>
               <button
-                onClick={() => setSelectedProject(null)}
-                className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-background/80 hover:bg-background flex items-center justify-center"
+                onClick={() => setIsDrawerOpen(false)}
+                className="rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
               >
-                <X className="w-4 h-4" />
+                <X className="h-5 w-5" />
+                <span className="sr-only">Fermer</span>
               </button>
-              <img
-                src={selectedProject.fullImage}
-                alt={selectedProject.title}
-                className="w-full h-64 object-cover rounded-t-lg"
-              />
             </div>
-            <div className="p-6">
-              <h3 className="text-2xl font-bold mb-3">
-                {selectedProject.title}
-              </h3>
-              <p className="text-muted-foreground mb-4">
-                {selectedProject.description}
-              </p>
+          </SheetHeader>
 
-              <div className="mb-4">
-                <h4 className="font-semibold mb-2">Outils utilisés:</h4>
-                <div className="flex flex-wrap gap-1">
-                  {selectedProject.tools.map((tool, index) => (
-                    <span
-                      key={index}
-                      className="px-2 py-1 bg-secondary text-secondary-foreground text-sm rounded"
-                    >
-                      {tool}
-                    </span>
-                  ))}
-                </div>
-              </div>
+          <div className="p-6 space-y-6 pb-20">
+            {selectedProject && (
+              <>
+                {/* Image principale ou Galerie d'images */}
+                {(selectedProject.gallery || selectedProject.fullImage) && (
+                  <div className="space-y-3">
+                    {selectedProject.gallery &&
+                    selectedProject.gallery.length > 0 ? (
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                        {selectedProject.gallery.map((img, index) => (
+                          <img
+                            key={index}
+                            src={img}
+                            alt={`${selectedProject.title} - ${index + 1}`}
+                            className="w-full h-48 object-cover rounded-lg cursor-pointer hover:opacity-80 transition-opacity"
+                            onClick={() => setZoomedImage(img)}
+                          />
+                        ))}
+                      </div>
+                    ) : (
+                      <img
+                        src={selectedProject.fullImage}
+                        alt={selectedProject.title}
+                        className="w-full h-64 object-cover rounded-lg cursor-pointer hover:opacity-80 transition-opacity"
+                        onClick={() =>
+                          setZoomedImage(selectedProject.fullImage)
+                        }
+                      />
+                    )}
+                  </div>
+                )}
 
-              <div>
-                <h4 className="font-semibold mb-2">Services fournis:</h4>
-                <ul className="space-y-1">
-                  {selectedProject.services.map((service, index) => (
-                    <li key={index} className="text-muted-foreground">
-                      • {service}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+                {/* Description générale */}
+                {selectedProject.description && (
+                  <div>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {selectedProject.description}
+                    </p>
+                  </div>
+                )}
+
+                {/* Mon rôle */}
+                {selectedProject.role && (
+                  <div>
+                    <h4 className="text-lg font-semibold mb-2">Mon rôle</h4>
+                    <p className="text-muted-foreground">
+                      {selectedProject.role}
+                    </p>
+                  </div>
+                )}
+
+                {/* Durée */}
+                {selectedProject.duration && (
+                  <div>
+                    <h4 className="text-lg font-semibold mb-2">Durée</h4>
+                    <p className="text-muted-foreground">
+                      {selectedProject.duration}
+                    </p>
+                  </div>
+                )}
+
+                {/* Technologies utilisées */}
+                {selectedProject.tools && selectedProject.tools.length > 0 && (
+                  <div>
+                    <h4 className="text-lg font-semibold mb-2">
+                      Technologies utilisées
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedProject.tools.map((tool, index) => (
+                        <span
+                          key={index}
+                          className="px-3 py-1 bg-secondary text-secondary-foreground text-sm rounded-md"
+                        >
+                          {tool}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Le problème */}
+                {selectedProject.problem && (
+                  <div>
+                    <h4 className="text-lg font-semibold mb-2">Le problème</h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {selectedProject.problem}
+                    </p>
+                  </div>
+                )}
+
+                {/* L'objectif */}
+                {selectedProject.objective && (
+                  <div>
+                    <h4 className="text-lg font-semibold mb-2">L'objectif</h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {selectedProject.objective}
+                    </p>
+                  </div>
+                )}
+
+                {/* Recherches et insights */}
+                {selectedProject.research && (
+                  <div>
+                    <h4 className="text-lg font-semibold mb-2">
+                      Recherches et insights
+                    </h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {selectedProject.research}
+                    </p>
+                  </div>
+                )}
+
+                {/* Solutions designs */}
+                {(selectedProject.designSolutions ||
+                  (selectedProject.mockups &&
+                    selectedProject.mockups.length > 0)) && (
+                  <div>
+                    <h4 className="text-lg font-semibold mb-2">
+                      Solutions design
+                    </h4>
+                    {selectedProject.designSolutions && (
+                      <p className="text-muted-foreground leading-relaxed mb-3">
+                        {selectedProject.designSolutions}
+                      </p>
+                    )}
+                    {selectedProject.mockups &&
+                      selectedProject.mockups.length > 0 && (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+                          {selectedProject.mockups.map((mockup, index) => (
+                            <img
+                              key={index}
+                              src={mockup}
+                              alt={`Maquette ${index + 1}`}
+                              className="w-full h-auto object-cover rounded-lg border cursor-pointer hover:opacity-80 transition-opacity"
+                              onClick={() => setZoomedImage(mockup)}
+                            />
+                          ))}
+                        </div>
+                      )}
+                  </div>
+                )}
+
+                {/* Implémentation technique */}
+                {selectedProject.technicalImplementation && (
+                  <div>
+                    <h4 className="text-lg font-semibold mb-2">
+                      Implémentation technique
+                    </h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {selectedProject.technicalImplementation}
+                    </p>
+                  </div>
+                )}
+
+                {/* Résultats et impacts */}
+                {selectedProject.results && (
+                  <div>
+                    <h4 className="text-lg font-semibold mb-2">
+                      Résultats et impacts
+                    </h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {selectedProject.results}
+                    </p>
+                  </div>
+                )}
+
+                {/* Ce que j'ai appris */}
+                {selectedProject.learnings && (
+                  <div>
+                    <h4 className="text-lg font-semibold mb-2">
+                      Ce que j'ai appris
+                    </h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {selectedProject.learnings}
+                    </p>
+                  </div>
+                )}
+
+                {/* Services fournis */}
+                {selectedProject.services &&
+                  selectedProject.services.length > 0 && (
+                    <div>
+                      <h4 className="text-lg font-semibold mb-2">
+                        Services fournis
+                      </h4>
+                      <ul className="space-y-1">
+                        {selectedProject.services.map((service, index) => (
+                          <li key={index} className="text-muted-foreground">
+                            • {service}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+              </>
+            )}
           </div>
-        </div>
-      )}
+        </SheetContent>
+      </Sheet>
+
+      {/* Image Zoom Lightbox */}
+      {zoomedImage &&
+        createPortal(
+          <div
+            className="fixed inset-0 bg-black/90 flex items-center justify-center p-4"
+            style={{ zIndex: 2147483647, pointerEvents: "auto" }}
+            onClick={() => setZoomedImage(null)}
+          >
+            <button
+              className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors cursor-pointer"
+              style={{ pointerEvents: "auto", cursor: "pointer" }}
+              onClick={(e) => {
+                e.stopPropagation();
+                setZoomedImage(null);
+              }}
+            >
+              <X className="w-6 h-6" />
+            </button>
+            <img
+              src={zoomedImage}
+              alt="Zoomed image"
+              className="max-w-full max-h-full object-contain"
+              style={{ pointerEvents: "none" }}
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>,
+          document.body,
+        )}
 
       {/* GitHub Floating Button */}
       <a
