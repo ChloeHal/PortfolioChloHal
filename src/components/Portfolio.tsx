@@ -327,8 +327,18 @@ export default function Portfolio() {
   const [randomBook, setRandomBook] = useState("");
   const [coffeeMood, setCoffeeMood] = useState(0);
   const [showThemeSelector, setShowThemeSelector] = useState(false);
+  const [showTour, setShowTour] = useState(false);
+  const [tourStep, setTourStep] = useState(0);
 
   const timerRef = useRef<NodeJS.Timeout>();
+
+  // Check if user has seen the tour
+  useEffect(() => {
+    const hasSeenTour = localStorage.getItem('hasSeenTour');
+    if (!hasSeenTour) {
+      setTimeout(() => setShowTour(true), 1000); // Show tour after 1 second
+    }
+  }, []);
 
   useEffect(() => {
     document.documentElement.className = currentTheme;
@@ -680,7 +690,7 @@ export default function Portfolio() {
       </section>
 
       {/* Interactive Tools */}
-      <section className="py-16 px-4">
+      <section className="py-16 px-4" id="bonus-tools">
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold text-center mb-4">
             Les Outils Bonus
@@ -1127,10 +1137,155 @@ export default function Portfolio() {
         rel="noopener noreferrer"
         className="github-float"
         title="Visit my GitHub"
+        id="github-button"
       >
         <Github className="w-6 h-6" />
         Read me
       </a>
+
+      {/* Tour Guide */}
+      {showTour && (
+        <>
+          {/* Overlay */}
+          <div
+            className="fixed inset-0 bg-black/50 z-[9999]"
+            style={{ pointerEvents: tourStep === 3 ? 'auto' : 'none' }}
+          />
+
+          {/* Step 1: Theme Selector */}
+          {tourStep === 0 && (
+            <div
+              className="fixed top-20 right-4 z-[10000] bg-background border-2 border-primary rounded-lg shadow-2xl p-6 max-w-sm animate-fade-in-up"
+              style={{ pointerEvents: 'auto' }}
+            >
+              <div className="flex items-start gap-3 mb-4">
+                <Palette className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-bold text-lg mb-2">Sélecteur de thème</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Ces thèmes représentent les différents <strong>secteurs d'activité</strong> pour lesquels j'ai travaillé.
+                    Chaque thème reflète un univers professionnel distinct que j'ai eu l'occasion d'explorer.
+                  </p>
+                </div>
+              </div>
+              <div className="flex justify-between items-center mt-4">
+                <button
+                  onClick={() => {
+                    setShowTour(false);
+                    localStorage.setItem('hasSeenTour', 'true');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className="text-sm text-muted-foreground hover:text-foreground"
+                >
+                  Passer le tour
+                </button>
+                <button
+                  onClick={() => {
+                    setTourStep(1);
+                    setTimeout(() => {
+                      document.getElementById('bonus-tools')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 100);
+                  }}
+                  className="btn btn-primary btn-sm"
+                >
+                  Suivant (1/3)
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Step 2: Bonus Tools */}
+          {tourStep === 1 && (
+            <div
+              className="fixed bottom-24 left-1/2 transform -translate-x-1/2 z-[10000] bg-background border-2 border-primary rounded-lg shadow-2xl p-6 max-w-md animate-fade-in-up"
+              style={{ pointerEvents: 'auto' }}
+            >
+              <div className="flex items-start gap-3 mb-4">
+                <Wand2 className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-bold text-lg mb-2">Les Outils Bonus</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Cette section est un <strong>moyen ludique</strong> pour vous faire rester plus longtemps sur le site
+                    et vous assurer que vous vous souviendrez de mon nom. Un peu d'amusement ne fait jamais de mal!
+                  </p>
+                </div>
+              </div>
+              <div className="flex justify-between items-center mt-4">
+                <button
+                  onClick={() => {
+                    setTourStep(0);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className="text-sm text-muted-foreground hover:text-foreground"
+                >
+                  Retour
+                </button>
+                <button
+                  onClick={() => setTourStep(2)}
+                  className="btn btn-primary btn-sm"
+                >
+                  Suivant (2/3)
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Step 3: GitHub Button */}
+          {tourStep === 2 && (
+            <div
+              className="fixed bottom-20 right-40 z-[10000] bg-background border-2 border-primary rounded-lg shadow-2xl p-6 max-w-sm animate-fade-in-up"
+              style={{ pointerEvents: 'auto' }}
+            >
+              <div className="flex items-start gap-3 mb-4">
+                <Github className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-bold text-lg mb-2">Read me</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Cliquez ici pour en savoir plus sur les <strong>aspects techniques</strong> de ce portfolio :
+                    technologies utilisées, architecture, et choix de développement.
+                  </p>
+                </div>
+              </div>
+              <div className="flex justify-between items-center mt-4">
+                <button
+                  onClick={() => setTourStep(1)}
+                  className="text-sm text-muted-foreground hover:text-foreground"
+                >
+                  Retour
+                </button>
+                <button
+                  onClick={() => {
+                    setShowTour(false);
+                    setTourStep(0);
+                    localStorage.setItem('hasSeenTour', 'true');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className="btn btn-primary btn-sm"
+                >
+                  Terminer (3/3)
+                </button>
+              </div>
+            </div>
+          )}
+        </>
+      )}
+
+      {/* Tour Restart Button */}
+      {!showTour && (
+        <button
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(() => {
+              setShowTour(true);
+              setTourStep(0);
+            }, 500);
+          }}
+          className="fixed bottom-20 left-4 w-12 h-12 rounded-full bg-primary/10 hover:bg-primary/20 flex items-center justify-center text-primary transition-all z-[9998]"
+          title="Relancer le tour guidé"
+        >
+          <Wand2 className="w-5 h-5" />
+        </button>
+      )}
     </div>
   );
 }
