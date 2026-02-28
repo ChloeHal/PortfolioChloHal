@@ -1,0 +1,1981 @@
+/* ============================================
+   MINIMAL PORTFOLIO — Adaptive Stylesheet
+   ============================================ */
+
+/* ---------- Accessibility ---------- */
+
+:focus-visible {
+  outline: 2px solid var(--p-text);
+  outline-offset: 2px;
+}
+
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 200;
+  padding: 0.75rem 1.5rem;
+  background: var(--p-text);
+  color: var(--p-bg);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.skip-to-content:focus {
+  left: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Layout ---------- */
+
+.portfolio-container {
+  min-height: 100vh;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+/* ---------- Navigation ---------- */
+
+.top-navigation {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--p-bg);
+  border-bottom: 1px solid var(--p-border);
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 56px;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-logo h2 {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--p-text-muted);
+  letter-spacing: -0.01em;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+  animation: pulse-green 2s ease-in-out infinite;
+}
+
+@keyframes pulse-green {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ---------- Sector Dropdown ---------- */
+
+.sector-dropdown-container {
+  position: relative;
+}
+
+.sector-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  border: 1px solid var(--p-border);
+  background: transparent;
+  color: var(--p-text-muted);
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.sector-dropdown-trigger:hover {
+  color: var(--p-text);
+  border-color: var(--p-text-muted);
+}
+
+.sector-dropdown-trigger.active {
+  color: var(--p-text);
+  border-color: var(--p-text-muted);
+}
+
+.current-sector {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.sector-text {
+  white-space: nowrap;
+}
+
+.dropdown-arrow {
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+.dropdown-arrow.rotated {
+  transform: rotate(180deg);
+}
+
+.sector-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  width: 280px;
+  background: var(--p-surface);
+  border: 1px solid var(--p-border);
+  border-radius: 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: all 0.2s ease;
+  z-index: 101;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.dark .sector-dropdown-menu {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.sector-dropdown-menu.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-header {
+  padding: 0.75rem 1rem 0.5rem;
+  border-bottom: 1px solid var(--p-border);
+}
+
+.dropdown-header h3 {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--p-text);
+  margin-bottom: 0;
+}
+
+.dropdown-header p {
+  font-size: 0.75rem;
+  color: var(--p-text-muted);
+}
+
+.dropdown-content {
+  padding: 0.25rem;
+}
+
+.dropdown-separator {
+  display: none;
+}
+
+.sector-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  background: transparent;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  text-align: left;
+  color: var(--p-text);
+}
+
+.sector-dropdown-item:hover {
+  background: var(--p-surface-hover);
+}
+
+.sector-dropdown-item.active {
+  background: var(--p-surface-hover);
+}
+
+.item-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+}
+
+.sector-icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.tab-icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.coffee-cups {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.item-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+}
+
+.item-name {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--p-text);
+}
+
+.item-description {
+  font-size: 0.7rem;
+  color: var(--p-text-muted);
+  line-height: 1.3;
+}
+
+.dropdown-footer {
+  padding: 0.5rem 0.75rem;
+  border-top: 1px solid var(--p-border);
+}
+
+.reset-theme-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  width: 100%;
+  padding: 0.375rem 0.5rem;
+  border: 1px dashed var(--p-border);
+  background: transparent;
+  color: var(--p-text-muted);
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 0.75rem;
+}
+
+.reset-theme-btn:hover {
+  color: var(--p-text);
+  border-color: var(--p-text-muted);
+}
+
+/* ---------- Hero ---------- */
+
+.hero-section {
+  padding-top: 4rem;
+  padding-bottom: 2rem;
+}
+
+.hero-content {
+  text-align: left;
+}
+
+.hero-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  color: var(--p-text);
+  margin-bottom: 0.25rem;
+}
+
+.hero-subtitle {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--p-text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.hero-description {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--p-text-muted);
+  margin-bottom: 1.5rem;
+  max-width: none;
+}
+
+.hero-links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.hero-links a {
+  font-size: 0.9rem;
+  color: var(--p-text);
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid var(--p-border);
+  padding-bottom: 1px;
+  transition: border-color 0.2s ease;
+}
+
+.hero-links a:hover {
+  border-color: var(--p-text);
+}
+
+/* ---------- Section Base ---------- */
+
+section {
+  padding: 2.5rem 0;
+}
+
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--p-border);
+  margin: 0;
+  transition: border-color 0.3s ease;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+  color: var(--p-text);
+  position: relative;
+  display: block;
+}
+
+.section-title::after {
+  display: none;
+}
+
+/* ---------- Philosophy / Intro ---------- */
+
+.philosophy-section {
+  padding: 1.5rem 0 0;
+}
+
+.philosophy-content p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--p-text-muted);
+  margin-bottom: 1rem;
+}
+
+/* ---------- Experience ---------- */
+
+.experience-timeline {
+  position: relative;
+  padding-left: 0;
+}
+
+.experience-timeline::before {
+  display: none;
+}
+
+.experience-item {
+  position: relative;
+  margin-bottom: 2rem;
+  padding-left: 0;
+}
+
+.experience-item::before {
+  display: none;
+}
+
+.experience-year {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--p-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.experience-content h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.375rem;
+  color: var(--p-text);
+}
+
+.experience-company {
+  font-weight: 500;
+  color: var(--p-text);
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.experience-content p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--p-text-muted);
+}
+
+/* ---------- Education ---------- */
+
+.education-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.education-item {
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  opacity: 1;
+  transition: none;
+}
+
+.education-item:hover {
+  transform: none;
+}
+
+.education-item h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--p-text);
+  margin-bottom: 0.25rem;
+}
+
+.education-school {
+  font-weight: 500;
+  opacity: 1;
+  color: var(--p-text-muted);
+  font-size: 0.9rem;
+}
+
+.education-year {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8rem;
+  opacity: 1;
+  color: var(--p-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.education-description {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--p-text-muted);
+  margin-top: 0.375rem;
+}
+
+.education-item p:last-child {
+  font-size: 0.9rem;
+  color: var(--p-text-muted);
+}
+
+/* ---------- Skills ---------- */
+
+.skills-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.skill-category h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--p-text);
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.skill-tag {
+  font-family: "JetBrains Mono", monospace;
+  padding: 0.25rem 0.625rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  border: 1px solid var(--p-border);
+  color: var(--p-text-muted);
+  background: var(--p-code-bg);
+  opacity: 1;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.skill-tag:hover {
+  color: var(--p-text);
+  border-color: var(--p-text-muted);
+  transform: none;
+}
+
+/* ---------- Soft Skills ---------- */
+
+.soft-skills-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.soft-skill-item {
+  text-align: left;
+  padding: 0;
+}
+
+.soft-skill-item h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: var(--p-text);
+}
+
+.soft-skill-item p {
+  font-size: 0.9rem;
+  color: var(--p-text-muted);
+  line-height: 1.6;
+}
+
+/* ---------- Certifications ---------- */
+
+.certifications-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.certification-item {
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  opacity: 1;
+}
+
+.certification-item h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--p-text);
+  margin-bottom: 0.125rem;
+}
+
+.cert-issuer {
+  font-weight: 500;
+  opacity: 1;
+  color: var(--p-text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 0;
+}
+
+.cert-year {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  opacity: 1;
+  color: var(--p-text-muted);
+}
+
+/* ---------- Interactive Tools ---------- */
+
+.interactive-tools-section {
+  background: transparent;
+  margin: 0;
+  border-radius: 0;
+  padding: 2.5rem 0;
+}
+
+.tools-container {
+  max-width: none;
+  margin: 0;
+}
+
+.tools-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-bottom: 2rem;
+  justify-content: flex-start;
+  border-bottom: 1px solid var(--p-border);
+}
+
+.tool-tab {
+  padding: 0.5rem 0.75rem;
+  border: none;
+  background: transparent;
+  color: var(--p-text-muted);
+  border-radius: 0;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+
+.tool-tab:hover {
+  color: var(--p-text);
+  background: transparent;
+  transform: none;
+}
+
+.tool-tab.active {
+  color: var(--p-text);
+  background: transparent;
+  border-bottom-color: var(--p-text);
+  transform: none;
+}
+
+.tools-content {
+  min-height: 200px;
+}
+
+.tool-panel {
+  text-align: left;
+  padding: 0;
+}
+
+.tool-panel h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--p-text);
+}
+
+.tool-panel p {
+  font-size: 0.9rem;
+  color: var(--p-text-muted);
+}
+
+.generate-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  border: 1px solid var(--p-border);
+  border-radius: 0;
+  background: var(--p-surface);
+  color: var(--p-text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin: 1rem 0;
+  font-weight: 500;
+}
+
+.generate-btn:hover {
+  background: var(--p-surface-hover);
+  border-color: var(--p-text-muted);
+  transform: none;
+  box-shadow: none;
+}
+
+.result-display {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--p-code-bg);
+  border: 1px solid var(--p-border);
+  border-radius: 0;
+  font-size: 0.9rem;
+  font-family: "JetBrains Mono", monospace;
+  color: var(--p-text);
+}
+
+/* Password Tool */
+.password-options {
+  margin: 1rem 0;
+  text-align: left;
+}
+
+.option-group,
+.checkbox-group {
+  margin-bottom: 0.75rem;
+}
+
+.option-group label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--p-text);
+  display: block;
+  margin-bottom: 0.375rem;
+}
+
+.option-group input[type="range"] {
+  width: 100%;
+  accent-color: var(--p-text);
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--p-text-muted);
+  cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+  accent-color: var(--p-text);
+}
+
+.password-result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.password-result code {
+  flex: 1;
+  font-family: "JetBrains Mono", monospace;
+  word-break: break-all;
+  font-size: 0.85rem;
+}
+
+.password-result button {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.75rem;
+  border: 1px solid var(--p-border);
+  border-radius: 0;
+  background: transparent;
+  color: var(--p-text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.password-result button:hover {
+  color: var(--p-text);
+  border-color: var(--p-text-muted);
+}
+
+/* Timer Tool */
+.timer-display {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 1.5rem 0;
+  font-family: "JetBrains Mono", monospace;
+  color: var(--p-text);
+}
+
+.timer-presets {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.timer-presets button {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--p-border);
+  background: transparent;
+  color: var(--p-text-muted);
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.timer-presets button:hover {
+  color: var(--p-text);
+  border-color: var(--p-text-muted);
+}
+
+/* Coffee Tool */
+.coffee-slider-container {
+  margin: 1.5rem 0;
+}
+
+.coffee-slider {
+  width: 100%;
+  height: 4px;
+  border-radius: 0;
+  outline: none;
+  margin-bottom: 0.75rem;
+  accent-color: var(--p-text);
+}
+
+.coffee-level-display {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+  color: var(--p-text);
+}
+
+.coffee-status {
+  font-size: 0.9rem;
+  padding: 0.75rem 1rem;
+  background: var(--p-code-bg);
+  border: 1px solid var(--p-border);
+  border-radius: 0;
+  color: var(--p-text-muted);
+  line-height: 1.6;
+}
+
+/* ---------- Footer ---------- */
+
+.portfolio-footer {
+  padding: 2rem 0;
+  border-top: 1px solid var(--p-border);
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  font-size: 0.85rem;
+  color: var(--p-text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--p-text);
+}
+
+.footer-separator {
+  color: var(--p-border);
+  font-size: 0.75rem;
+}
+
+/* ============================================
+   SECTOR THEMES
+   Each sector only overrides the accent color.
+   ============================================ */
+
+/* Sector accent on status dot when a sector is active */
+body:not(.default) .status-dot {
+  background: var(--sector-accent);
+}
+
+/* Sector accent applied to specific elements */
+body:not(.default) .hero-subtitle {
+  color: var(--sector-accent);
+}
+
+body:not(.default) .section-title {
+  color: var(--sector-accent);
+}
+
+body:not(.default) .skill-tag:hover {
+  border-color: var(--sector-accent);
+  color: var(--sector-accent);
+}
+
+body:not(.default) .hero-links a {
+  border-bottom-color: var(--sector-accent);
+}
+
+body:not(.default) .hero-links a:hover {
+  color: var(--sector-accent);
+}
+
+body:not(.default) .tool-tab.active {
+  color: var(--sector-accent);
+  border-bottom-color: var(--sector-accent);
+}
+
+body:not(.default) .generate-btn {
+  border-color: var(--sector-accent);
+  color: var(--sector-accent);
+}
+
+body:not(.default) .generate-btn:hover {
+  background: var(--sector-accent);
+  color: var(--p-bg);
+}
+
+/* ============================================
+   SECTOR PALETTES — From chlohal.com live site
+   Each sector overrides --p-* + --sector-accent.
+   Font families via --font-heading / --font-body.
+   ============================================ */
+
+/* --- Leisure (Gaming — blue, no live equivalent) --- */
+body.leisure {
+  --sector-accent: hsl(217, 91%, 60%);
+  --p-bg: hsl(220, 50%, 96%);
+  --p-surface: hsl(220, 45%, 92%);
+  --p-surface-hover: hsl(220, 40%, 88%);
+  --p-border: hsl(220, 40%, 85%);
+  --p-text: hsl(220, 30%, 15%);
+  --p-text-muted: hsl(220, 20%, 45%);
+  --p-code-bg: hsl(220, 30%, 94%);
+}
+html.dark body.leisure {
+  --sector-accent: hsl(217, 91%, 65%);
+  --p-bg: hsl(220, 25%, 10%);
+  --p-surface: hsl(220, 22%, 14%);
+  --p-surface-hover: hsl(220, 20%, 18%);
+  --p-border: hsl(220, 20%, 25%);
+  --p-text: hsl(220, 20%, 90%);
+  --p-text-muted: hsl(220, 15%, 55%);
+  --p-code-bg: hsl(220, 18%, 12%);
+}
+
+/* --- Florist (Fleurs — Cormorant / Figtree) --- */
+body.florist {
+  --sector-accent: hsl(16.4, 67.9%, 15.9%);
+  --p-bg: hsl(21.4, 77.8%, 96.5%);
+  --p-surface: hsl(20.7, 78.4%, 92.7%);
+  --p-surface-hover: hsl(20.7, 78.4%, 89%);
+  --p-border: hsl(320, 60%, 85%);
+  --p-text: hsl(16.4, 67.9%, 15.9%);
+  --p-text-muted: hsl(16.4, 40%, 40%);
+  --p-code-bg: hsl(320, 30%, 95%);
+  --font-heading: "Cormorant", serif;
+  --font-body: "Figtree", sans-serif;
+}
+html.dark body.florist {
+  --sector-accent: hsl(16.4, 60%, 60%);
+  --p-bg: hsl(21, 40%, 10%);
+  --p-surface: hsl(21, 30%, 14%);
+  --p-surface-hover: hsl(21, 28%, 18%);
+  --p-border: hsl(320, 30%, 25%);
+  --p-text: hsl(21, 60%, 90%);
+  --p-text-muted: hsl(16, 40%, 60%);
+  --p-code-bg: hsl(320, 15%, 12%);
+}
+
+/* --- Wine (Vin — Archivo Narrow / Poppins) --- */
+body.wine {
+  --sector-accent: hsl(350.4, 99.2%, 49.2%);
+  --p-bg: hsl(0, 0%, 100%);
+  --p-surface: hsl(0, 10%, 96.1%);
+  --p-surface-hover: hsl(14, 50%, 90%);
+  --p-border: hsl(14, 85.1%, 76.3%);
+  --p-text: hsl(12.9, 87.5%, 3.1%);
+  --p-text-muted: hsl(12.9, 40%, 35%);
+  --p-code-bg: hsl(0, 10%, 96.1%);
+  --font-heading: "Archivo Narrow", sans-serif;
+  --font-body: "Poppins", sans-serif;
+}
+html.dark body.wine {
+  --sector-accent: hsl(350.4, 90%, 60%);
+  --p-bg: hsl(350, 30%, 8%);
+  --p-surface: hsl(350, 25%, 12%);
+  --p-surface-hover: hsl(350, 22%, 16%);
+  --p-border: hsl(14, 50%, 30%);
+  --p-text: hsl(0, 0%, 92%);
+  --p-text-muted: hsl(0, 10%, 65%);
+  --p-code-bg: hsl(350, 20%, 10%);
+}
+
+/* --- Boxing (Boxe — Fjalla One / Nunito Sans) — dark theme --- */
+body.boxing {
+  --sector-accent: hsl(264.2, 100%, 71.8%);
+  --p-bg: hsl(0, 0%, 7%);
+  --p-surface: hsl(261.4, 20.6%, 13.3%);
+  --p-surface-hover: hsl(261.4, 20.6%, 17%);
+  --p-border: hsl(261.4, 20.6%, 13.3%);
+  --p-text: hsl(0, 0%, 95%);
+  --p-text-muted: hsl(0, 0%, 70%);
+  --p-code-bg: hsl(261.4, 20.6%, 13.3%);
+  --font-heading: "Fjalla One", sans-serif;
+  --font-body: "Nunito Sans", sans-serif;
+}
+html.dark body.boxing {
+  --sector-accent: hsl(264.2, 100%, 75%);
+  --p-bg: hsl(0, 0%, 5%);
+  --p-surface: hsl(261.4, 20.6%, 10%);
+  --p-surface-hover: hsl(261.4, 20.6%, 14%);
+  --p-border: hsl(261.4, 20.6%, 18%);
+  --p-text: hsl(0, 0%, 95%);
+  --p-text-muted: hsl(0, 0%, 65%);
+  --p-code-bg: hsl(261.4, 18%, 8%);
+}
+
+/* --- Real Estate (Immobilier — Montserrat / Poppins) --- */
+body.realestate {
+  --sector-accent: hsl(45, 85%, 45%);
+  --p-bg: hsl(45, 35%, 98%);
+  --p-surface: hsl(45, 40%, 93%);
+  --p-surface-hover: hsl(45, 40%, 89%);
+  --p-border: hsl(45, 45%, 80%);
+  --p-text: hsl(45, 15%, 15%);
+  --p-text-muted: hsl(45, 25%, 40%);
+  --p-code-bg: hsl(45, 40%, 93%);
+  --font-heading: "Montserrat", sans-serif;
+  --font-body: "Poppins", sans-serif;
+}
+html.dark body.realestate {
+  --sector-accent: hsl(45, 85%, 55%);
+  --p-bg: hsl(45, 15%, 10%);
+  --p-surface: hsl(45, 12%, 14%);
+  --p-surface-hover: hsl(45, 10%, 18%);
+  --p-border: hsl(45, 20%, 25%);
+  --p-text: hsl(45, 20%, 88%);
+  --p-text-muted: hsl(45, 15%, 55%);
+  --p-code-bg: hsl(45, 10%, 12%);
+}
+
+/* --- Media (Agence Média — Electrolize / Kanit) — dark theme --- */
+body.media {
+  --sector-accent: hsl(4, 53%, 43%);
+  --p-bg: hsl(240, 3%, 19%);
+  --p-surface: hsl(240, 6%, 21%);
+  --p-surface-hover: hsl(240, 8%, 24%);
+  --p-border: hsl(240, 11%, 31%);
+  --p-text: hsl(0, 10%, 92%);
+  --p-text-muted: hsl(0, 10%, 67%);
+  --p-code-bg: hsl(240, 6%, 21%);
+  --font-heading: "Electrolize", sans-serif;
+  --font-body: "Kanit", sans-serif;
+}
+html.dark body.media {
+  --sector-accent: hsl(4, 53%, 50%);
+  --p-bg: hsl(240, 3%, 12%);
+  --p-surface: hsl(240, 5%, 15%);
+  --p-surface-hover: hsl(240, 6%, 18%);
+  --p-border: hsl(240, 8%, 25%);
+  --p-text: hsl(0, 10%, 92%);
+  --p-text-muted: hsl(0, 10%, 60%);
+  --p-code-bg: hsl(240, 4%, 13%);
+}
+
+/* --- Web Agency (Agence Digitale — Rubik / Zilla Slab) --- */
+body.webagency {
+  --sector-accent: hsl(208, 61%, 49%);
+  --p-bg: hsl(36, 24%, 96%);
+  --p-surface: hsl(36, 27%, 93%);
+  --p-surface-hover: hsl(36, 29%, 88%);
+  --p-border: hsl(36, 32%, 84%);
+  --p-text: hsl(175, 9%, 24%);
+  --p-text-muted: hsl(175, 4%, 39%);
+  --p-code-bg: hsl(36, 27%, 93%);
+  --font-heading: "Rubik", sans-serif;
+  --font-body: "Zilla Slab", serif;
+}
+html.dark body.webagency {
+  --sector-accent: hsl(208, 61%, 55%);
+  --p-bg: hsl(175, 9%, 10%);
+  --p-surface: hsl(175, 8%, 14%);
+  --p-surface-hover: hsl(175, 7%, 18%);
+  --p-border: hsl(36, 15%, 25%);
+  --p-text: hsl(36, 24%, 90%);
+  --p-text-muted: hsl(175, 5%, 55%);
+  --p-code-bg: hsl(175, 6%, 12%);
+}
+
+/* --- Singer (Artiste — Host Grotesk) --- */
+body.singer {
+  --sector-accent: hsl(0, 0%, 25%);
+  --p-bg: hsl(0, 0%, 98%);
+  --p-surface: hsl(0, 0%, 92%);
+  --p-surface-hover: hsl(0, 0%, 88%);
+  --p-border: hsl(0, 0%, 75%);
+  --p-text: hsl(0, 0%, 15%);
+  --p-text-muted: hsl(0, 0%, 45%);
+  --p-code-bg: hsl(0, 0%, 92%);
+  --font-heading: "Host Grotesk", sans-serif;
+  --font-body: "Host Grotesk", sans-serif;
+}
+html.dark body.singer {
+  --sector-accent: hsl(0, 0%, 60%);
+  --p-bg: hsl(0, 0%, 8%);
+  --p-surface: hsl(0, 0%, 12%);
+  --p-surface-hover: hsl(0, 0%, 16%);
+  --p-border: hsl(0, 0%, 25%);
+  --p-text: hsl(0, 0%, 90%);
+  --p-text-muted: hsl(0, 0%, 55%);
+  --p-code-bg: hsl(0, 0%, 10%);
+}
+
+/* --- Production (Boite de Production — Arial) --- */
+body.production {
+  --sector-accent: hsl(71.1, 99.2%, 48%);
+  --p-bg: hsl(0, 0%, 100%);
+  --p-surface: hsl(0, 0%, 97%);
+  --p-surface-hover: hsl(0, 0%, 93%);
+  --p-border: hsl(71.1, 99.2%, 48%);
+  --p-text: hsl(133, 13%, 20%);
+  --p-text-muted: hsl(133, 8%, 45%);
+  --p-code-bg: hsl(0, 0%, 97%);
+  --font-heading: "Arial", sans-serif;
+  --font-body: "Arial", sans-serif;
+}
+html.dark body.production {
+  --sector-accent: hsl(71, 99%, 55%);
+  --p-bg: hsl(133, 13%, 8%);
+  --p-surface: hsl(133, 10%, 12%);
+  --p-surface-hover: hsl(133, 8%, 16%);
+  --p-border: hsl(71, 40%, 25%);
+  --p-text: hsl(0, 0%, 92%);
+  --p-text-muted: hsl(133, 8%, 55%);
+  --p-code-bg: hsl(133, 8%, 10%);
+}
+
+/* --- Plushies (Doudou — Cormorant / Raleway) --- */
+body.plushies {
+  --sector-accent: hsl(26, 53%, 47%);
+  --p-bg: hsl(23, 50%, 97%);
+  --p-surface: hsl(23, 50%, 91%);
+  --p-surface-hover: hsl(23, 50%, 87%);
+  --p-border: hsl(26, 23%, 57%);
+  --p-text: hsl(16, 41%, 20%);
+  --p-text-muted: hsl(16, 31%, 35%);
+  --p-code-bg: hsl(23, 50%, 91%);
+  --font-heading: "Cormorant", serif;
+  --font-body: "Raleway", sans-serif;
+}
+html.dark body.plushies {
+  --sector-accent: hsl(26, 53%, 55%);
+  --p-bg: hsl(23, 20%, 10%);
+  --p-surface: hsl(23, 18%, 14%);
+  --p-surface-hover: hsl(23, 15%, 18%);
+  --p-border: hsl(26, 20%, 28%);
+  --p-text: hsl(23, 40%, 88%);
+  --p-text-muted: hsl(16, 20%, 55%);
+  --p-code-bg: hsl(23, 15%, 12%);
+}
+
+/* --- Jewelry (Bijoux — Playfair Display / sans-serif) --- */
+body.jewelry {
+  --sector-accent: hsl(0, 0%, 0%);
+  --p-bg: hsl(72, 33%, 97%);
+  --p-surface: hsl(56, 25%, 89%);
+  --p-surface-hover: hsl(56, 25%, 85%);
+  --p-border: hsl(0, 0%, 20%);
+  --p-text: hsl(0, 0%, 0%);
+  --p-text-muted: hsl(0, 0%, 40%);
+  --p-code-bg: hsl(56, 25%, 89%);
+  --font-heading: "Playfair Display", serif;
+  --font-body: sans-serif;
+}
+html.dark body.jewelry {
+  --sector-accent: hsl(56, 25%, 70%);
+  --p-bg: hsl(72, 10%, 8%);
+  --p-surface: hsl(56, 15%, 12%);
+  --p-surface-hover: hsl(56, 12%, 16%);
+  --p-border: hsl(0, 0%, 25%);
+  --p-text: hsl(72, 20%, 90%);
+  --p-text-muted: hsl(0, 0%, 55%);
+  --p-code-bg: hsl(56, 10%, 10%);
+}
+
+/* --- Sector font overrides --- */
+body:not(.default) {
+  font-family: var(--font-body, "Inter", -apple-system, sans-serif);
+}
+
+body:not(.default) h1,
+body:not(.default) h2,
+body:not(.default) h3 {
+  font-family: var(--font-heading, "Inter", -apple-system, sans-serif);
+}
+
+/* ============================================
+   SECTOR IMMERSION
+   When a sector is active, the page transforms
+   from raw markdown into a designed portfolio.
+   ============================================ */
+
+/* Hero accent bottom border */
+body:not(.default) .hero-section {
+  padding-bottom: 2.5rem;
+  border-bottom: 2px solid
+    color-mix(in srgb, var(--sector-accent) 20%, transparent);
+  margin-bottom: 0.5rem;
+}
+
+/* Section titles get accent underline */
+body:not(.default) .section-title {
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--sector-accent);
+  display: inline-block;
+  margin-bottom: 1.75rem;
+}
+
+/* Section dividers become invisible (cards provide separation) */
+body:not(.default) .section-divider {
+  border-color: transparent;
+}
+
+/* Sections get card treatment */
+body:not(.default) .experience-section,
+body:not(.default) .education-section,
+body:not(.default) .skills-section,
+body:not(.default) .soft-skills-section {
+  background: var(--p-surface);
+  border: 1px solid var(--p-border);
+  border-radius: 0;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+html.dark body:not(.default) .experience-section,
+html.dark body:not(.default) .education-section,
+html.dark body:not(.default) .skills-section,
+html.dark body:not(.default) .soft-skills-section {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Experience items get accent left border */
+body:not(.default) .experience-item {
+  padding-left: 1rem;
+  border-left: 3px solid
+    color-mix(in srgb, var(--sector-accent) 40%, transparent);
+  transition: border-color 0.2s ease;
+}
+
+body:not(.default) .experience-item:hover {
+  border-left-color: var(--sector-accent);
+}
+
+/* Education items get subtle card wrap */
+body:not(.default) .education-item {
+  padding: 1rem;
+  border: 1px solid var(--p-border);
+  border-radius: 0;
+  background: var(--p-code-bg);
+  transition: border-color 0.2s ease;
+}
+
+body:not(.default) .education-item:hover {
+  border-color: color-mix(in srgb, var(--sector-accent) 50%, var(--p-border));
+}
+
+/* Skill tags become filled pills */
+body:not(.default) .skill-tag {
+  font-family:
+    "Inter",
+    -apple-system,
+    sans-serif;
+  background: color-mix(in srgb, var(--sector-accent) 10%, var(--p-surface));
+  border-color: color-mix(in srgb, var(--sector-accent) 25%, var(--p-border));
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+  color: var(--p-text);
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+body:not(.default) .skill-tag:hover {
+  background: color-mix(in srgb, var(--sector-accent) 20%, var(--p-surface));
+  border-color: var(--sector-accent);
+  color: var(--sector-accent);
+}
+
+/* Soft skill items get accent dot prefix */
+body:not(.default) .soft-skill-item {
+  padding-left: 1rem;
+  position: relative;
+}
+
+body:not(.default) .soft-skill-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--sector-accent);
+}
+
+/* Interactive tools section becomes polished */
+body:not(.default) .interactive-tools-section {
+  background: var(--p-surface);
+  border: 1px solid var(--p-border);
+  border-radius: 0;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+html.dark body:not(.default) .interactive-tools-section {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+body:not(.default) .tools-tabs {
+  border-bottom-color: color-mix(
+    in srgb,
+    var(--sector-accent) 20%,
+    var(--p-border)
+  );
+}
+
+body:not(.default) .tool-tab:hover {
+  color: var(--sector-accent);
+}
+
+body:not(.default) .result-display {
+  border-color: color-mix(in srgb, var(--sector-accent) 30%, var(--p-border));
+  background: color-mix(in srgb, var(--sector-accent) 5%, var(--p-code-bg));
+}
+
+body:not(.default) .coffee-status {
+  border-color: color-mix(in srgb, var(--sector-accent) 30%, var(--p-border));
+  background: color-mix(in srgb, var(--sector-accent) 5%, var(--p-code-bg));
+}
+
+/* Navigation accent on sector button */
+body:not(.default) .sector-dropdown-trigger {
+  border-color: color-mix(in srgb, var(--sector-accent) 40%, var(--p-border));
+  color: var(--sector-accent);
+}
+
+/* Footer gets accent treatment */
+body:not(.default) .portfolio-footer {
+  border-top-color: color-mix(
+    in srgb,
+    var(--sector-accent) 30%,
+    var(--p-border)
+  );
+}
+
+body:not(.default) .footer-links a:hover {
+  color: var(--sector-accent);
+}
+
+/* Status dot size bump when active */
+body:not(.default) .status-dot {
+  width: 10px;
+  height: 10px;
+}
+
+/* Timer presets and buttons get accent treatment */
+body:not(.default) .timer-presets button {
+  border-color: color-mix(in srgb, var(--sector-accent) 30%, var(--p-border));
+}
+
+body:not(.default) .timer-presets button:hover {
+  background: color-mix(in srgb, var(--sector-accent) 10%, transparent);
+  border-color: var(--sector-accent);
+  color: var(--sector-accent);
+}
+
+/* Accent on form controls */
+body:not(.default) .option-group input[type="range"],
+body:not(.default) .coffee-slider {
+  accent-color: var(--sector-accent);
+}
+
+body:not(.default) .checkbox-group input[type="checkbox"] {
+  accent-color: var(--sector-accent);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 640px) {
+  .portfolio-container {
+    padding: 0 1rem 3rem;
+  }
+
+  .nav-content {
+    padding: 0 1rem;
+  }
+
+  .hero-title {
+    font-size: 1.75rem;
+  }
+
+  .sector-text {
+    display: none;
+  }
+
+  .sector-dropdown-trigger {
+    min-width: auto;
+    padding: 0.375rem 0.5rem;
+  }
+
+  .tools-tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tool-tab {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .hero-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+/* ---------- Animations ---------- */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.portfolio-container > section,
+.portfolio-container > hr {
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* ---------- Admin Page ---------- */
+
+.admin-container {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  min-height: 100vh;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--p-border);
+}
+
+.admin-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--p-text);
+}
+
+.admin-header-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.admin-btn {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid var(--p-border);
+  border-radius: 0;
+  background: transparent;
+  color: var(--p-text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.admin-btn:hover {
+  color: var(--p-text);
+  border-color: var(--p-text-muted);
+}
+
+.admin-btn-primary {
+  background: var(--p-text);
+  color: var(--p-bg);
+  border-color: var(--p-text);
+}
+
+.admin-btn-primary:hover {
+  opacity: 0.85;
+  color: var(--p-bg);
+}
+
+.admin-btn-danger {
+  color: #ef4444;
+  border-color: #ef4444;
+}
+
+.admin-btn-danger:hover {
+  background: #ef4444;
+  color: white;
+}
+
+.admin-section {
+  margin-bottom: 2.5rem;
+}
+
+.admin-section h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--p-text);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--p-border);
+}
+
+.admin-field {
+  margin-bottom: 1rem;
+}
+
+.admin-field label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--p-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.admin-field input,
+.admin-field textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  border: 1px solid var(--p-border);
+  border-radius: 0;
+  background: var(--p-surface);
+  color: var(--p-text);
+  font-family: inherit;
+  transition: border-color 0.15s ease;
+  box-sizing: border-box;
+}
+
+.admin-field input:focus,
+.admin-field textarea:focus {
+  outline: none;
+  border-color: var(--p-text-muted);
+}
+
+.admin-field textarea {
+  min-height: 80px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.admin-item {
+  padding: 1rem;
+  border: 1px solid var(--p-border);
+  border-radius: 0;
+  margin-bottom: 0.75rem;
+  background: var(--p-surface);
+}
+
+.admin-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.admin-item-header h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--p-text);
+}
+
+.admin-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8rem;
+  border: 1px dashed var(--p-border);
+  border-radius: 0;
+  background: transparent;
+  color: var(--p-text-muted);
+  cursor: pointer;
+  width: 100%;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.admin-add-btn:hover {
+  border-color: var(--p-text-muted);
+  color: var(--p-text);
+}
+
+.admin-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.admin-login h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--p-text);
+}
+
+.admin-login-form {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 320px;
+}
+
+.admin-login-form input {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  border: 1px solid var(--p-border);
+  border-radius: 0;
+  background: var(--p-surface);
+  color: var(--p-text);
+}
+
+.admin-login-form input:focus {
+  outline: none;
+  border-color: var(--p-text-muted);
+}
+
+.admin-login-error {
+  font-size: 0.8rem;
+  color: #ef4444;
+}
+
+.admin-back-link {
+  font-size: 0.8rem;
+  color: var(--p-text-muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--p-border);
+  transition: color 0.15s ease;
+}
+
+.admin-back-link:hover {
+  color: var(--p-text);
+}
+
+.admin-tags-input {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  padding: 0.5rem;
+  border: 1px solid var(--p-border);
+  border-radius: 0;
+  background: var(--p-surface);
+  min-height: 40px;
+  align-items: center;
+}
+
+.admin-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  font-family: "JetBrains Mono", monospace;
+  background: var(--p-code-bg);
+  border: 1px solid var(--p-border);
+  border-radius: 4px;
+  color: var(--p-text-muted);
+}
+
+.admin-tag button {
+  background: none;
+  border: none;
+  color: var(--p-text-muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0;
+  line-height: 1;
+}
+
+.admin-tag button:hover {
+  color: #ef4444;
+}
+
+.admin-tags-input input {
+  border: none;
+  background: transparent;
+  font-size: 0.8rem;
+  color: var(--p-text);
+  outline: none;
+  flex: 1;
+  min-width: 100px;
+  padding: 0.125rem;
+}
+
+/* ---------- Dock Navigation ---------- */
+
+.dock-nav {
+  padding: 2px 0;
+}
+
+.dock-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.dock-list {
+  position: relative;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 4px;
+}
+
+.dock-list-active {
+  background: var(--sector-accent, var(--p-text));
+}
+
+.dock-btn {
+  display: flex;
+  height: 28px;
+  align-items: center;
+  gap: 5px;
+  padding: 10px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--p-text);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: inherit;
+  text-decoration: none;
+}
+
+.dock-btn-active {
+  color: var(--p-bg);
+}
+
+.dock-clip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  transition: clip-path 0.25s ease;
+  clip-path: inset(0 75% 0 0);
+}
+
+/* ---------- Read Me Floating Button ---------- */
+
+.readme-float {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--p-text);
+  color: var(--p-bg);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--p-border);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.readme-float:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+}
+
+/* ---------- Tutorial Tour ---------- */
+
+.tour-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.tour-card {
+  position: fixed;
+  z-index: 10000;
+  background: var(--p-bg);
+  border: 2px solid var(--p-text);
+  padding: 1.5rem;
+  max-width: 22rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  animation: tour-fade-in 0.3s ease;
+}
+
+@keyframes tour-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tour-step-0 {
+  top: 5rem;
+  right: 1rem;
+}
+
+.tour-step-1 {
+  bottom: 7rem;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 26rem;
+}
+
+.tour-step-2 {
+  bottom: 5rem;
+  right: 6rem;
+}
+
+.tour-card-content {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.tour-icon {
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+  color: var(--p-text);
+}
+
+.tour-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--p-text);
+}
+
+.tour-card p {
+  font-size: 0.85rem;
+  color: var(--p-text-muted);
+  line-height: 1.6;
+}
+
+.tour-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.tour-skip {
+  background: none;
+  border: none;
+  font-size: 0.8rem;
+  color: var(--p-text-muted);
+  cursor: pointer;
+  padding: 0;
+}
+
+.tour-skip:hover {
+  color: var(--p-text);
+}
+
+.tour-next {
+  background: var(--p-text);
+  color: var(--p-bg);
+  border: none;
+  padding: 0.4rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.tour-next:hover {
+  opacity: 0.85;
+}
+
+.tour-restart-btn {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 50;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--p-surface);
+  color: var(--p-text-muted);
+  border: 1px solid var(--p-border);
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.tour-restart-btn:hover {
+  background: var(--p-surface-hover);
+  color: var(--p-text);
+}
+
+@media (max-width: 640px) {
+  .tour-step-0,
+  .tour-step-1,
+  .tour-step-2 {
+    left: 1rem;
+    right: 1rem;
+    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: none;
+  }
+
+  .dock-label {
+    display: none;
+  }
+
+  .dock-btn {
+    padding: 8px;
+  }
+
+  .readme-float {
+    bottom: 1rem;
+    right: 1rem;
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .tour-restart-btn {
+    bottom: 1rem;
+    left: 1rem;
+  }
+}
