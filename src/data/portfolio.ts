@@ -49,7 +49,7 @@ export const defaultData: PortfolioData = {
     title: "Chloé Halloin",
     subtitle: "Product Designer · Design Engineer",
     description:
-      "Je conçois des produits et je les code. De la recherche utilisateur au composant React, je couvre tout le spectre — UX research, product design, design systems et front-end engineering. Je crois que les meilleurs produits naissent quand design et code avancent ensemble.",
+      "Je design des produits et je code mes designs. De la recherche utilisateur à l'interface livrée, je couvre tout le spectre : UX research, product design, design systems et implémentation. Je crois que les meilleurs produits naissent quand le design ne s'arrête pas à la maquette.",
     links: [
       {
         label: "LinkedIn ↗",
@@ -77,7 +77,7 @@ export const defaultData: PortfolioData = {
     {
       id: "exp-1",
       period: "Janvier 2026 — Avril 2026",
-      title: "Product Designer Trainee",
+      title: "Design Engineer Trainee",
       company: "Enobase",
       description:
         "Conception UX/UI pour un générateur d'ERP, avec un focus sur l'optimisation des flux utilisateurs et l'amélioration de l'efficacité opérationnelle.",
@@ -88,7 +88,7 @@ export const defaultData: PortfolioData = {
       title: "Front-End Designer & Web Developer",
       company: "Vertical Design",
       description:
-        "Gestion de projets web sur mesure de bout en bout — de la conception UX/UI et du prototypage jusqu'au développement, au déploiement et à l'hébergement ainsi que la maintenance et l'accompagnement pour la prise en main — pour garantir des solutions personnalisées qui équilibrent les besoins des utilisateurs, la performance technique et les objectifs du client.",
+        "Gestion de projets web sur mesure de bout en bout, de la conception UX/UI et du prototypage jusqu'au développement, au déploiement et à l'hébergement ainsi que la maintenance et l'accompagnement pour la prise en main.",
     },
     {
       id: "exp-3",
@@ -133,6 +133,14 @@ export const defaultData: PortfolioData = {
   ],
   education: [
     {
+      id: "edu-0",
+      title: "Web Animations",
+      school: "animations.dev",
+      year: "2025",
+      description:
+        "Certification spécialisée en animations web : principes de motion design, springs, keyframes, performance GPU et accessibilité (prefers-reduced-motion).",
+    },
+    {
       id: "edu-1",
       title: "UX/UI Designer",
       school: "Interface3",
@@ -142,11 +150,11 @@ export const defaultData: PortfolioData = {
     },
     {
       id: "edu-2",
-      title: "Développeur Web",
+      title: "Développement Web",
       school: "BeCode",
       year: "Novembre 2022 — Août 2023",
       description:
-        "Programme intensif de formation en développement web axé sur la méthodologie active, visant à former des développeurs front-end compétents et adaptables.",
+        "Programme intensif de formation au développement front-end, là où j'ai appris à donner vie à mes designs en code.",
     },
     {
       id: "edu-3",
@@ -154,7 +162,7 @@ export const defaultData: PortfolioData = {
       school: "ISFSC",
       year: "Septembre 2021 — 2022",
       description:
-        "Grande Distinction — Bachelier créatif à destination des métiers du web comme le marketing, le graphisme ou le web.",
+        "Grande Distinction. Bachelier créatif à destination des métiers du web comme le marketing, le graphisme ou le web.",
     },
     {
       id: "edu-4",
@@ -162,7 +170,7 @@ export const defaultData: PortfolioData = {
       school: "EPHEC",
       year: "Septembre 2016 — Juin 2020",
       description:
-        "Distinction — Bachelier permettant de développer des compétences dans les différents aspects digitaux d'un business comme le droit, la supply chain, le marketing, le développement web, les bases de données.",
+        "Distinction. Bachelier permettant de développer des compétences dans les différents aspects digitaux d'un business comme le droit, la supply chain, le marketing, le développement web, les bases de données.",
     },
   ],
   skills: [
@@ -192,7 +200,7 @@ export const defaultData: PortfolioData = {
     },
     {
       id: "skill-eng",
-      name: "Développement Front-End",
+      name: "Design → Code",
       skills: [
         "React",
         "TypeScript",
@@ -220,13 +228,13 @@ export const defaultData: PortfolioData = {
       id: "qual-1",
       title: "Full-stack design",
       description:
-        "De la discovery au delivery. Je mène la recherche utilisateur, conçois l'expérience, dessine l'interface et je l'implémente — un seul interlocuteur, zéro perte en traduction.",
+        "De la discovery au produit livré. Je mène la recherche, conçois l'expérience, dessine l'interface et je l'implémente. Un seul interlocuteur, zéro friction entre le design et ce qui est livré.",
     },
     {
       id: "qual-2",
-      title: "Design ↔ Code",
+      title: "Design → Code",
       description:
-        "Je parle les deux langages. Je traduis l'intention design en code fidèle, et les contraintes techniques en opportunités design. Les design systems que je crée vivent en Figma et en React.",
+        "Je code ce que je design. Pas besoin de traduction entre les deux — l'intention design arrive intacte dans le produit. Les design systems que je crée vivent dans les maquettes et en production.",
     },
     {
       id: "qual-3",

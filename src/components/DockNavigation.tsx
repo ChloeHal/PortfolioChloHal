@@ -1,34 +1,34 @@
-import { useEffect, useLayoutEffect, useRef, useState, useCallback } from "react";
+import { useLayoutEffect, useRef, useCallback, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   User,
   Briefcase,
-  GraduationCap,
-  Code2,
-  Star,
-  Swords,
+  Bookmark,
+  FlaskConical,
+  Backpack,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 interface DockTab {
   name: string;
   icon: LucideIcon;
-  target: string;
+  path: string;
 }
 
 const TABS: DockTab[] = [
-  { name: "Accueil", icon: User, target: "main-content" },
-  { name: "Expérience", icon: Briefcase, target: "experience" },
-  { name: "Formation", icon: GraduationCap, target: "education" },
-  { name: "Compétences", icon: Code2, target: "skills" },
-  { name: "Qualités", icon: Star, target: "qualities" },
-  { name: "Outils", icon: Swords, target: "tools" },
+  { name: "Moi", icon: User, path: "/" },
+  { name: "Parcours", icon: Briefcase, path: "/experience" },
+  { name: "Laboratoire", icon: FlaskConical, path: "/laboratoire" },
+  { name: "Bookmarks", icon: Bookmark, path: "/bookmarks" },
+  { name: "Bag", icon: Backpack, path: "/bag" },
 ];
 
 const DockNavigation = () => {
-  const [activeTab, setActiveTab] = useState(TABS[0].name);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const activeTab = TABS.find((t) => t.path === location.pathname)?.name || TABS[0].name;
   const containerRef = useRef<HTMLDivElement>(null);
   const activeTabElementRef = useRef<HTMLButtonElement>(null);
-  const isClickScrolling = useRef(false);
 
   const updateClipPath = useCallback(() => {
     const container = containerRef.current;
@@ -46,43 +46,18 @@ const DockNavigation = () => {
     ).toFixed()}%)`;
   }, []);
 
-  // Update clip-path before paint when active tab changes
   useLayoutEffect(() => {
     updateClipPath();
   }, [activeTab, updateClipPath]);
 
-  // Recalculate on resize
   useEffect(() => {
     const handleResize = () => updateClipPath();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [updateClipPath]);
 
-  // Scroll spy — disabled during click-initiated smooth scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      if (isClickScrolling.current) return;
-      const scrollPos = window.scrollY + window.innerHeight / 3;
-      for (let i = TABS.length - 1; i >= 0; i--) {
-        const section = document.getElementById(TABS[i].target);
-        if (section && section.offsetTop <= scrollPos) {
-          setActiveTab(TABS[i].name);
-          break;
-        }
-      }
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   const handleClick = (tab: DockTab) => {
-    setActiveTab(tab.name);
-    isClickScrolling.current = true;
-    document.getElementById(tab.target)?.scrollIntoView({ behavior: "smooth" });
-    setTimeout(() => {
-      isClickScrolling.current = false;
-    }, 900);
+    navigate(tab.path);
   };
 
   return (
@@ -98,7 +73,7 @@ const DockNavigation = () => {
                   data-tab={tab.name}
                   onClick={() => handleClick(tab)}
                   className="dock-btn"
-                  aria-current={activeTab === tab.name ? "true" : undefined}
+                  aria-current={activeTab === tab.name ? "page" : undefined}
                 >
                   <Icon size={16} aria-hidden="true" />
                   <span className="dock-label">{tab.name}</span>

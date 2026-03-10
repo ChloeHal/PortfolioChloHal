@@ -3,7 +3,12 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
+import Layout from "./components/Layout";
+import Moi from "./pages/Moi";
+import Experience from "./pages/Experience";
+import Bookmarks from "./pages/Bookmarks";
+import Laboratoire from "./pages/Laboratoire";
+import Bag from "./pages/Bag";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 
@@ -16,7 +21,13 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route element={<Layout />}>
+            <Route path="/" element={<Moi />} />
+            <Route path="/experience" element={<Experience />} />
+            <Route path="/bookmarks" element={<Bookmarks />} />
+            <Route path="/laboratoire" element={<Laboratoire />} />
+            <Route path="/bag" element={<Bag />} />
+          </Route>
           <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
