@@ -26,25 +26,6 @@
   left: 0;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-
-  /* Les expériences du labo gardent toujours leurs animations */
-  .labo-experiments *,
-  .labo-experiments *::before,
-  .labo-experiments *::after {
-    animation-duration: revert !important;
-    animation-iteration-count: revert !important;
-    transition-duration: revert !important;
-  }
-}
-
 /* ---------- Layout ---------- */
 
 .portfolio-container {

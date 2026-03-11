@@ -1163,7 +1163,7 @@ const Laboratoire = () => {
           interactif et le code source correspondant.
         </p>
 
-        <div className="lab-grid labo-experiments">
+        <div className="lab-grid">
           <CodePreview
             title="Dynamic Island"
             description="Emoji sender avec Dynamic Island, gooey SVG filter et animations spring"
