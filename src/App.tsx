@@ -9,7 +9,7 @@ import Experience from "./pages/Experience";
 import Bookmarks from "./pages/Bookmarks";
 import Laboratoire from "./pages/Laboratoire";
 import Bag from "./pages/Bag";
-import Admin from "./pages/Admin";
+
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,7 +28,7 @@ const App = () => (
             <Route path="/laboratoire" element={<Laboratoire />} />
             <Route path="/bag" element={<Bag />} />
           </Route>
-          <Route path="/admin" element={<Admin />} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

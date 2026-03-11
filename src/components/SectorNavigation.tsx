@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import {
   ChevronDown,
-  RotateCcw,
   Sparkles,
   Gamepad2,
   Flower2,
@@ -119,9 +118,23 @@ const SectorNavigation: React.FC<SectorNavigationProps> = ({
       >
         <div className="dropdown-header">
           <h3>Secteur d'activité</h3>
+          <p className="dropdown-subtitle">Des univers que j'ai déjà pu décoder.</p>
         </div>
 
         <div className="dropdown-content">
+          <button
+            className={`sector-dropdown-item ${currentSector === "default" ? "active" : ""}`}
+            onClick={() => handleSectorSelect("default")}
+            role="option"
+            aria-selected={currentSector === "default"}
+          >
+            <span className="item-icon" aria-hidden="true"><Sparkles size={16} /></span>
+            <div className="item-content">
+              <span className="item-name">Défaut</span>
+              <span className="item-description">Thème neutre</span>
+            </div>
+          </button>
+
           {sectors.map((sector) => {
             const SectorIcon = sector.icon;
             return (
@@ -140,18 +153,6 @@ const SectorNavigation: React.FC<SectorNavigationProps> = ({
               </button>
             );
           })}
-        </div>
-
-        <div className="dropdown-footer">
-          <button
-            className="reset-theme-btn"
-            onClick={() => handleSectorSelect("default")}
-            role="option"
-            aria-selected={currentSector === "default"}
-          >
-            <RotateCcw size={12} aria-hidden="true" />
-            Thème par défaut
-          </button>
         </div>
       </div>
     </div>

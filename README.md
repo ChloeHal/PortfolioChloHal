@@ -30,14 +30,24 @@ En mode par defaut, le site reste volontairement brut et minimal — un rendu ma
 | Bijoux | Playfair Display | Creme vert, noir luxe |
 | Leisure | Inter | Bleu gaming |
 
+## Pages
+
+- **Moi** (`/`) — hero, competences, formation, qualites et outils interactifs
+- **Experience** (`/experience`) — parcours professionnel detaille
+- **Bookmarks** (`/bookmarks`) — liens favoris organises par categorie (IA, Design, Inspiration, UX, Dev, Chrome Extensions, X) avec filtrage par tags
+- **Laboratoire** (`/laboratoire`) — experiences d'animation interactives avec code source (Dynamic Island, Hold to Delete, Clip Reveal, Morph Checkbox, Scrubber Input, Chat Split-Flap)
+- **Bag** (`/bag`) — objets du quotidien
+
 ## Fonctionnalites
 
 - **Theming sectoriel dynamique** — changement de palette, typos et ambiance via le dropdown dans la nav
-- **Dark mode** — toggle clair/sombre avec persistence localStorage
-- **Tour guide** — introduction en 3 etapes pour les nouveaux visiteurs
-- **CMS integre** — page `/admin` pour editer tout le contenu (hero, experiences, formation, competences, qualites)
+- **Dark mode** — toggle clair/sombre avec crossfade anime et persistence localStorage
+
 - **Outils interactifs** — generateur de nom ninja, generateur de mot de passe, egg timer, book picker, jauge a cafe
-- **Contenu data-driven** — tout le texte vient d'un fichier de donnees, modifiable via le CMS
+- **Bookmarks** — 150+ liens classes par categorie avec filtrage par tags
+- **Laboratoire** — 6 experiences d'animation interactives avec apercu live et code source
+- **Contenu data-driven** — tout le texte vient d'un fichier de donnees
+- **SPA routing** — navigation client-side avec `.htaccess` pour Hostinger (Apache)
 
 ## Stack technique
 
@@ -49,7 +59,7 @@ En mode par defaut, le site reste volontairement brut et minimal — un rendu ma
 | Composants UI | shadcn/ui + Radix |
 | Icones | lucide-react |
 | Fonts | Google Fonts (15 familles chargees a la demande) |
-| Deploy | GitHub Pages |
+| Hebergement | Hostinger |
 
 ## Structure
 
@@ -57,18 +67,22 @@ En mode par defaut, le site reste volontairement brut et minimal — un rendu ma
 src/
   components/
     SectorNavigation.tsx   — dropdown de selection de secteur
-    DarkModeToggle.tsx     — toggle clair/sombre
+    DarkModeToggle.tsx     — toggle clair/sombre avec crossfade
+    DockNavigation.tsx     — navigation dock en bas (mobile)
     InteractiveTools.tsx   — outils bonus (ninja, password, timer, book, coffee)
-    ReadMeButton.tsx       — bouton flottant GitHub
-    TutorialTour.tsx       — tour guide 3 etapes
-  data/
+    CodePreview.tsx        — carte apercu + code pour le labo
+    Layout.tsx             — layout avec Outlet pour le routing
+  pages/
+    Moi.tsx                — page principale (hero, skills, formation)
+    Experience.tsx         — parcours professionnel
+    Bookmarks.tsx          — liens favoris avec filtrage par tags
+    Laboratoire.tsx        — experiences d'animation interactives
+    Bag.tsx                — objets du quotidien
+data/
     portfolio.ts           — types + donnees par defaut
     usePortfolioData.ts    — hook avec localStorage + JSON export
-  pages/
-    Index.tsx              — page principale
-    Admin.tsx              — CMS protege par mot de passe
   styles/
-    adaptive-portfolio.css — tout le CSS (palettes, immersion, layout)
+    adaptive-portfolio.css — tout le CSS (palettes, themes, layout, animations)
 ```
 
 ## Lancer en local

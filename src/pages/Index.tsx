@@ -4,7 +4,6 @@ import DarkModeToggle from "../components/DarkModeToggle";
 import InteractiveTools from "../components/InteractiveTools";
 import DockNavigation from "../components/DockNavigation";
 import ReadMeButton from "../components/ReadMeButton";
-import TutorialTour from "../components/TutorialTour";
 import { usePortfolioData } from "../data/usePortfolioData";
 import "../styles/adaptive-portfolio.css";
 
@@ -155,7 +154,6 @@ const Index = () => {
       <InteractiveTools />
 
       <ReadMeButton />
-      <TutorialTour />
 
       {/* Footer */}
       <footer className="portfolio-footer">
