@@ -36,6 +36,14 @@
   }
 }
 
+/* ---------- Theme transition ---------- */
+
+body {
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
 /* ---------- Layout ---------- */
 
 .portfolio-container {
@@ -2413,13 +2421,22 @@ body:not(.default) .checkbox-group input[type="checkbox"] {
   transition: clip-path 0.2s ease-out;
 }
 
-.hold-delete-btn:active .hold-delete-overlay {
+.hold-delete-btn:active .hold-delete-overlay,
+.hold-delete-btn.is-pressing .hold-delete-overlay {
   transition: clip-path 1.5s linear;
   clip-path: inset(0px 0px 0px 0px);
 }
 
-.hold-delete-btn:active {
+.hold-delete-btn:active,
+.hold-delete-btn.is-pressing {
   transform: scale(0.97);
+}
+
+.hold-delete-btn {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 /* ============================================

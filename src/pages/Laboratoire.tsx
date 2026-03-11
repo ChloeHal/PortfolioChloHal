@@ -4,7 +4,9 @@ import CodePreview from "../components/CodePreview";
 /* ---- Experiment 1: Hold to Delete Button ---- */
 const HoldToDeleteButton = () => {
   const overlayRef = useRef<HTMLDivElement>(null);
+  const btnRef = useRef<HTMLButtonElement>(null);
   const [deleted, setDeleted] = useState(false);
+  const [pressing, setPressing] = useState(false);
 
   const handleTransitionEnd = useCallback((e: React.TransitionEvent) => {
     if (e.propertyName !== "clip-path") return;
@@ -13,8 +15,12 @@ const HoldToDeleteButton = () => {
     const clip = getComputedStyle(overlay).clipPath;
     if (clip === "inset(0px)" || clip === "inset(0px 0px 0px 0px)") {
       setDeleted(true);
+      setPressing(false);
     }
   }, []);
+
+  const startPress = useCallback(() => setPressing(true), []);
+  const endPress = useCallback(() => setPressing(false), []);
 
   if (deleted) {
     return (
@@ -52,7 +58,16 @@ const HoldToDeleteButton = () => {
   );
 
   return (
-    <button className="hold-delete-btn">
+    <button
+      ref={btnRef}
+      className={`hold-delete-btn${pressing ? " is-pressing" : ""}`}
+      onMouseDown={startPress}
+      onMouseUp={endPress}
+      onMouseLeave={endPress}
+      onTouchStart={startPress}
+      onTouchEnd={endPress}
+      onTouchCancel={endPress}
+    >
       <div
         ref={overlayRef}
         className="hold-delete-overlay"

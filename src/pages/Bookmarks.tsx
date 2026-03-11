@@ -10,6 +10,15 @@ interface BookmarkItem {
 }
 
 const bookmarks: BookmarkItem[] = [
+  // ── IA ──
+  { title: "Cursor", url: "https://www.cursor.com", description: "The AI Code Editor", category: "IA", tags: ["AI", "Dev"] },
+  { title: "Remini Web", url: "https://remini.ai", description: "Photo Enhancer par IA", category: "IA", tags: ["AI", "Photos"] },
+  { title: "Le Chat — Mistral AI", url: "https://chat.mistral.ai", description: "Assistant IA par Mistral", category: "IA", tags: ["AI"] },
+  { title: "Base44", url: "https://base44.com", description: "Build Apps with AI in Minutes", category: "IA", tags: ["AI", "Dev"] },
+  { title: "Atomic AGI", url: "https://atomicagi.com", description: "AI-First SEO Analytics & Attribution", category: "IA", tags: ["AI", "SaaS"] },
+  { title: "UX Pilot", url: "https://uxpilot.ai", description: "Superfast UX/UI Design with AI", category: "IA", tags: ["AI", "UX", "UI"] },
+  { title: "Color AI", url: "https://colorai.co", description: "Palettes basées sur la science et la culture", category: "IA", tags: ["AI", "Couleur"] },
+
   // ── Design · Outils ──
   { title: "Coolors", url: "https://coolors.co", description: "Générateur de palettes de couleurs", category: "Design · Outils", tags: ["Couleur"] },
   { title: "Trycolors", url: "https://trycolors.com", description: "Mélangeur de couleurs interactif", category: "Design · Outils", tags: ["Couleur"] },
@@ -41,6 +50,13 @@ const bookmarks: BookmarkItem[] = [
   { title: "SAVEE", url: "https://savee.it", description: "Sauvegarder et organiser l'inspiration visuelle", category: "Design · Assets", tags: ["Inspiration"] },
 
   // ── Inspiration ──
+  { title: "Pinterest", url: "https://pinterest.com", description: "Moteur de découverte visuelle et moodboards", category: "Inspiration", tags: ["Inspiration", "Branding"] },
+  { title: "Behance", url: "https://www.behance.net", description: "Portfolios créatifs par Adobe", category: "Inspiration", tags: ["UI", "Branding", "Inspiration"] },
+  { title: "Awwwards", url: "https://www.awwwards.com", description: "Les meilleurs sites web primés", category: "Inspiration", tags: ["UI", "Inspiration"] },
+  { title: "SiteInspire", url: "https://www.siteinspire.com", description: "Showcase de web design de qualité", category: "Inspiration", tags: ["UI", "Inspiration"] },
+  { title: "Godly", url: "https://godly.website", description: "Curation de sites web astronomiquement bons", category: "Inspiration", tags: ["UI", "Inspiration"] },
+  { title: "Lapa Ninja", url: "https://www.lapa.ninja", description: "Landing pages et ressources design", category: "Inspiration", tags: ["UI", "Inspiration"] },
+  { title: "Muzli", url: "https://muz.li", description: "Extension Chrome d'inspiration design", category: "Inspiration", tags: ["UI", "Inspiration"] },
   { title: "Dribbble", url: "https://dribbble.com", description: "La communauté design de référence", category: "Inspiration", tags: ["UI", "Branding"] },
   { title: "Mobbin", url: "https://mobbin.com", description: "Bibliothèque de patterns UI mobile et web", category: "Inspiration", tags: ["UI", "Mobile"] },
   { title: "21st.dev", url: "https://21st.dev", description: "Composants UI sidebar et navigation", category: "Inspiration", tags: ["UI", "React"] },
@@ -64,6 +80,9 @@ const bookmarks: BookmarkItem[] = [
   { title: "Geist Introduction", url: "https://vercel.com/geist/introduction", description: "Introduction au design system Geist de Vercel", category: "Inspiration", tags: ["Design System", "UI"] },
   { title: "Linear Homepage", url: "https://linear.app/homepage", description: "Référence en craft UI — homepage Linear", category: "Inspiration", tags: ["UI", "SaaS"] },
   { title: "Working Theorys", url: "https://www.workingtheorys.com/p/taste-is-eating-silicon-valley", description: "Taste is Eating Silicon Valley — essai sur le goût en tech", category: "Inspiration", tags: ["UX", "Inspiration"] },
+  { title: "Aave", url: "https://aave.com", description: "Protocole DeFi — UI crypto de référence", category: "Inspiration", tags: ["UI", "SaaS"] },
+  { title: "Drops (Foundation)", url: "https://foundation.app", description: "Plateforme créative NFT — design épuré", category: "Inspiration", tags: ["UI", "Inspiration"] },
+  { title: "Eye on Design", url: "https://eyeondesign.aiga.org", description: "Bold Beers, Colorful Wine Labels — AIGA", category: "Inspiration", tags: ["Branding", "Inspiration"] },
 
   // ── UX · Documentation ──
   { title: "Laws of UX", url: "https://lawsofux.com", description: "Principes psychologiques appliqués au design", category: "UX · Documentation", tags: ["UX", "Formation"] },
@@ -95,6 +114,9 @@ const bookmarks: BookmarkItem[] = [
   { title: "goey-toast", url: "https://goey-toast.vercel.app", description: "Notifications toast morphing pour React", category: "Dev · Librairies", tags: ["Animation", "React"] },
   { title: "Tailwind Plus", url: "https://tailwindcss.com/plus", description: "Composants Tailwind CSS officiels", category: "Dev · Librairies", tags: ["CSS", "UI"] },
   { title: "Warp Background", url: "https://warp.dev", description: "Composants React avec backgrounds animés", category: "Dev · Librairies", tags: ["Animation", "React"] },
+  { title: "Bootstrap", url: "https://getbootstrap.com", description: "Framework CSS le plus populaire", category: "Dev · Librairies", tags: ["CSS", "UI"] },
+  { title: "Understrap", url: "https://understrap.com", description: "Starter theme WordPress + Bootstrap", category: "Dev · Librairies", tags: ["CSS", "UI"] },
+  { title: "ui.land", url: "https://ui.land", description: "Composants et templates UI", category: "Dev · Librairies", tags: ["UI", "React"] },
 
   // ── Dev · Outils ──
   { title: "CodePen", url: "https://codepen.io", description: "Playground front-end en ligne", category: "Dev · Outils", tags: ["CSS", "JS"] },
@@ -109,6 +131,7 @@ const bookmarks: BookmarkItem[] = [
   { title: "Placehold", url: "https://placehold.co", description: "Service d'images placeholder rapide", category: "Dev · Outils", tags: ["Mockup"] },
   { title: "Firecrawl", url: "https://www.firecrawl.dev", description: "API de données web pour l'AI", category: "Dev · Outils", tags: ["JS", "AI"] },
   { title: "Shader AI", url: "https://shaderai.com/new", description: "Générer des shaders avec l'AI", category: "Dev · Outils", tags: ["AI", "Animation"] },
+  { title: "Speak Human", url: "https://speakhuman.today", description: "Générateur de copy lisible et humaine", category: "Dev · Outils", tags: ["UX", "Référence"] },
 
   // ── Chrome Extensions ──
   { title: "ColorZilla", url: "https://chromewebstore.google.com/detail/colorzilla/bhlhnicpbhignbdhedgjhgdocnmhomnp", description: "Pipette couleur et générateur de gradients", category: "Chrome Extensions", tags: ["Couleur", "CSS"] },
@@ -136,6 +159,9 @@ const bookmarks: BookmarkItem[] = [
   { title: "Sidebar Animation Perf", url: "https://www.joshuawootonn.com/sidebar-animation-performance", description: "Deep dive performance des animations de sidebar", category: "Dev · Documentation", tags: ["Animation", "Performance", "React"] },
   { title: "Steal Like an Artist", url: "https://www.amazon.com.be/gp/product/0761169253/", description: "Austin Kleon — livre sur la créativité et l'inspiration", category: "Dev · Documentation", tags: ["Formation", "Inspiration"] },
   { title: "Show Your Work!", url: "https://www.amazon.com.be/gp/product/076117897X/", description: "Austin Kleon — partager son travail créatif", category: "Dev · Documentation", tags: ["Formation", "Inspiration"] },
+  { title: "SuperHi", url: "https://www.superhi.com", description: "Learn To Code Now — HTML, CSS & JS", category: "Dev · Documentation", tags: ["Formation", "JS", "CSS"] },
+  { title: "SoloLearn", url: "https://www.sololearn.com", description: "Apprendre à coder sur mobile et web", category: "Dev · Documentation", tags: ["Formation", "JS"] },
+  { title: "Tailwind + Svelte + Vite", url: "https://dev.to/onlyphp/comment-installer-tailwind-css-avec-svelte-vite-4d2e", description: "Installer Tailwind CSS avec Svelte + Vite", category: "Dev · Documentation", tags: ["CSS", "JS"] },
 
   // ── X · À suivre ──
   { title: "rauno", url: "https://x.com/raunofreiberg", description: "Staff Design Engineer chez Vercel — devouringdetails.com", category: "X · À suivre", tags: ["UI", "Animation"] },
@@ -158,6 +184,7 @@ const bookmarks: BookmarkItem[] = [
 const ALL_TAGS = [...new Set(bookmarks.flatMap((b) => b.tags))].sort();
 
 const CATEGORY_COLORS: Record<string, string> = {
+  "IA": "cyan",
   "Design · Outils": "coral",
   "Design · Assets": "amber",
   "Inspiration": "emerald",
