@@ -49,7 +49,7 @@ export const defaultData: PortfolioData = {
     title: "Chloé Halloin",
     subtitle: "Product Designer · Design Engineer",
     description:
-      "Je design des produits et je code mes designs. De la recherche utilisateur à l'interface livrée, je couvre tout le spectre : UX research, product design, design systems et implémentation. Je crois que les meilleurs produits naissent quand le design ne s'arrête pas à la maquette.",
+      "Je conçois des produits et je code mes designs. De la recherche utilisateur à la livraison des composants, je couvre tout le spectre : UX research, product design, design systems et implémentation des éléments interactifs. Mon approche ? Des produits où le design ne s'arrête pas à la maquette. Je crée des interfaces, des animations et des design systems, puis je les implémente en React/TypeScript pour qu'ils soient prêts à l'emploi. Mon objectif : réduire les frictions entre le design et le code, en garantissant une cohérence parfaite entre l'intention et le résultat final.",
     links: [
       {
         label: "LinkedIn ↗",
@@ -201,14 +201,7 @@ export const defaultData: PortfolioData = {
     {
       id: "skill-eng",
       name: "Design → Code",
-      skills: [
-        "React",
-        "TypeScript",
-        "HTML/CSS",
-        "Tailwind",
-        "Next.js",
-        "Storybook",
-      ],
+      skills: ["React", "TypeScript", "HTML/CSS", "Tailwind"],
     },
     {
       id: "skill-methods",
@@ -217,7 +210,7 @@ export const defaultData: PortfolioData = {
         "Agile/Scrum",
         "Git",
         "CI/CD",
-        "Accessibility (a11y)",
+        "Accessibility (WCAG)",
         "Analytics",
         "Notion",
       ],
@@ -226,27 +219,56 @@ export const defaultData: PortfolioData = {
   qualities: [
     {
       id: "qual-1",
-      title: "Full-stack design",
-      description:
-        "De la discovery au produit livré. Je mène la recherche, conçois l'expérience, dessine l'interface et je l'implémente. Un seul interlocuteur, zéro friction entre le design et ce qui est livré.",
+      title: "Design produit",
+      description: "Recherche utilisateur, stratégie, UX/UI, prototypage.",
     },
     {
       id: "qual-2",
-      title: "Design → Code",
+      title: "Design systems",
       description:
-        "Je code ce que je design. Pas besoin de traduction entre les deux — l'intention design arrive intacte dans le produit. Les design systems que je crée vivent dans les maquettes et en production.",
+        "Création et implémentation de systèmes de composants réutilisables (Figma + code).",
     },
     {
       id: "qual-3",
-      title: "Product mindset",
+      title: "Code des designs",
       description:
-        "Je ne conçois pas des écrans, je résous des problèmes. Chaque décision design est argumentée par de la data, des insights utilisateurs ou un objectif business clair.",
+        "Développement des composants, animations et librairies (React, TypeScript, Storybook).",
     },
     {
       id: "qual-4",
-      title: "Adaptabilité sectorielle",
+      title: "Motion design",
       description:
-        "Capacité à comprendre rapidement les codes visuels, les users et les enjeux de chaque industrie pour y adapter le produit.",
+        "Animations fluides et performantes (Framer Motion, CSS/JS).",
+    },
+    {
+      id: "qual-5",
+      title: "Collaboration",
+      description:
+        "Pont entre les équipes design et dev pour une livraison sans friction.",
+    },
+    {
+      id: "qual-6",
+      title: "Un seul interlocuteur",
+      description:
+        "De la discovery à la livraison des composants, je couvre tout le processus.",
+    },
+    {
+      id: "qual-7",
+      title: "Design qui vit dans le code",
+      description:
+        "Pas de perte d'intention entre les maquettes et l'implémentation.",
+    },
+    {
+      id: "qual-8",
+      title: "Expertise technique",
+      description:
+        "Je parle le langage des designers et des devs, ce qui accélère les itérations.",
+    },
+    {
+      id: "qual-9",
+      title: "Approche produit",
+      description:
+        "Je ne conçois pas des écrans, je résous des problèmes (basés sur des données et des insights utilisateurs).",
     },
   ],
 };

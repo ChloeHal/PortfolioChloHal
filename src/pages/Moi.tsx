@@ -51,9 +51,9 @@ const Moi = () => {
 
       <hr className="section-divider" aria-hidden="true" />
 
-      {/* Qualities */}
-      <section className="soft-skills-section" aria-label="Qualités humaines">
-        <h2 className="section-title">Qualités</h2>
+      {/* Ce que je fais & pourquoi travailler avec moi */}
+      <section className="soft-skills-section" aria-label="Ce que j'apporte">
+        <h2 className="section-title">Ce que j'apporte</h2>
         <div className="soft-skills-grid">
           {data.qualities.map((quality) => (
             <div key={quality.id} className="soft-skill-item">
