@@ -34,14 +34,15 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-}
 
-/* ---------- Theme transition ---------- */
-
-body {
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
+  /* Les expériences du labo gardent toujours leurs animations */
+  .labo-experiments *,
+  .labo-experiments *::before,
+  .labo-experiments *::after {
+    animation-duration: revert !important;
+    animation-iteration-count: revert !important;
+    transition-duration: revert !important;
+  }
 }
 
 /* ---------- Layout ---------- */

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 const DarkModeToggle = () => {
   const [isDark, setIsDark] = useState(() => {
@@ -18,9 +18,31 @@ const DarkModeToggle = () => {
     localStorage.setItem("theme", isDark ? "dark" : "light");
   }, [isDark]);
 
+  const toggle = useCallback(() => {
+    const overlay = document.createElement("div");
+    overlay.style.cssText =
+      "position:fixed;inset:0;z-index:9999;pointer-events:none;" +
+      "background:" + (isDark ? "#fafafa" : "#0a0a0a") + ";" +
+      "opacity:0;transition:opacity 0.3s ease";
+    document.body.appendChild(overlay);
+
+    requestAnimationFrame(() => {
+      overlay.style.opacity = "1";
+      overlay.addEventListener("transitionend", () => {
+        setIsDark((prev) => !prev);
+        requestAnimationFrame(() => {
+          overlay.style.opacity = "0";
+          overlay.addEventListener("transitionend", () => {
+            overlay.remove();
+          }, { once: true });
+        });
+      }, { once: true });
+    });
+  }, [isDark]);
+
   return (
     <button
-      onClick={() => setIsDark(!isDark)}
+      onClick={toggle}
       aria-label={isDark ? "Passer en mode clair" : "Passer en mode sombre"}
       aria-pressed={isDark}
       style={{

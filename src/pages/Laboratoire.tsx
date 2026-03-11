@@ -19,7 +19,10 @@ const HoldToDeleteButton = () => {
     }
   }, []);
 
-  const startPress = useCallback(() => setPressing(true), []);
+  const startPress = useCallback((e: React.TouchEvent | React.MouseEvent) => {
+    if ("touches" in e) e.preventDefault();
+    setPressing(true);
+  }, []);
   const endPress = useCallback(() => setPressing(false), []);
 
   if (deleted) {
@@ -1160,7 +1163,7 @@ const Laboratoire = () => {
           interactif et le code source correspondant.
         </p>
 
-        <div className="lab-grid">
+        <div className="lab-grid labo-experiments">
           <CodePreview
             title="Dynamic Island"
             description="Emoji sender avec Dynamic Island, gooey SVG filter et animations spring"
