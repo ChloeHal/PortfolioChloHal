@@ -1153,6 +1153,432 @@ function transitionTo(phrase) {
 
 setInterval(nextPhrase, 3500);`;
 
+/* ---- Experiment 7: Daily UI #001 — Sign Up (Liquid Glass) ---- */
+const signUpGlassHtml = `<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily UI #001 — Sign Up</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --cols: 12; --col-gap: 12px; --margin: 16px; --grid-max: 1200px;
+      --col-color: rgba(255, 59, 48, 0.06); --baseline: 8px;
+      --baseline-color: rgba(0, 122, 255, 0.04);
+      --label-color: rgba(255, 59, 48, 0.35);
+      --bg: #e8e4e0;
+      --glass-bg: rgba(255,255,255,0.32);
+      --glass-border: rgba(255,255,255,0.60);
+      --glass-border-top: rgba(255,255,255,0.80);
+      --glass-border-bottom: rgba(0,0,0,0.03);
+      --glass-shadow: 0 0 0 0.5px rgba(255,255,255,0.5), 0 1px 1px rgba(0,0,0,0.02), 0 4px 8px rgba(0,0,0,0.03), 0 16px 40px rgba(0,0,0,0.05), inset 0 0.5px 0 rgba(255,255,255,0.7);
+      --clear-bg: rgba(255,255,255,0.45);
+      --clear-border: rgba(255,255,255,0.65);
+      --clear-shadow: inset 0 0.5px 0 rgba(255,255,255,0.7), 0 1px 2px rgba(0,0,0,0.03);
+      --active-bg: rgba(0,0,0,0.72);
+      --active-border: rgba(255,255,255,0.06);
+      --active-text: #fff;
+      --text: #1a1a1a;
+      --text-secondary: rgba(0,0,0,0.48);
+      --text-tertiary: rgba(0,0,0,0.25);
+      --link: rgba(0,0,0,0.55);
+      --link-hover: #000;
+      --divider: rgba(0,0,0,0.05);
+      --focus-ring: rgba(0,122,255,0.20);
+      --focus-border: rgba(0,122,255,0.45);
+      --avatar-text: rgba(0,0,0,0.45);
+      --blob-1: rgba(139,92,246,0.20);
+      --blob-2: rgba(251,113,133,0.15);
+      --blob-3: rgba(56,189,248,0.13);
+      --blob-4: rgba(250,204,21,0.10);
+      --theme-btn-bg: rgba(255,255,255,0.40);
+      --theme-btn-border: rgba(255,255,255,0.60);
+      --theme-btn-hover: rgba(255,255,255,0.60);
+      --theme-btn-color: rgba(0,0,0,0.35);
+    }
+    [data-theme="dark"] {
+      --col-color: rgba(255, 59, 48, 0.04);
+      --baseline-color: rgba(0, 122, 255, 0.03);
+      --label-color: rgba(255, 59, 48, 0.22);
+      --bg: #111113;
+      --glass-bg: rgba(255,255,255,0.05);
+      --glass-border: rgba(255,255,255,0.08);
+      --glass-border-top: rgba(255,255,255,0.12);
+      --glass-border-bottom: rgba(255,255,255,0.03);
+      --glass-shadow: 0 0 0 0.5px rgba(255,255,255,0.06), 0 1px 1px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.1), 0 16px 40px rgba(0,0,0,0.18), inset 0 0.5px 0 rgba(255,255,255,0.06);
+      --clear-bg: rgba(255,255,255,0.04);
+      --clear-border: rgba(255,255,255,0.07);
+      --clear-shadow: inset 0 0.5px 0 rgba(255,255,255,0.04), 0 1px 2px rgba(0,0,0,0.12);
+      --active-bg: rgba(255,255,255,0.13);
+      --active-border: rgba(255,255,255,0.10);
+      --active-text: #fff;
+      --text: #f2f2f2;
+      --text-secondary: rgba(255,255,255,0.48);
+      --text-tertiary: rgba(255,255,255,0.20);
+      --link: rgba(255,255,255,0.55);
+      --link-hover: #fff;
+      --divider: rgba(255,255,255,0.05);
+      --focus-ring: rgba(50,140,255,0.12);
+      --focus-border: rgba(50,140,255,0.42);
+      --avatar-text: rgba(255,255,255,0.4);
+      --blob-1: rgba(139,92,246,0.24);
+      --blob-2: rgba(251,113,133,0.17);
+      --blob-3: rgba(56,189,248,0.14);
+      --blob-4: rgba(250,204,21,0.08);
+      --theme-btn-bg: rgba(255,255,255,0.04);
+      --theme-btn-border: rgba(255,255,255,0.07);
+      --theme-btn-hover: rgba(255,255,255,0.08);
+      --theme-btn-color: rgba(255,255,255,0.30);
+    }
+    body { font-family: 'Inter', -apple-system, system-ui, sans-serif; min-height: 100vh; background: var(--bg); overflow: auto; transition: background 0.4s; -webkit-font-smoothing: antialiased; }
+    .grid-overlay { position: fixed; inset: 0; z-index: 1; display: flex; justify-content: center; pointer-events: none; }
+    .grid-container { width: 100%; max-width: var(--grid-max); margin: 0 var(--margin); position: relative; display: grid; grid-template-columns: repeat(var(--cols), 1fr); grid-template-rows: 1fr; gap: 0 var(--col-gap); align-items: center; }
+    .grid-col { background: var(--col-color); position: relative; height: 100%; }
+    .grid-col::before { content: attr(data-col); position: absolute; top: 6px; left: 50%; transform: translateX(-50%); font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 500; color: var(--label-color); line-height: 1; }
+    .grid-baseline { position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: repeating-linear-gradient(0deg, var(--baseline-color) 0px, var(--baseline-color) 1px, transparent 1px, transparent var(--baseline)); }
+    .grid-margin-left, .grid-margin-right { position: fixed; top: 0; bottom: 0; width: var(--margin); z-index: 0; pointer-events: none; border-style: solid; border-color: rgba(255, 59, 48, 0.08); border-width: 0; }
+    .grid-margin-left { left: 0; border-right-width: 1px; }
+    .grid-margin-right { right: 0; border-left-width: 1px; }
+    .bg-blobs { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    .blob { position: absolute; border-radius: 50%; filter: blur(90px); will-change: transform; transition: background 0.4s; }
+    .blob-1 { width: 500px; height: 500px; background: var(--blob-1); top: -12%; left: -6%; animation: d1 20s ease-in-out infinite; }
+    .blob-2 { width: 420px; height: 420px; background: var(--blob-2); bottom: -10%; right: -7%; animation: d2 24s ease-in-out infinite; }
+    .blob-3 { width: 340px; height: 340px; background: var(--blob-3); top: 35%; left: 58%; animation: d3 17s ease-in-out infinite; }
+    .blob-4 { width: 260px; height: 260px; background: var(--blob-4); top: 62%; left: 12%; animation: d4 22s ease-in-out infinite; }
+    @keyframes d1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(65px,35px) scale(1.06)} }
+    @keyframes d2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-50px,-20px) scale(1.1)} }
+    @keyframes d3 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-35px,25px) scale(0.9)} }
+    @keyframes d4 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(30px,-30px) scale(1.07)} }
+    .theme-toggle { position: fixed; top: 1.2rem; right: 1.2rem; z-index: 10; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--theme-btn-border); background: var(--theme-btn-bg); backdrop-filter: blur(24px) saturate(1.6); -webkit-backdrop-filter: blur(24px) saturate(1.6); box-shadow: var(--clear-shadow); color: var(--theme-btn-color); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.25s; }
+    .theme-toggle:hover { background: var(--theme-btn-hover); }
+    .theme-toggle svg { width: 14px; height: 14px; }
+    .theme-toggle .icon-moon { display: none; }
+    [data-theme="dark"] .theme-toggle .icon-sun { display: none; }
+    [data-theme="dark"] .theme-toggle .icon-moon { display: block; }
+    .card { position: relative; z-index: 2; pointer-events: auto; padding: 32px var(--col-gap) 24px; border-radius: 20px; backdrop-filter: blur(50px) saturate(1.8); -webkit-backdrop-filter: blur(50px) saturate(1.8); background: var(--glass-bg); border: 1px solid var(--glass-border); border-top-color: var(--glass-border-top); border-bottom-color: var(--glass-border-bottom); box-shadow: var(--glass-shadow); transition: background 0.4s, border-color 0.4s, box-shadow 0.4s; }
+    .card::before { content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 1px; background: var(--glass-border-top); opacity: 0.6; pointer-events: none; }
+    .avatar-area { display: flex; flex-direction: column; align-items: center; margin-bottom: 20px; position: relative; z-index: 1; }
+    .avatar { width: 64px; height: 64px; border-radius: 16px; background: var(--clear-bg); border: 1px solid var(--clear-border); border-top-color: var(--glass-border-top); border-bottom-color: var(--glass-border-bottom); backdrop-filter: blur(20px) saturate(1.5); -webkit-backdrop-filter: blur(20px) saturate(1.5); box-shadow: var(--clear-shadow); display: flex; align-items: center; justify-content: center; margin-bottom: 8px; transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative; }
+    .avatar::before { content: ''; position: absolute; top: 0; left: 15%; right: 15%; height: 1px; background: var(--clear-border); opacity: 0.5; pointer-events: none; }
+    .avatar.has-initials { transform: scale(1.06); }
+    .avatar-placeholder { color: var(--text-tertiary); transition: opacity 0.3s; }
+    .avatar-placeholder svg { width: 24px; height: 24px; }
+    .avatar-initials { font-size: 1.2rem; font-weight: 600; color: var(--avatar-text); letter-spacing: 0.02em; position: relative; z-index: 1; opacity: 0; transform: scale(0.5); transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    .avatar.has-initials .avatar-initials { opacity: 1; transform: scale(1); }
+    .avatar.has-initials .avatar-placeholder { opacity: 0; position: absolute; }
+    .avatar-label { font-size: 0.68rem; font-weight: 500; color: var(--text-tertiary); transition: all 0.3s; height: 16px; line-height: 16px; }
+    .avatar-label.active { color: var(--text-secondary); }
+    .header { text-align: center; margin-bottom: 24px; position: relative; z-index: 1; }
+    .header h1 { font-size: 1.28rem; font-weight: 600; color: var(--text); margin-bottom: 4px; letter-spacing: -0.01em; }
+    .header p { font-size: 0.76rem; color: var(--text-secondary); }
+    .header p a { color: var(--link); text-decoration: none; transition: color 0.2s; }
+    .header p a:hover { color: var(--link-hover); }
+    .social-row { display: flex; gap: var(--col-gap); margin-bottom: 16px; position: relative; z-index: 1; }
+    .social-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; height: 40px; border-radius: 10px; border: 1px solid var(--clear-border); border-top-color: var(--glass-border-top); border-bottom-color: var(--glass-border-bottom); background: var(--clear-bg); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4); box-shadow: var(--clear-shadow); color: var(--text-secondary); font-size: 0.76rem; font-weight: 500; font-family: inherit; cursor: pointer; transition: all 0.2s; position: relative; }
+    .social-btn::before { content: ''; position: absolute; top: 0; left: 18%; right: 18%; height: 1px; background: var(--clear-border); opacity: 0.4; pointer-events: none; }
+    .social-btn:hover { background: rgba(255,255,255,0.55); }
+    [data-theme="dark"] .social-btn:hover { background: rgba(255,255,255,0.07); }
+    .social-btn svg { width: 15px; height: 15px; flex-shrink: 0; position: relative; z-index: 1; }
+    .social-btn span { position: relative; z-index: 1; }
+    .divider { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; position: relative; z-index: 1; }
+    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--divider); }
+    .divider span { font-size: 0.62rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.1em; }
+    .form-wrap { position: relative; z-index: 1; }
+    .row { display: flex; gap: var(--col-gap); }
+    .field { margin-bottom: 12px; flex: 1; }
+    .field label { display: block; font-size: 0.66rem; font-weight: 500; color: var(--text-secondary); margin-bottom: 4px; letter-spacing: 0.01em; line-height: 16px; }
+    .input-wrap { position: relative; border-radius: 10px; overflow: hidden; }
+    .input-wrap::before { content: ''; position: absolute; top: 0; left: 15%; right: 15%; height: 1px; background: var(--clear-border); opacity: 0.3; z-index: 2; pointer-events: none; }
+    .field input { width: 100%; height: 40px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--clear-border); border-top-color: var(--glass-border-top); border-bottom-color: var(--glass-border-bottom); background: var(--clear-bg); backdrop-filter: blur(12px) saturate(1.3); -webkit-backdrop-filter: blur(12px) saturate(1.3); box-shadow: var(--clear-shadow); color: var(--text); font-size: 0.82rem; font-family: inherit; outline: none; transition: all 0.25s; }
+    .field input::placeholder { color: var(--text-tertiary); }
+    .field input:focus { border-color: var(--focus-border); box-shadow: 0 0 0 3.5px var(--focus-ring), var(--clear-shadow); }
+    .pw-wrap { position: relative; }
+    .pw-wrap .input-wrap input { padding-right: 40px; }
+    .pw-toggle { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); z-index: 3; background: none; border: none; color: var(--text-tertiary); cursor: pointer; padding: 4px; transition: color 0.2s; display: flex; }
+    .pw-toggle:hover { color: var(--text-secondary); }
+    .pw-toggle svg { width: 14px; height: 14px; }
+    .strength { display: flex; gap: 3px; margin-top: 4px; }
+    .strength span { flex: 1; height: 2px; border-radius: 1px; background: var(--divider); transition: background 0.3s; }
+    .strength span.on.s1 { background: #ef4444; }
+    .strength span.on.s2 { background: #f59e0b; }
+    .strength span.on.s3 { background: #10b981; }
+    .terms { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 16px; }
+    .terms input[type="checkbox"] { appearance: none; width: 16px; height: 16px; border-radius: 5px; border: 1px solid var(--clear-border); border-top-color: var(--glass-border-top); border-bottom-color: var(--glass-border-bottom); background: var(--clear-bg); backdrop-filter: blur(8px); box-shadow: var(--clear-shadow); cursor: pointer; flex-shrink: 0; margin-top: 2px; transition: all 0.2s; position: relative; }
+    .terms input[type="checkbox"]:checked { background: rgba(0,122,255,0.70); border-color: rgba(0,122,255,0.10); }
+    [data-theme="dark"] .terms input[type="checkbox"]:checked { background: rgba(50,140,255,0.60); }
+    .terms input[type="checkbox"]:checked::after { content: ''; position: absolute; left: 4.5px; top: 1.5px; width: 4px; height: 8px; border: solid #fff; border-width: 0 1.5px 1.5px 0; transform: rotate(45deg); }
+    .terms > span { font-size: 0.66rem; color: var(--text-secondary); line-height: 1.5; }
+    .terms a { color: var(--link); text-decoration: none; }
+    .terms a:hover { color: var(--link-hover); }
+    .submit { width: 100%; height: 40px; border-radius: 10px; border: 1px solid var(--active-border); background: var(--active-bg); backdrop-filter: blur(20px) saturate(1.6); -webkit-backdrop-filter: blur(20px) saturate(1.6); box-shadow: inset 0 0.5px 0 rgba(255,255,255,0.06), 0 2px 6px rgba(0,0,0,0.08), 0 10px 30px rgba(0,0,0,0.10); color: var(--active-text); font-size: 0.82rem; font-weight: 500; font-family: inherit; cursor: pointer; transition: all 0.25s; position: relative; }
+    .submit::before { content: ''; position: absolute; top: 0; left: 15%; right: 15%; height: 1px; background: rgba(255,255,255,0.10); pointer-events: none; }
+    .submit:hover { filter: brightness(1.15); }
+    .submit:active { transform: scale(0.98); }
+    .submit span { position: relative; z-index: 1; }
+    .submit.ok { background: rgba(16,185,129,0.75); border-color: rgba(16,185,129,0.15); pointer-events: none; }
+    [data-theme="dark"] .submit.ok { background: rgba(16,185,129,0.35); }
+    .grid-overlay { align-items: start; padding-top: 2rem; }
+    .card { grid-column: 1 / -1 !important; margin: 0 auto; max-width: 420px; }
+    .grid-col { display: none; }
+    .grid-baseline, .grid-margin-left, .grid-margin-right { display: none; }
+    @media (max-width: 480px) { .card { border-radius: 0; max-width: 100%; } .row { flex-direction: column; gap: 0; } .social-row { flex-direction: column; } }
+  </style>
+</head>
+<body>
+  <button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+  </button>
+  <div class="grid-baseline"></div>
+  <div class="grid-margin-left"></div>
+  <div class="grid-margin-right"></div>
+  <div class="bg-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+  </div>
+  <div class="grid-overlay">
+    <div class="grid-container" id="gridContainer">
+      <div class="card" style="grid-column: 4 / 10; grid-row: 1;">
+        <div class="avatar-area">
+          <div class="avatar" id="avatar">
+            <span class="avatar-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+            <span class="avatar-initials" id="avatarInitials"></span>
+          </div>
+          <span class="avatar-label" id="avatarLabel"></span>
+        </div>
+        <div class="header">
+          <h1>Create an account</h1>
+          <p>Already have one? <a href="#">Sign in</a></p>
+        </div>
+        <div class="social-row">
+          <button class="social-btn"><svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg><span>Google</span></button>
+          <button class="social-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"/></svg><span>GitHub</span></button>
+        </div>
+        <div class="divider"><span>or</span></div>
+        <form id="form" class="form-wrap" novalidate>
+          <div class="row">
+            <div class="field"><label>First name</label><div class="input-wrap"><input type="text" id="fn" placeholder="Ada" autocomplete="given-name"></div></div>
+            <div class="field"><label>Last name</label><div class="input-wrap"><input type="text" id="ln" placeholder="Lovelace" autocomplete="family-name"></div></div>
+          </div>
+          <div class="field"><label>Email</label><div class="input-wrap"><input type="email" id="email" placeholder="ada@example.com" autocomplete="email"></div></div>
+          <div class="field"><label>Password</label><div class="pw-wrap"><div class="input-wrap"><input type="password" id="pw" placeholder="Min. 8 characters" autocomplete="new-password"></div><button type="button" class="pw-toggle" aria-label="Show password"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div><div class="strength"><span></span><span></span><span></span><span></span></div></div>
+          <label class="terms"><input type="checkbox" id="tos"><span>I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a></span></label>
+          <button type="submit" class="submit"><span>Create account</span></button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script>
+    const gc=document.getElementById('gridContainer'),card=gc.querySelector('.card');
+    for(let i=1;i<=12;i++){const c=document.createElement('div');c.className='grid-col';c.dataset.col=i;c.style.gridColumn=i;c.style.gridRow='1';gc.insertBefore(c,card);}
+    document.querySelector('.theme-toggle').addEventListener('click',()=>{const h=document.documentElement;h.dataset.theme=h.dataset.theme==='dark'?'light':'dark';});
+    const fnI=document.getElementById('fn'),lnI=document.getElementById('ln'),av=document.getElementById('avatar'),avI=document.getElementById('avatarInitials'),avL=document.getElementById('avatarLabel');
+    function updateAvatar(){const f=fnI.value.trim(),l=lnI.value.trim(),ini=(f?f[0]:'').toUpperCase()+(l?l[0]:'').toUpperCase();avI.textContent=ini;if(ini){av.classList.add('has-initials');avL.textContent=[f,l].filter(Boolean).join(' ');avL.classList.add('active');}else{av.classList.remove('has-initials');avL.textContent='';avL.classList.remove('active');}}
+    fnI.addEventListener('input',updateAvatar);lnI.addEventListener('input',updateAvatar);
+    const pw=document.getElementById('pw'),tog=document.querySelector('.pw-toggle');
+    tog.addEventListener('click',()=>{const show=pw.type==='password';pw.type=show?'text':'password';tog.innerHTML=show?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';});
+    const segs=document.querySelectorAll('.strength span');
+    pw.addEventListener('input',()=>{const v=pw.value;let s=0;if(v.length>=4)s++;if(v.length>=8)s++;if(/[A-Z]/.test(v)&&/[a-z]/.test(v))s++;if(/[^a-zA-Z0-9]/.test(v))s++;const c=s<=1?'s1':s<=2?'s2':'s3';segs.forEach((el,i)=>{el.className=i<s?'on '+c:'';});});
+    const form=document.getElementById('form'),btn=form.querySelector('.submit');
+    form.addEventListener('submit',e=>{e.preventDefault();const ok=fnI.value.trim()&&document.getElementById('email').value.trim()&&pw.value.length>=8&&document.getElementById('tos').checked;if(!ok){btn.style.animation='shake .35s ease';btn.addEventListener('animationend',()=>btn.style.animation='',{once:true});return;}btn.classList.add('ok');btn.querySelector('span').textContent='Welcome!';});
+    const sk=document.createElement('style');sk.textContent='@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}';document.head.appendChild(sk);
+  </script>
+</body>
+</html>`;
+
+const SignUpGlassDemo = () => {
+  return (
+    <iframe
+      srcDoc={signUpGlassHtml}
+      style={{
+        width: "100%",
+        height: 700,
+        border: "none",
+        borderRadius: 12,
+        background: "#e8e4e0",
+      }}
+      title="Daily UI #001 — Sign Up"
+    />
+  );
+};
+
+const signUpGlassCode = `/* Daily UI #001 — Sign Up
+   Liquid Glass design system with:
+   - Figma-style 12-column grid overlay
+   - Backdrop blur glassmorphism
+   - Light/dark theme toggle
+   - Avatar initials from name fields
+   - Password strength indicator
+   - Animated blob backgrounds */
+
+/* See full HTML source in the preview */`;
+
+/* ---- Experiment 8: Daily UI #002 — Checkout (Terminal) ---- */
+const checkoutTerminalHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily UI #002 — Checkout</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --fg: #24292f; --fg-bright: #1a1e24; --fg-muted: #656d76;
+      --fg-accent: #0969da; --fg-green: #1a7f37; --fg-yellow: #9a6700;
+      --fg-red: #cf222e; --fg-purple: #8250df;
+      --bg: #f6f8fa; --bg-surface: #ffffff; --border: #d0d7de;
+      --selection: rgba(9,105,218,0.08); --cursor: #0969da;
+      --gutter-fg: #b0b8c1; --lh: 1.65; --flash: rgba(9,105,218,0.12);
+    }
+    html { background: var(--bg); }
+    body { font-family: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', monospace; font-size: 13px; line-height: var(--lh); color: var(--fg); background: var(--bg); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem 1rem; -webkit-font-smoothing: antialiased; }
+    .terminal { width: 100%; max-width: 78ch; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06); }
+    .chrome { display: flex; align-items: center; padding: 10px 14px; background: var(--bg); border-bottom: 1px solid var(--border); gap: 8px; }
+    .dots { display: flex; gap: 6px; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; cursor: pointer; transition: filter 0.2s; }
+    .dot:hover { filter: brightness(0.9); }
+    .dot.red { background: #ff5f57; } .dot.yellow { background: #febc2e; } .dot.green { background: #28c840; }
+    .chrome-title { flex: 1; text-align: center; font-size: 11px; color: var(--fg-muted); }
+    .content { padding: 0; white-space: pre; overflow-x: hidden; cursor: default; user-select: none; }
+    .line { display: block; padding: 0 1ch 0 0; min-height: calc(1em * var(--lh)); transition: background 0.1s; }
+    .line:hover { background: var(--selection); }
+    .line.typing-hidden { opacity: 0; height: 0; min-height: 0; overflow: hidden; }
+    .line.typing-visible { animation: typeFadeIn 0.06s ease-out forwards; }
+    @keyframes typeFadeIn { from { opacity: 0.3; } to { opacity: 1; } }
+    .gutter { display: inline-block; width: 4ch; text-align: right; color: var(--gutter-fg); padding-right: 1.5ch; user-select: none; pointer-events: none; }
+    .accent { color: var(--fg-accent); } .green { color: var(--fg-green); } .yellow { color: var(--fg-yellow); } .red { color: var(--fg-red); } .purple { color: var(--fg-purple); } .bright { color: var(--fg-bright); font-weight: 500; } .muted { color: var(--fg-muted); } .dim { color: var(--border); }
+    .nav-link { color: var(--fg); text-decoration: none; cursor: pointer; display: inline; transition: color 0.15s; background: none; border: none; font: inherit; padding: 0; }
+    .nav-link:hover { color: var(--fg-accent); }
+    .nav-link.active { color: var(--fg-accent); text-decoration: underline; text-underline-offset: 3px; }
+    .step { cursor: pointer; display: inline; transition: color 0.15s; }
+    .step:hover { color: var(--fg-bright); }
+    .step.done { color: var(--fg-green); } .step.current { color: var(--fg-accent); }
+    .ascii-btn { display: inline; background: none; border: none; font: inherit; color: var(--fg); cursor: pointer; padding: 0; transition: color 0.15s; }
+    .ascii-btn:hover { color: var(--fg-accent); }
+    .ascii-btn.primary { color: var(--fg-green); }
+    .ascii-btn.primary:hover { color: #2da44e; }
+    .ascii-btn.danger:hover { color: var(--fg-red); }
+    @keyframes pulse-ready { 0%, 100% { color: var(--fg-green); } 50% { color: #2da44e; } }
+    .ascii-btn.ready { animation: pulse-ready 1.8s ease-in-out infinite; }
+    .card-pill { display: inline; background: none; border: none; font: inherit; cursor: pointer; padding: 0; color: var(--fg-muted); transition: color 0.15s; }
+    .card-pill.selected { color: var(--fg-accent); } .card-pill:hover { color: var(--fg-bright); } .card-pill.auto-detected { color: var(--fg-green); }
+    .ascii-input-wrap { display: inline-block; position: relative; }
+    .ascii-input { font: inherit; background: transparent; border: none; color: var(--fg-bright); outline: none; padding: 0; width: 100%; caret-color: var(--cursor); letter-spacing: inherit; }
+    .ascii-input::placeholder { color: var(--border); }
+    .ascii-input:focus { background: var(--selection); }
+    .ascii-check, .ascii-radio { display: inline; cursor: pointer; color: var(--fg); background: none; border: none; font: inherit; padding: 0; transition: color 0.15s; }
+    .ascii-check:hover, .ascii-radio:hover { color: var(--fg-accent); }
+    .ascii-radio.selected { color: var(--fg-green); }
+    @keyframes toggle-flash { 0% { color: var(--fg-accent); } 100% { color: inherit; } }
+    .flash { animation: toggle-flash 0.4s ease-out; }
+    @media (max-width: 660px) { body { font-size: 10px; padding: 0.5rem; } .terminal { border-radius: 0; } }
+    .content::-webkit-scrollbar { height: 6px; } .content::-webkit-scrollbar-track { background: transparent; } .content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::selection { background: var(--selection); color: var(--fg-bright); }
+    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)} }
+  </style>
+</head>
+<body>
+<div class="terminal">
+  <div class="chrome">
+    <div class="dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+    <span class="chrome-title">checkout.md — SecurePay</span>
+    <span style="width:52px"></span>
+  </div>
+  <div class="content" id="content"></div>
+</div>
+<script>
+const state={cardType:'',cardNumber:'',cardName:'',expiry:'',cvv:'',saveCard:true,billing:'same',step:1,subtotal:99.00,taxRate:0.08,booted:false};
+state.tax=+(state.subtotal*state.taxRate).toFixed(2);state.total=+(state.subtotal+state.tax).toFixed(2);
+const CW=72;
+function padR(s,n){s=String(s);return s.length>=n?s.substring(0,n):s+' '.repeat(n-s.length)}
+function padL(s,n){s=String(s);return s.length>=n?s:' '.repeat(n-s.length)+s}
+function hr(w=CW,ch='\\u2500'){return ch.repeat(w)}
+function boxT(w){return'\\u250c'+'\\u2500'.repeat(w-2)+'\\u2510'}
+function boxM(w){return'\\u251c'+'\\u2500'.repeat(w-2)+'\\u2524'}
+function boxB(w){return'\\u2514'+'\\u2500'.repeat(w-2)+'\\u2518'}
+function boxR(c,w){const l=sLen(c),p=w-4-l;return p<=0?'\\u2502 '+c+' \\u2502':'\\u2502 '+c+' '.repeat(p)+' \\u2502'}
+function sLen(h){return h.replace(/<[^>]*>/g,'').length}
+function escH(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function getCompletion(){let n=0,total=4;if(state.cardNumber.replace(/\\s/g,'').length>=16)n++;if(state.cardName.trim())n++;if(state.expiry.length>=5)n++;if(state.cvv.length>=3)n++;return n/total}
+function isFormValid(){return state.cardNumber.replace(/\\s/g,'').length>=16&&state.cardName.trim()&&state.expiry.length>=5&&state.cvv.length>=3}
+function progressBar(w){const pct=getCompletion();const filled=Math.round(pct*w);const empty=w-filled;const bar='\\u2588'.repeat(filled)+'\\u2591'.repeat(empty);const label=Math.round(pct*100)+'%';const cls=pct>=1?'green':pct>=0.5?'yellow':'muted';return '<span class="'+cls+'">'+bar+'</span> <span class="muted">'+label+'</span>'}
+function detectCard(num){const d=num.replace(/\\s/g,'');if(!d)return'';if(d[0]==='4')return'visa';if(d[0]==='5')return'mastercard';return''}
+function nav(label,id,active){return'<button class="nav-link'+(active?' active':'')+'" onclick="navClick(\\''+id+'\\')">'+label+'</button>'}
+function step(label,i){if(i<state.step)return'<span class="step done" onclick="setStep('+i+')">  '+label+'  </span>';if(i===state.step)return'<span class="step current" onclick="setStep('+i+')">[ '+label+' ]</span>';return'<span class="muted step" onclick="setStep('+i+')">  '+label+'  </span>'}
+function inp(id,ph,w,opts){opts=opts||{};const val=state[id]||'';const ml=opts.maxlen||w;const tp=opts.type||'text';return'[<span class="ascii-input-wrap" style="width:'+w+'ch"><input class="ascii-input" type="'+tp+'" id="input-'+id+'" value="'+escH(val)+'" placeholder="'+ph+'" maxlength="'+ml+'" style="width:'+w+'ch" data-field="'+id+'" oninput="onInput(this)" onfocus="onFocus(this)" onblur="onBlur(this)"></span>]'}
+function chk(on){return'<button class="ascii-check" onclick="toggleCheck()" id="chk-save">'+(on?'\\u2611':'\\u2610')+'</button>'}
+function rad(val,label){const sel=state.billing===val;return'<button class="ascii-radio'+(sel?' selected':'')+'" onclick="setRadio(\\''+val+'\\')" id="rad-'+val+'">'+(sel?'\\u25cf':'\\u25cb')+' '+label+'</button>'}
+function pill(type,label){const auto=detectCard(state.cardNumber);let cls='card-pill';if(state.cardType===type)cls+=' selected';if(auto===type&&auto)cls+=' auto-detected';return'<button class="'+cls+'" onclick="setCard(\\''+type+'\\')">['+label+']</button>'}
+let ln=0,focused=null;
+function L(html){html=html||'';ln++;return'<span class="line"><span class="gutter">'+padL(ln,3)+'</span>'+html+'</span>\\n'}
+function render(animate){ln=0;const BW=CW;let o='';const detected=detectCard(state.cardNumber);if(detected&&detected!==state.cardType)state.cardType=detected;
+o+=L();o+=L(' '+nav('SecurePay','home',true)+'   '+nav('Products','products')+'   '+nav('Cart','cart')+'   '+nav('Orders','orders')+'                      '+nav('[ Sign Out ]','signout'));o+=L('<span class="dim">'+hr()+'</span>');
+o+=L('<span class="bright"> Complete Your Purchase</span>');o+=L(' '+step('Shipping',0)+' '+step('Payment',1)+'  '+step('Review',2)+'  '+step('Complete',3));o+=L('<span class="dim">'+hr()+'</span>');
+o+=L(' <span id="progress-bar">'+progressBar(CW-8)+'</span>');o+=L();
+o+=L(' '+boxT(BW-2));o+=L(' '+boxR('<span class="bright">Order Summary</span>          <span class="yellow">Premium Subscription</span> \\u00b7 1 Year           Subtotal: <span class="bright">$'+state.subtotal.toFixed(2)+'</span>  Tax: <span class="bright">$'+state.tax.toFixed(2)+'</span>',BW-2));o+=L(' '+boxR(' '.repeat(BW-30)+'<span class="green bright">Total:  $'+state.total.toFixed(2)+'</span>     ',BW-2));o+=L(' '+boxB(BW-2));o+=L();
+o+=L(' '+boxT(BW-2));o+=L(' '+boxR('<span class="bright">Payment Information</span>',BW-2));
+o+=L(' \\u251c\\u2500<span class="muted">Accepted Cards:</span>'+'\\u2500'.repeat(BW-22)+'\\u2524');
+o+=L(' '+boxR('  <span id="card-pills">'+pill('visa','VISA')+' '+pill('mastercard','MC')+(detected?' <span class="green">\\u2190 auto-detected</span>':'')+'</span>',BW-2));o+=L(' '+boxR('',BW-2));
+o+=L(' '+boxR('<span class="muted">Card Number</span>',BW-2));o+=L(' '+boxR('  '+inp('cardNumber','0000 0000 0000 0000',BW-12,{maxlen:19}),BW-2));o+=L(' '+boxR('',BW-2));
+o+=L(' '+boxR('<span class="muted">Cardholder Name</span>',BW-2));o+=L(' '+boxR('  '+inp('cardName','Your full name',BW-12),BW-2));o+=L(' '+boxR('',BW-2));
+const halfW=Math.floor((BW-14)/2);o+=L(' '+boxR('<span class="muted">Expiry Date</span>'+' '.repeat(halfW-8)+'<span class="muted">Security Code (CVV)</span>',BW-2));o+=L(' '+boxR('  '+inp('expiry','MM/YY',halfW-4,{maxlen:5})+'   '+inp('cvv','\\u00b7\\u00b7\\u00b7',halfW-5,{maxlen:4,type:'password'}),BW-2));o+=L(' '+boxR('',BW-2));
+o+=L(' '+boxR('  '+chk(state.saveCard)+' <span class="muted">Save card for future purchases</span>',BW-2));o+=L(' '+boxR('',BW-2));o+=L(' '+boxB(BW-2));o+=L();
+o+=L(' '+boxT(BW-2));o+=L(' '+boxR('<span class="bright">Billing Address</span>',BW-2));o+=L(' '+boxR('  '+rad('same','Same as shipping address'),BW-2));o+=L(' '+boxR('  '+rad('different','Use different billing address'),BW-2));o+=L(' '+boxB(BW-2));
+o+=L();o+=L(' <span class="muted">Your payment is secured with 256-bit SSL encryption</span>');o+=L();
+const valid=isFormValid();const payClass=valid?'ascii-btn primary ready':'ascii-btn primary';const payHint=valid?' <span class="muted">\\u21b5 Enter</span>':'';const cancel='<button class="ascii-btn danger" onclick="onCancel()">[    Cancel    ]</button>';const pay='<button class="'+payClass+'" onclick="onPay()">[  Pay $'+state.total.toFixed(2)+'  ]</button>';
+o+=L(' '.repeat(CW-40)+' '+cancel+'  <span id="pay-btn-wrap">'+pay+payHint+'</span>');o+=L();
+document.getElementById('content').innerHTML=o;
+if(animate){const lines=document.querySelectorAll('.line');lines.forEach((line,i)=>{line.classList.add('typing-hidden');setTimeout(()=>{line.classList.remove('typing-hidden');line.classList.add('typing-visible');},i*25)});state.booted=true;return}
+if(focused){const el=document.getElementById('input-'+focused);if(el){el.focus();const l=el.value.length;el.setSelectionRange(l,l)}}}
+function onInput(el){const f=el.dataset.field;let v=el.value;if(f==='cardNumber'){v=v.replace(/[^0-9]/g,'').substring(0,16);v=v.replace(/(.{4})/g,'$1 ').trim()}if(f==='expiry'){v=v.replace(/[^0-9/]/g,'');if(v.length===2&&!v.includes('/')&&state.expiry.length<v.length)v+='/'}if(f==='cvv')v=v.replace(/[^0-9]/g,'').substring(0,4);state[f]=v;if(el.value!==v){const pos=el.selectionStart;el.value=v;el.setSelectionRange(Math.min(pos+1,v.length),Math.min(pos+1,v.length))}if(f==='cardNumber'){const detected=detectCard(v);if(detected&&detected!==state.cardType)state.cardType=detected;const pillsEl=document.getElementById('card-pills');if(pillsEl){const det=detectCard(state.cardNumber);const hint=det?' <span class="green">\\u2190 auto-detected</span>':'';pillsEl.innerHTML=pill('visa','VISA')+' '+pill('mastercard','MC')+hint}}updateDynamic()}
+function updateDynamic(){const pb=document.getElementById('progress-bar');if(pb)pb.innerHTML=progressBar(CW-8);const pw=document.getElementById('pay-btn-wrap');if(pw){const valid=isFormValid();const payClass=valid?'ascii-btn primary ready':'ascii-btn primary';const payHint=valid?' <span class="muted">\\u21b5 Enter</span>':'';pw.innerHTML='<button class="'+payClass+'" onclick="onPay()">[  Pay $'+state.total.toFixed(2)+'  ]</button>'+payHint}}
+function onFocus(el){focused=el.dataset.field}function onBlur(el){if(focused===el.dataset.field)focused=null}
+function toggleCheck(){state.saveCard=!state.saveCard;render();setTimeout(()=>{const el=document.getElementById('chk-save');if(el)el.classList.add('flash')},10)}
+function setRadio(v){state.billing=v;render();setTimeout(()=>{const el=document.getElementById('rad-'+v);if(el)el.classList.add('flash')},10)}
+function setCard(t){state.cardType=t;render()}function setStep(n){state.step=n;render()}function navClick(){}
+function onCancel(){if(confirm('Cancel your purchase?')){state.cardNumber='';state.cardName='';state.expiry='';state.cvv='';state.cardType='';render()}}
+function onPay(){const errs=[];if(state.cardNumber.replace(/\\s/g,'').length<16)errs.push('Card number must be 16 digits');if(!state.cardName.trim())errs.push('Cardholder name is required');if(state.expiry.length<5)errs.push('Expiry date is required');if(state.cvv.length<3)errs.push('CVV must be at least 3 digits');if(errs.length){alert('Validation errors:\\n\\n'+errs.map(e=>'  \\u2717 '+e).join('\\n'));return}state.step=3;render();showSuccess()}
+function showSuccess(){setTimeout(()=>{ln=0;const sw=46;const pad=' '.repeat(Math.floor((CW-sw)/2));const lines=[];lines.push(L());lines.push(L());lines.push(L());lines.push(L(pad+boxT(sw)));lines.push(L(pad+boxR('',sw)));lines.push(L(pad+boxR('<span class="green bright">\\u2713 Payment Successful!</span>',sw)));lines.push(L(pad+boxR('',sw)));lines.push(L(pad+boxR('<span class="muted">Amount charged:</span>  <span class="bright">$'+state.total.toFixed(2)+'</span>',sw)));lines.push(L(pad+boxR('<span class="muted">Card ending:</span>     <span class="bright">****'+state.cardNumber.replace(/\\s/g,'').slice(-4)+'</span>',sw)));lines.push(L(pad+boxR('<span class="muted">Status:</span>          <span class="green">Confirmed</span>',sw)));lines.push(L(pad+boxR('',sw)));lines.push(L(pad+boxR('<span class="muted">A receipt has been sent to</span>',sw)));lines.push(L(pad+boxR('<span class="muted">your registered email address.</span>',sw)));lines.push(L(pad+boxR('',sw)));lines.push(L(pad+boxR('<button class="ascii-btn accent" onclick="resetForm()">[  Back to Dashboard  ]</button>',sw)));lines.push(L(pad+boxR('',sw)));lines.push(L(pad+boxB(sw)));lines.push(L());lines.push(L());const container=document.getElementById('content');container.innerHTML='';lines.forEach((lineHtml,i)=>{setTimeout(()=>{container.innerHTML+=lineHtml},i*60)})},400)}
+function resetForm(){state.step=1;state.cardNumber='';state.cardName='';state.expiry='';state.cvv='';state.cardType='';render(true)}
+document.addEventListener('keydown',(e)=>{if(e.key==='Enter'&&!e.shiftKey&&isFormValid()){const active=document.activeElement;if(active&&active.classList.contains('ascii-input')){e.preventDefault();onPay()}}if(e.key==='Tab'){const order=['cardNumber','cardName','expiry','cvv'];const currentIdx=order.indexOf(focused);if(currentIdx!==-1){e.preventDefault();const next=e.shiftKey?(currentIdx-1+order.length)%order.length:(currentIdx+1)%order.length;focused=order[next];render()}}});
+render(true);
+</script>
+</body>
+</html>`;
+
+const CheckoutTerminalDemo = () => {
+  return (
+    <iframe
+      srcDoc={checkoutTerminalHtml}
+      style={{
+        width: "100%",
+        height: 580,
+        border: "none",
+        borderRadius: 12,
+        background: "#f6f8fa",
+      }}
+      title="Daily UI #002 — Checkout"
+    />
+  );
+};
+
+const checkoutTerminalCode = `/* Daily UI #002 — Checkout
+   Terminal-style checkout form with:
+   - JetBrains Mono monospace UI
+   - ASCII box-drawing characters
+   - Line numbers & gutter
+   - Card type auto-detection (Visa/MC)
+   - Progress bar & form validation
+   - Typing animation on boot
+   - Payment success flow */
+
+/* See full HTML source in the preview */`;
+
 const Laboratoire = () => {
   return (
     <>
@@ -1205,6 +1631,22 @@ const Laboratoire = () => {
             description="Un bouton de suppression avec maintien et clip-path reveal"
             code={holdToDeleteCode}
             preview={<HoldToDeleteButton />}
+          />
+
+          <CodePreview
+            title="Daily UI #001 — Sign Up"
+            description="Formulaire d'inscription Liquid Glass avec grille 12 colonnes, glassmorphism, toggle light/dark et avatar dynamique"
+            code={signUpGlassCode}
+            preview={<SignUpGlassDemo />}
+            language="html"
+          />
+
+          <CodePreview
+            title="Daily UI #002 — Checkout"
+            description="Checkout terminal-style avec ASCII box-drawing, auto-détection de carte, barre de progression et animation de typing"
+            code={checkoutTerminalCode}
+            preview={<CheckoutTerminalDemo />}
+            language="html"
           />
         </div>
       </section>

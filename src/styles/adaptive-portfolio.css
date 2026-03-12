@@ -2323,6 +2323,7 @@ body:not(.default) .checkbox-group input[type="checkbox"] {
 }
 
 .code-preview-render {
+  position: relative;
   padding: 1.5rem;
   display: flex;
   align-items: center;
