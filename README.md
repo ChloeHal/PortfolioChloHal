@@ -32,10 +32,10 @@ En mode par defaut, le site reste volontairement brut et minimal — un rendu ma
 
 ## Pages
 
-- **Moi** (`/`) — hero, competences, formation, qualites et outils interactifs
+- **Moi** (`/`) — hero, competences, qualites et outils interactifs
 - **Experience** (`/experience`) — parcours professionnel detaille
 - **Bookmarks** (`/bookmarks`) — liens favoris organises par categorie (IA, Design, Inspiration, UX, Dev, Chrome Extensions, X) avec filtrage par tags
-- **Laboratoire** (`/laboratoire`) — experiences d'animation interactives avec code source (Dynamic Island, Hold to Delete, Clip Reveal, Morph Checkbox, Scrubber Input, Chat Split-Flap)
+- **Laboratoire** (`/laboratoire`) — experiences interactives presentees dans une grille d'icones style Finder avec Quick Look au hover et code source copiable (Variable Font Animator, Dynamic Island, Theme Transition, Chat Split-Flap, Morph Checkbox, Scrubber Input, Hold to Delete, Daily UI #001 Sign Up, Daily UI #002 Checkout)
 - **Bag** (`/bag`) — objets du quotidien
 
 ## Fonctionnalites
@@ -45,7 +45,7 @@ En mode par defaut, le site reste volontairement brut et minimal — un rendu ma
 
 - **Outils interactifs** — generateur de nom ninja, generateur de mot de passe, egg timer, book picker, jauge a cafe
 - **Bookmarks** — 150+ liens classes par categorie avec filtrage par tags
-- **Laboratoire** — 6 experiences d'animation interactives avec apercu live et code source
+- **Laboratoire** — 9 experiences interactives avec Quick Look au hover, navigation par dossier et code source copiable
 - **Contenu data-driven** — tout le texte vient d'un fichier de donnees
 - **SPA routing** — navigation client-side avec `.htaccess` pour Hostinger (Apache)
 
