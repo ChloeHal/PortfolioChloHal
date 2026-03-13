@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import CodePreview from "../components/CodePreview";
+import { X } from "lucide-react";
 
 /* ---- Experiment 1: Hold to Delete Button ---- */
 const HoldToDeleteButton = () => {
@@ -1153,6 +1154,224 @@ function transitionTo(phrase) {
 
 setInterval(nextPhrase, 3500);`;
 
+/* ---- Experiment: Variable Font Animator ---- */
+const variableFontHtml = `<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Variable Font Animator</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,slnt,wdth,wght,GRAD,ROND@6..144,-10..0,25..151,1..1000,0..100,0..100&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,slnt,wdth,wght,GRAD@8..144,-10..0,25..151,100..1000,-200..150&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; overflow: hidden; }
+    body { font-family: 'Google Sans Flex', system-ui, sans-serif; font-weight: 400; color: #000; background: #ece8e1; }
+    .app { display: grid; grid-template-columns: 1fr 440px; height: 100vh; max-width: 1400px; margin: 0 auto; border-left: 4px solid #000; border-right: 4px solid #000; }
+    .col-preview { background: #faf8f5; border-right: 4px solid #000; display: flex; flex-direction: column; overflow: hidden; }
+    .panel-input { background: #faf8f5; padding: 16px 24px; border-bottom: 3px solid #000; }
+    .preview { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; flex: 1; padding: 32px 24px; }
+    .letter { font-family: 'Google Sans Flex', sans-serif; font-size: 160px; line-height: 1; transition: none; display: inline-block; }
+    .col-settings { background: #f5f2ed; display: flex; flex-direction: column; height: 100vh; }
+    .panel { padding: 18px 24px; border-bottom: 2px solid #000; }
+    .panel:last-child { border-bottom: none; flex: 1; display: flex; flex-direction: column; }
+    h2 { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.18em; color: #fff; background: #000; padding: 5px 10px; display: inline-block; margin-bottom: 16px; }
+    .control-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .control-row:last-child { margin-bottom: 0; }
+    .control-row label { min-width: 105px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #444; }
+    .char-input { flex: 1; text-align: center; font-size: 20px; font-family: 'Google Sans Flex', sans-serif; font-weight: 700; padding: 10px 14px; border: 3px solid #000; border-radius: 0; outline: none; background: #faf8f5; transition: background 0.1s; }
+    .char-input:focus { background: #d4ff00; }
+    .dual-range { flex: 1; position: relative; height: 16px; }
+    .dual-range input[type="range"] { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; background: transparent; }
+    .dual-range input[type="range"]::-webkit-slider-thumb { pointer-events: all; }
+    .dual-range input[type="range"]::-moz-range-thumb { pointer-events: all; }
+    .dual-range input[type="range"]:first-child { background: #c5c0b8; }
+    input[type="range"] { flex: 1; -webkit-appearance: none; appearance: none; height: 2px; background: #c5c0b8; border-radius: 0; outline: none; cursor: pointer; }
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 0; background: #000; cursor: pointer; border: none; transition: background 0.1s; }
+    input[type="range"]::-webkit-slider-thumb:hover { background: #d4ff00; box-shadow: 0 0 0 2px #000; }
+    input[type="range"]::-webkit-slider-thumb:active { background: #d4ff00; box-shadow: 0 0 0 2px #000; }
+    input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius: 0; background: #000; cursor: pointer; border: none; }
+    input[type="range"]::-moz-range-thumb:hover { background: #d4ff00; box-shadow: 0 0 0 2px #000; }
+    .value { min-width: 40px; text-align: center; font-size: 12px; font-weight: 800; font-variant-numeric: tabular-nums; color: #000; background: #faf8f5; border: 2px solid #000; padding: 3px 6px; }
+    .unit { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #999; min-width: 32px; }
+    .custom-select { flex: 1; position: relative; user-select: none; }
+    .custom-select-trigger { font-size: 11px; font-family: 'Google Sans Flex', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; padding: 8px 12px; border: 2px solid #000; background: #faf8f5; cursor: pointer; display: flex; align-items: center; justify-content: space-between; }
+    .custom-select-trigger::after { content: ''; width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 5px solid #000; margin-left: 10px; }
+    .custom-select.open .custom-select-trigger { background: #d4ff00; }
+    .custom-select.open .custom-select-trigger::after { border-top: none; border-bottom: 5px solid #000; }
+    .custom-select-options { display: none; position: absolute; top: 100%; left: 0; right: 0; border: 2px solid #000; border-top: none; background: #faf8f5; z-index: 100; }
+    .custom-select.open .custom-select-options { display: block; }
+    .custom-select-option { font-size: 11px; font-family: 'Google Sans Flex', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; padding: 8px 12px; cursor: pointer; transition: background 0.08s; }
+    .custom-select-option:hover { background: #d4ff00; }
+    .custom-select-option.selected { background: #000; color: #d4ff00; }
+    .buttons { display: flex; gap: 0; margin-top: auto; padding-top: 14px; }
+    button, .btn-link { font-family: 'Google Sans Flex', sans-serif; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; padding: 12px 24px; border: 3px solid #000; border-radius: 0; background: #faf8f5; cursor: pointer; color: #000; text-decoration: none; transition: all 0.08s; display: inline-flex; align-items: center; }
+    button + .btn-link { border-left: none; }
+    button:hover, .btn-link:hover { background: #d4ff00; }
+    button:active, .btn-link:active { background: #000; color: #d4ff00; }
+    button.paused { background: #000; color: #d4ff00; border-color: #000; }
+    button.paused:hover { background: #1a1a1a; }
+    @media (max-width: 860px) { html, body { overflow: auto; } .app { grid-template-columns: 1fr; height: auto; } .col-preview { min-height: 240px; border-right: none; border-bottom: 6px solid #000; } .col-settings { height: auto; } }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="col-preview">
+      <div class="panel panel-input">
+        <div class="control-row">
+          <label>Typo</label>
+          <div class="custom-select" id="fontSelect" data-value="Google Sans Flex">
+            <div class="custom-select-trigger">Google Sans Flex</div>
+            <div class="custom-select-options">
+              <div class="custom-select-option selected" data-value="Google Sans Flex">Google Sans Flex</div>
+              <div class="custom-select-option" data-value="Roboto Flex">Roboto Flex</div>
+            </div>
+          </div>
+        </div>
+        <div class="control-row">
+          <label>Mot</label>
+          <input type="text" id="wordInput" value="Hello" class="char-input">
+        </div>
+      </div>
+      <div class="preview" id="preview">
+        <span class="letter">H</span><span class="letter">e</span><span class="letter">l</span><span class="letter">l</span><span class="letter">o</span>
+      </div>
+    </div>
+    <div class="col-settings">
+      <div class="panel">
+        <h2>Axes variables anim\\u00e9s</h2>
+        <div class="control-row">
+          <label>Weight</label>
+          <span class="value" id="wghtMinVal">100</span>
+          <div class="dual-range">
+            <input type="range" id="wghtMin" min="1" max="1000" value="100" step="1">
+            <input type="range" id="wghtMax" min="1" max="1000" value="900" step="1">
+          </div>
+          <span class="value" id="wghtMaxVal">900</span>
+        </div>
+        <div class="control-row">
+          <label>Grade</label>
+          <span class="value" id="gradMinVal">0</span>
+          <div class="dual-range">
+            <input type="range" id="gradMin" min="0" max="100" value="0" step="1">
+            <input type="range" id="gradMax" min="0" max="100" value="100" step="1">
+          </div>
+          <span class="value" id="gradMaxVal">100</span>
+        </div>
+        <div class="control-row">
+          <label>Slant</label>
+          <span class="value" id="slntMinVal">-10</span>
+          <div class="dual-range">
+            <input type="range" id="slntMin" min="-10" max="0" value="-10" step="0.5">
+            <input type="range" id="slntMax" min="-10" max="0" value="0" step="0.5">
+          </div>
+          <span class="value" id="slntMaxVal">0</span>
+        </div>
+        <div class="control-row" id="rondRow">
+          <label>Roundness</label>
+          <span class="value" id="rondMinVal">0</span>
+          <div class="dual-range">
+            <input type="range" id="rondMin" min="0" max="100" value="0" step="1">
+            <input type="range" id="rondMax" min="0" max="100" value="100" step="1">
+          </div>
+          <span class="value" id="rondMaxVal">100</span>
+        </div>
+      </div>
+      <div class="panel">
+        <h2>Animation</h2>
+        <div class="control-row">
+          <label>Vitesse</label>
+          <input type="range" id="speed" min="0.1" max="10" value="1.0" step="0.1">
+          <span class="value" id="speedVal">1.0</span>
+          <span class="unit">s/cycle</span>
+        </div>
+        <div class="control-row">
+          <label>Taille</label>
+          <input type="range" id="size" min="20" max="600" value="160" step="1">
+          <span class="value" id="sizeVal">160</span>
+          <span class="unit">px</span>
+        </div>
+        <div class="control-row">
+          <label>Easing</label>
+          <div class="custom-select" id="easing" data-value="cubic">
+            <div class="custom-select-trigger">Cubique</div>
+            <div class="custom-select-options">
+              <div class="custom-select-option" data-value="linear">Lin\\u00e9aire</div>
+              <div class="custom-select-option selected" data-value="cubic">Cubique</div>
+              <div class="custom-select-option" data-value="sine">Sinuso\\u00efdal</div>
+              <div class="custom-select-option" data-value="elastic">\\u00c9lastique</div>
+              <div class="custom-select-option" data-value="bounce">Rebond</div>
+            </div>
+          </div>
+        </div>
+        <div class="control-row">
+          <label>D\\u00e9calage lettres</label>
+          <input type="range" id="letterOffset" min="0" max="100" value="15" step="1">
+          <span class="value" id="letterOffsetVal">15</span>
+          <span class="unit">%</span>
+        </div>
+        <div class="buttons">
+          <button id="pauseBtn">Pause</button>
+          <a href="https://fonts.google.com/specimen/Google+Sans+Flex" target="_blank" class="btn-link">Google Sans Flex \\u2197</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const preview = document.getElementById('preview');
+    const wordInput = document.getElementById('wordInput');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const fontSelectEl = document.getElementById('fontSelect');
+    const easingEl = document.getElementById('easing');
+    function initCustomSelect(el, onChange) {
+      const trigger = el.querySelector('.custom-select-trigger');
+      const options = el.querySelectorAll('.custom-select-option');
+      trigger.addEventListener('click', (e) => { e.stopPropagation(); document.querySelectorAll('.custom-select.open').forEach(s => { if (s !== el) s.classList.remove('open'); }); el.classList.toggle('open'); });
+      options.forEach(opt => { opt.addEventListener('click', (e) => { e.stopPropagation(); const val = opt.dataset.value; el.dataset.value = val; trigger.textContent = opt.textContent; el.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected')); opt.classList.add('selected'); el.classList.remove('open'); if (onChange) onChange(val); }); });
+    }
+    document.addEventListener('click', () => { document.querySelectorAll('.custom-select.open').forEach(s => s.classList.remove('open')); });
+    const controls = { wghtMin: document.getElementById('wghtMin'), wghtMax: document.getElementById('wghtMax'), gradMin: document.getElementById('gradMin'), gradMax: document.getElementById('gradMax'), slntMin: document.getElementById('slntMin'), slntMax: document.getElementById('slntMax'), rondMin: document.getElementById('rondMin'), rondMax: document.getElementById('rondMax'), speed: document.getElementById('speed'), size: document.getElementById('size'), letterOffset: document.getElementById('letterOffset') };
+    const fontConfigs = { 'Google Sans Flex': { axes: ['wght', 'GRAD', 'slnt', 'ROND'], ranges: { wght: [1, 1000], GRAD: [0, 100], slnt: [-10, 0], ROND: [0, 100] } }, 'Roboto Flex': { axes: ['wght', 'GRAD', 'slnt'], ranges: { wght: [100, 1000], GRAD: [-200, 150], slnt: [-10, 0] } } };
+    function getFont() { return fontSelectEl.dataset.value; }
+    function getEasing() { return easingEl.dataset.value; }
+    function applyFontConfig(fontName) { const config = fontConfigs[fontName]; if (!config) return; const r = config.ranges; if (r.wght) { controls.wghtMin.min = r.wght[0]; controls.wghtMin.max = r.wght[1]; controls.wghtMax.min = r.wght[0]; controls.wghtMax.max = r.wght[1]; } if (r.GRAD) { controls.gradMin.min = r.GRAD[0]; controls.gradMin.max = r.GRAD[1]; controls.gradMax.min = r.GRAD[0]; controls.gradMax.max = r.GRAD[1]; controls.gradMin.value = r.GRAD[0]; controls.gradMax.value = r.GRAD[1]; values.gradMin.textContent = r.GRAD[0]; values.gradMax.textContent = r.GRAD[1]; } if (r.slnt) { controls.slntMin.min = r.slnt[0]; controls.slntMin.max = r.slnt[1]; controls.slntMax.min = r.slnt[0]; controls.slntMax.max = r.slnt[1]; } const hasRond = config.axes.includes('ROND'); const rondRow = document.getElementById('rondRow'); if (rondRow) rondRow.style.display = hasRond ? '' : 'none'; preview.querySelectorAll('.letter').forEach(el => { el.style.fontFamily = "'" + fontName + "', sans-serif"; }); }
+    initCustomSelect(fontSelectEl, (val) => applyFontConfig(val));
+    initCustomSelect(easingEl);
+    const values = { wghtMin: document.getElementById('wghtMinVal'), wghtMax: document.getElementById('wghtMaxVal'), gradMin: document.getElementById('gradMinVal'), gradMax: document.getElementById('gradMaxVal'), slntMin: document.getElementById('slntMinVal'), slntMax: document.getElementById('slntMaxVal'), rondMin: document.getElementById('rondMinVal'), rondMax: document.getElementById('rondMaxVal'), speed: document.getElementById('speedVal'), size: document.getElementById('sizeVal'), letterOffset: document.getElementById('letterOffsetVal') };
+    Object.keys(controls).forEach(key => { controls[key].addEventListener('input', () => { values[key].textContent = controls[key].value; }); });
+    function buildLetters(word) { preview.innerHTML = ''; const fontName = getFont(); for (const ch of word) { const span = document.createElement('span'); span.className = 'letter'; span.style.fontFamily = "'" + fontName + "', sans-serif"; if (ch === ' ') { span.innerHTML = '&nbsp;'; } else { span.textContent = ch; } preview.appendChild(span); } updateSize(); }
+    function updateSize() { const size = controls.size.value + 'px'; preview.querySelectorAll('.letter').forEach(el => { el.style.fontSize = size; }); }
+    wordInput.addEventListener('input', () => { const word = wordInput.value || 'A'; buildLetters(word); });
+    controls.size.addEventListener('input', updateSize);
+    const easings = { linear: t => t, cubic: t => t < 0.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2, sine: t => -(Math.cos(Math.PI*t)-1)/2, elastic: t => { if (t===0||t===1) return t; return t<0.5 ? -(Math.pow(2,20*t-10)*Math.sin((20*t-11.125)*(2*Math.PI)/4.5))/2 : (Math.pow(2,-20*t+10)*Math.sin((20*t-11.125)*(2*Math.PI)/4.5))/2+1; }, bounce: t => { const bounceOut = t => { const n1=7.5625,d1=2.75; if(t<1/d1) return n1*t*t; if(t<2/d1) return n1*(t-=1.5/d1)*t+0.75; if(t<2.5/d1) return n1*(t-=2.25/d1)*t+0.9375; return n1*(t-=2.625/d1)*t+0.984375; }; return t<0.5 ? (1-bounceOut(1-2*t))/2 : (1+bounceOut(2*t-1))/2; } };
+    function getPingPong(time, cycleDuration) { const raw = ((time%(cycleDuration*2))+cycleDuration*2)%(cycleDuration*2)/cycleDuration; return raw<=1?raw:2-raw; }
+    function lerp(a,b,t) { return a+(b-a)*t; }
+    let paused = false; let startTime = performance.now(); let pauseTime = 0;
+    pauseBtn.addEventListener('click', () => { paused=!paused; pauseBtn.textContent=paused?'Lecture':'Pause'; pauseBtn.classList.toggle('paused',paused); if(paused){pauseTime=performance.now()}else{startTime+=performance.now()-pauseTime} });
+    function animate(now) { requestAnimationFrame(animate); if(paused) return; const letters=preview.querySelectorAll('.letter'); if(letters.length===0) return; const cycleDuration=parseFloat(controls.speed.value)*1000; const letterOffsetRatio=parseFloat(controls.letterOffset.value)/100; const easeFn=easings[getEasing()]||easings.cubic; const wghtMin=parseFloat(controls.wghtMin.value); const wghtMax=parseFloat(controls.wghtMax.value); const gradMin=parseFloat(controls.gradMin.value); const gradMax=parseFloat(controls.gradMax.value); const slntMin=parseFloat(controls.slntMin.value); const slntMax=parseFloat(controls.slntMax.value); const rondMin=parseFloat(controls.rondMin.value); const rondMax=parseFloat(controls.rondMax.value); const elapsed=now-startTime; const count=letters.length; letters.forEach((el,i) => { const letterPhase=count>1?(i/(count-1))*letterOffsetRatio*cycleDuration:0; const t=easeFn(getPingPong(elapsed+letterPhase,cycleDuration)); const wght=lerp(wghtMin,wghtMax,t); const grad=lerp(gradMin,gradMax,t); const slnt=lerp(slntMin,slntMax,t); const rond=lerp(rondMin,rondMax,t); const config=fontConfigs[getFont()]; let fvs='"wght" '+wght+', "GRAD" '+grad+', "slnt" '+slnt; if(config&&config.axes.includes('ROND')){fvs+=', "ROND" '+rond} el.style.fontVariationSettings=fvs; }); }
+    requestAnimationFrame(animate);
+  </script>
+</body>
+</html>`;
+
+const VariableFontDemo = () => {
+  return (
+    <iframe
+      srcDoc={variableFontHtml}
+      style={{
+        width: "100%",
+        height: 600,
+        border: "none",
+        borderRadius: 12,
+        background: "#ece8e1",
+      }}
+      title="Variable Font Animator"
+    />
+  );
+};
+
+const variableFontCode = variableFontHtml;
+
 /* ---- Experiment 7: Daily UI #001 — Sign Up (Liquid Glass) ---- */
 const signUpGlassHtml = `<!DOCTYPE html>
 <html lang="fr" data-theme="light">
@@ -1406,16 +1625,7 @@ const SignUpGlassDemo = () => {
   );
 };
 
-const signUpGlassCode = `/* Daily UI #001 — Sign Up
-   Liquid Glass design system with:
-   - Figma-style 12-column grid overlay
-   - Backdrop blur glassmorphism
-   - Light/dark theme toggle
-   - Avatar initials from name fields
-   - Password strength indicator
-   - Animated blob backgrounds */
-
-/* See full HTML source in the preview */`;
+const signUpGlassCode = signUpGlassHtml;
 
 /* ---- Experiment 8: Daily UI #002 — Checkout (Terminal) ---- */
 const checkoutTerminalHtml = `<!DOCTYPE html>
@@ -1567,88 +1777,179 @@ const CheckoutTerminalDemo = () => {
   );
 };
 
-const checkoutTerminalCode = `/* Daily UI #002 — Checkout
-   Terminal-style checkout form with:
-   - JetBrains Mono monospace UI
-   - ASCII box-drawing characters
-   - Line numbers & gutter
-   - Card type auto-detection (Visa/MC)
-   - Progress bar & form validation
-   - Typing animation on boot
-   - Payment success flow */
+const checkoutTerminalCode = checkoutTerminalHtml;
 
-/* See full HTML source in the preview */`;
+interface LabExperiment {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  code: string;
+  preview: React.ReactNode;
+  srcDoc?: string;
+  language?: string;
+}
+
+const fileExperiments: LabExperiment[] = [
+  { id: "variable-font", title: "Variable Font Animator", description: "Polices variables, axes, easings", icon: "Aa", code: variableFontCode, preview: <VariableFontDemo />, srcDoc: variableFontHtml, language: "html" },
+  { id: "dynamic-island", title: "Dynamic Island", description: "Emoji sender, gooey filter, springs", icon: "💬", code: dynamicIslandCode, preview: <DynamicIslandDemo /> },
+  { id: "theme-transition", title: "Theme Transition", description: "Clip-path reveal light/dark", icon: "◐", code: clipRevealCode, preview: <ClipRevealDemo />, language: "html" },
+  { id: "chat-split-flap", title: "Chat Split-Flap", description: "Split-flap AI thinking indicator", icon: "▦", code: chatFlapCode, preview: <ChatFlapDemo /> },
+  { id: "morph-checkbox", title: "Morph Checkbox", description: "SVG morphing checkbox", icon: "☑", code: morphCheckboxCode, preview: <MorphCheckboxDemo /> },
+  { id: "scrubber-input", title: "Scrubber Input", description: "Drag to scrub, click to edit", icon: "↔", code: scrubberInputCode, preview: <ScrubberInputDemo /> },
+  { id: "hold-to-delete", title: "Hold to Delete", description: "Maintien + clip-path reveal", icon: "🗑", code: holdToDeleteCode, preview: <HoldToDeleteButton /> },
+];
+
+const dailyUiExperiments: LabExperiment[] = [
+  { id: "daily-ui-001", title: "#001 — Sign Up", description: "Liquid Glass, glassmorphism", icon: "01", code: signUpGlassCode, preview: <SignUpGlassDemo />, srcDoc: signUpGlassHtml, language: "html" },
+  { id: "daily-ui-002", title: "#002 — Checkout", description: "Terminal-style, ASCII art", icon: "02", code: checkoutTerminalCode, preview: <CheckoutTerminalDemo />, srcDoc: checkoutTerminalHtml, language: "html" },
+];
 
 const Laboratoire = () => {
+  const [openId, setOpenId] = useState<string | null>(null);
+  const [folderOpen, setFolderOpen] = useState(false);
+  const [hoverId, setHoverId] = useState<string | null>(null);
+  const tooltipRef = useRef<HTMLDivElement>(null);
+  const detailRef = useRef<HTMLDivElement>(null);
+
+  const allExperiments = [...fileExperiments, ...dailyUiExperiments];
+  const openExperiment = allExperiments.find((e) => e.id === openId);
+  const visibleFiles = folderOpen ? dailyUiExperiments : fileExperiments;
+
+  const handleOpen = useCallback((id: string) => {
+    setOpenId((prev) => (prev === id ? null : id));
+  }, []);
+
+  const handleFolderOpen = useCallback(() => {
+    setFolderOpen(true);
+    setOpenId(null);
+  }, []);
+
+  const handleBack = useCallback(() => {
+    setFolderOpen(false);
+    setOpenId(null);
+  }, []);
+
+  useEffect(() => {
+    if (openId && detailRef.current) {
+      detailRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }, [openId]);
+
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        if (openId) setOpenId(null);
+        else if (folderOpen) setFolderOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [openId, folderOpen]);
+
   return (
     <>
       <section className="lab-section" aria-label="Laboratoire">
         <h2 className="section-title">Laboratoire</h2>
         <p className="section-intro">
-          Mes petits tests et expérimentations en code. Chaque carte montre un aperçu
-          interactif et le code source correspondant.
+          Mes petits tests et expérimentations en code. Cliquez sur un élément
+          pour voir l'aperçu interactif et le code source.
         </p>
 
-        <div className="lab-grid">
-          <CodePreview
-            title="Dynamic Island"
-            description="Emoji sender avec Dynamic Island, gooey SVG filter et animations spring"
-            code={dynamicIslandCode}
-            preview={<DynamicIslandDemo />}
-          />
+        {folderOpen && (
+          <p className="finder-breadcrumb">
+            <button className="breadcrumb-link" onClick={handleBack}>Laboratoire</button>
+            {" › "}
+            <span>Daily UI</span>
+          </p>
+        )}
 
-          <CodePreview
-            title="Theme Transition (clip-reveal)"
-            description="Transition de thème light/dark avec clip-path inset — les deux thèmes coexistent pendant l'animation"
-            code={clipRevealCode}
-            preview={<ClipRevealDemo />}
-            language="html"
-          />
+        <div className="finder-grid">
+          {/* Folder (only in root) */}
+          {!folderOpen && (
+            <button className="finder-file" onClick={handleFolderOpen}>
+              <div className="finder-folder-icon">
+                <div className="finder-folder-icon-tab" />
+                <div className="finder-folder-icon-back" />
+                <div className="finder-folder-icon-front" />
+              </div>
+              <span className="finder-file-label">Daily UI</span>
+            </button>
+          )}
 
-          <CodePreview
-            title="Chat Split-Flap"
-            description="Indicateur de réflexion AI avec animation split-flap et skeleton loading"
-            code={chatFlapCode}
-            preview={<ChatFlapDemo />}
-          />
-
-          <CodePreview
-            title="Morph Checkbox"
-            description="Checkbox animée avec morphing SVG — le carré se transforme en checkmark"
-            code={morphCheckboxCode}
-            preview={<MorphCheckboxDemo />}
-          />
-
-          <CodePreview
-            title="Scrubber Input"
-            description="Input à la Figma : drag pour scrubber, clic pour éditer la valeur"
-            code={scrubberInputCode}
-            preview={<ScrubberInputDemo />}
-          />
-
-          <CodePreview
-            title="Hold to Delete"
-            description="Un bouton de suppression avec maintien et clip-path reveal"
-            code={holdToDeleteCode}
-            preview={<HoldToDeleteButton />}
-          />
-
-          <CodePreview
-            title="Daily UI #001 — Sign Up"
-            description="Formulaire d'inscription Liquid Glass avec grille 12 colonnes, glassmorphism, toggle light/dark et avatar dynamique"
-            code={signUpGlassCode}
-            preview={<SignUpGlassDemo />}
-            language="html"
-          />
-
-          <CodePreview
-            title="Daily UI #002 — Checkout"
-            description="Checkout terminal-style avec ASCII box-drawing, auto-détection de carte, barre de progression et animation de typing"
-            code={checkoutTerminalCode}
-            preview={<CheckoutTerminalDemo />}
-            language="html"
-          />
+          {/* Files */}
+          {visibleFiles.map((exp) => (
+            <button
+              key={exp.id}
+              className={`finder-file${openId === exp.id ? " selected" : ""}`}
+              onClick={() => handleOpen(exp.id)}
+              onMouseEnter={() => setHoverId(exp.id)}
+              onMouseMove={(e) => {
+                if (tooltipRef.current) {
+                  tooltipRef.current.style.left = `${e.clientX}px`;
+                  tooltipRef.current.style.top = `${e.clientY}px`;
+                }
+              }}
+              onMouseLeave={() => setHoverId(null)}
+            >
+              <div className="finder-file-icon">
+                <div className="finder-file-icon-page">
+                  <span className="finder-file-icon-preview">{exp.icon}</span>
+                </div>
+              </div>
+              <span className="finder-file-label">{exp.title}</span>
+            </button>
+          ))}
         </div>
+
+        {/* ── Quick Look tooltip (fixed, outside finder overflow) ── */}
+        {hoverId && (() => {
+          const exp = allExperiments.find((e) => e.id === hoverId);
+          if (!exp) return null;
+          return (
+            <div
+              ref={tooltipRef}
+              className="finder-quicklook"
+            >
+              <div className="finder-quicklook-inner">
+                {exp.srcDoc ? (
+                  <iframe
+                    srcDoc={exp.srcDoc}
+                    title={exp.title}
+                    style={{ border: "none" }}
+                  />
+                ) : (
+                  exp.preview
+                )}
+              </div>
+            </div>
+          );
+        })()}
+
+        {/* ── Detail panel ── */}
+        {openExperiment && (
+          <div className="finder-detail" ref={detailRef}>
+            <div className="finder-detail-header">
+              <div>
+                <h3 className="finder-detail-title">{openExperiment.title}</h3>
+                <p className="finder-detail-desc">{openExperiment.description}</p>
+              </div>
+              <button
+                className="finder-detail-close"
+                onClick={() => setOpenId(null)}
+                aria-label="Fermer"
+              >
+                <X size={16} />
+              </button>
+            </div>
+            <CodePreview
+              title={openExperiment.title}
+              code={openExperiment.code}
+              preview={openExperiment.preview}
+              language={openExperiment.language}
+            />
+          </div>
+        )}
       </section>
     </>
   );
