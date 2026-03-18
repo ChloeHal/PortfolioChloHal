@@ -424,6 +424,20 @@ const bookmarks: BookmarkItem[] = [
     tags: ["UI", "Inspiration"],
   },
   {
+    title: "Fluid Functionalism",
+    url: "https://www.fluidfunctionalism.com",
+    description: "Composants shadcn/ui avec animations fonctionnelles et purposeful motion",
+    category: "Inspiration",
+    tags: ["UI", "Animation", "React"],
+  },
+  {
+    title: "Impeccable",
+    url: "https://impeccable.style",
+    description: "Skills de design frontend pour assistants IA — vocabulaire et commandes pro",
+    category: "Inspiration",
+    tags: ["AI", "UI", "Dev"],
+  },
+  {
     title: "Eye on Design",
     url: "https://eyeondesign.aiga.org",
     description: "Bold Beers, Colorful Wine Labels — AIGA",
@@ -501,6 +515,13 @@ const bookmarks: BookmarkItem[] = [
     description: "Lecteur d'écran gratuit pour tester l'accessibilité",
     category: "UX · Documentation",
     tags: ["Accessibilité"],
+  },
+  {
+    title: "User Interface Wiki",
+    url: "https://www.userinterface.wiki",
+    description: "Manuel vivant pour apprendre les principes d'interfaces, animation et typographie",
+    category: "UX · Documentation",
+    tags: ["UX", "Animation", "Formation"],
   },
   {
     title: "On Taste (Part I)",
