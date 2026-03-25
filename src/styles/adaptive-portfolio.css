@@ -113,7 +113,7 @@
   color: var(--p-text-muted);
   border-radius: 0;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease, border-color 0.2s ease;
   font-size: 0.8rem;
   font-weight: 500;
 }
@@ -160,7 +160,7 @@
   opacity: 0;
   visibility: hidden;
   transform: translateY(-4px);
-  transition: all 0.2s ease;
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
   z-index: 101;
   max-height: 420px;
   overflow-y: auto;
@@ -282,7 +282,7 @@
   color: var(--p-text-muted);
   border-radius: 0;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: color 0.15s ease, border-color 0.15s ease;
   font-size: 0.75rem;
 }
 
@@ -309,6 +309,7 @@
   line-height: 1.2;
   color: var(--p-text);
   margin-bottom: 0.25rem;
+  text-wrap: balance;
 }
 
 .hero-subtitle {
@@ -325,6 +326,7 @@
   color: var(--p-text-muted);
   margin-bottom: 1.5rem;
   max-width: none;
+  text-wrap: pretty;
 }
 
 .hero-links {
@@ -368,6 +370,7 @@ section {
   color: var(--p-text);
   position: relative;
   display: block;
+  text-wrap: balance;
 }
 
 .section-title::after {
@@ -385,6 +388,7 @@ section {
   line-height: 1.7;
   color: var(--p-text-muted);
   margin-bottom: 1rem;
+  text-wrap: pretty;
 }
 
 /* ---------- Experience ---------- */
@@ -434,6 +438,7 @@ section {
   font-size: 0.9rem;
   line-height: 1.6;
   color: var(--p-text-muted);
+  text-wrap: pretty;
 }
 
 /* ---------- Education ---------- */
@@ -483,6 +488,7 @@ section {
   line-height: 1.6;
   color: var(--p-text-muted);
   margin-top: 0.375rem;
+  text-wrap: pretty;
 }
 
 .education-item p:last-child {
@@ -556,6 +562,7 @@ section {
   font-size: 0.9rem;
   color: var(--p-text-muted);
   line-height: 1.6;
+  text-wrap: pretty;
 }
 
 /* ---------- Certifications ---------- */
@@ -677,7 +684,7 @@ section {
   background: var(--p-surface);
   color: var(--p-text);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease;
   margin: 1rem 0;
   font-weight: 500;
 }
@@ -765,7 +772,7 @@ section {
   background: transparent;
   color: var(--p-text-muted);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: color 0.15s ease, border-color 0.15s ease;
   flex-shrink: 0;
 }
 
@@ -781,6 +788,7 @@ section {
   margin: 1.5rem 0;
   font-family: "JetBrains Mono", monospace;
   color: var(--p-text);
+  font-variant-numeric: tabular-nums;
 }
 
 .timer-presets {
@@ -796,7 +804,7 @@ section {
   color: var(--p-text-muted);
   border-radius: 0;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease, border-color 0.2s ease;
   font-size: 0.8rem;
   font-weight: 500;
 }
@@ -1447,7 +1455,7 @@ body:not(.default) .checkbox-group input[type="checkbox"] {
 
 .portfolio-container > section,
 .portfolio-container > hr {
-  animation: fadeIn 0.4s ease-out;
+  animation: fadeIn 0.3s ease-out;
 }
 
 /* ---------- Admin Page ---------- */
@@ -1488,7 +1496,7 @@ body:not(.default) .checkbox-group input[type="checkbox"] {
   background: transparent;
   color: var(--p-text-muted);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: color 0.15s ease, border-color 0.15s ease;
 }
 
 .admin-btn:hover {
@@ -1602,7 +1610,7 @@ body:not(.default) .checkbox-group input[type="checkbox"] {
   cursor: pointer;
   width: 100%;
   justify-content: center;
-  transition: all 0.15s ease;
+  transition: color 0.15s ease, border-color 0.15s ease;
 }
 
 .admin-add-btn:hover {
@@ -1822,7 +1830,7 @@ body:not(.default) .checkbox-group input[type="checkbox"] {
   padding: 1.5rem;
   max-width: 22rem;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
-  animation: tour-fade-in 0.3s ease;
+  animation: tour-fade-in 0.3s ease-out;
 }
 
 @keyframes tour-fade-in {
@@ -1871,12 +1879,14 @@ body:not(.default) .checkbox-group input[type="checkbox"] {
   font-weight: 700;
   margin-bottom: 0.5rem;
   color: var(--p-text);
+  text-wrap: balance;
 }
 
 .tour-card p {
   font-size: 0.85rem;
   color: var(--p-text-muted);
   line-height: 1.6;
+  text-wrap: pretty;
 }
 
 .tour-actions {
@@ -2017,7 +2027,7 @@ body:not(.default) .checkbox-group input[type="checkbox"] {
   background: transparent;
   color: var(--p-text-muted);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
   font-family: inherit;
 }
 
@@ -2490,6 +2500,7 @@ body:not(.default) .checkbox-group input[type="checkbox"] {
 }
 
 .finder-detail-close {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2501,7 +2512,17 @@ body:not(.default) .checkbox-group input[type="checkbox"] {
   color: var(--p-text-muted);
   cursor: pointer;
   flex-shrink: 0;
-  transition: all 0.15s;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.finder-detail-close::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
 }
 
 .finder-detail-close:hover {
@@ -2564,7 +2585,7 @@ body:not(.default) .checkbox-group input[type="checkbox"] {
   font-size: 0.75rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .code-preview-tab.active {
@@ -2613,14 +2634,16 @@ body:not(.default) .checkbox-group input[type="checkbox"] {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-  padding: 0.25rem 0.6rem;
+  padding: 0.5rem 0.6rem;
+  min-height: 40px;
+  min-width: 40px;
   border: 1px solid var(--p-border);
   background: var(--p-surface);
   color: var(--p-text-muted);
   font-size: 0.7rem;
   cursor: pointer;
   z-index: 2;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .code-copy-btn:hover {
@@ -2662,6 +2685,7 @@ body:not(.default) .checkbox-group input[type="checkbox"] {
   color: #e5484d;
   clip-path: inset(0px 100% 0px 0px);
   transition: clip-path 0.2s ease-out;
+  will-change: clip-path;
 }
 
 .hold-delete-btn:active .hold-delete-overlay,
@@ -2672,7 +2696,7 @@ body:not(.default) .checkbox-group input[type="checkbox"] {
 
 .hold-delete-btn:active,
 .hold-delete-btn.is-pressing {
-  transform: scale(0.97);
+  transform: scale(0.96);
 }
 
 .hold-delete-btn {
@@ -2791,5 +2815,19 @@ body:not(.default) .checkbox-group input[type="checkbox"] {
   /* Breadcrumb */
   .finder-breadcrumb {
     font-size: 0.8rem;
+  }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
