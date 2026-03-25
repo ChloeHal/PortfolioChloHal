@@ -1,8 +1,15 @@
 import InteractiveTools from "../components/InteractiveTools";
 import { usePortfolioData } from "../data/usePortfolioData";
+import { useSEO } from "../hooks/useSEO";
 
 const Moi = () => {
   const { data } = usePortfolioData();
+
+  useSEO({
+    title: "Chloé Halloin — Product Designer & Design Engineer",
+    description:
+      "Portfolio de Chloé Halloin — Product Designer & Design Engineer. Découvrez mes projets, compétences et expérimentations.",
+  });
 
   return (
     <>

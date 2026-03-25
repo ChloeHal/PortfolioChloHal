@@ -17,6 +17,7 @@ import {
   Scissors,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { useSEO } from "../hooks/useSEO";
 
 interface BagItem {
   name: string;
@@ -59,6 +60,12 @@ const CATEGORIES: BagCategory[] = [
 ];
 
 const Bag = () => {
+  useSEO({
+    title: "Bag — Chloé Halloin",
+    description:
+      "Les objets de mon quotidien — tech, accessoires et essentiels.",
+  });
+
   return (
     <>
       <section className="bag-section" aria-label="What's in my bag">

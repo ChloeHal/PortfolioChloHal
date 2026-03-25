@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import CodePreview from "../components/CodePreview";
 import { X } from "lucide-react";
+import { useSEO } from "../hooks/useSEO";
 
 /* ---- Experiment 1: Hold to Delete Button ---- */
 const HoldToDeleteButton = () => {
@@ -1806,6 +1807,12 @@ const dailyUiExperiments: LabExperiment[] = [
 ];
 
 const Laboratoire = () => {
+  useSEO({
+    title: "Laboratoire — Chloé Halloin",
+    description:
+      "Expérimentations interactives — micro-interactions, composants UI et prototypes créatifs.",
+  });
+
   const [openId, setOpenId] = useState<string | null>(null);
   const [folderOpen, setFolderOpen] = useState(false);
   const [hoverId, setHoverId] = useState<string | null>(null);

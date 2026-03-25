@@ -1,7 +1,14 @@
 import { usePortfolioData } from "../data/usePortfolioData";
+import { useSEO } from "../hooks/useSEO";
 
 const Experience = () => {
   const { data } = usePortfolioData();
+
+  useSEO({
+    title: "Expérience — Chloé Halloin",
+    description:
+      "Parcours professionnel et formation de Chloé Halloin — Product Designer & Design Engineer.",
+  });
 
   return (
     <>

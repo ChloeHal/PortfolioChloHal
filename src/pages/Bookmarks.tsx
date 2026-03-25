@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ExternalLink } from "lucide-react";
+import { useSEO } from "../hooks/useSEO";
 
 interface BookmarkItem {
   title: string;
@@ -431,6 +432,20 @@ const bookmarks: BookmarkItem[] = [
     tags: ["UI", "Animation", "React"],
   },
   {
+    title: "Using AI as a Design Engineer",
+    url: "https://jakub.kr/work/using-ai-as-a-design-engineer",
+    description: "Guide pratique sur l'utilisation de l'IA dans le workflow d'un design engineer",
+    category: "Inspiration",
+    tags: ["AI", "UI", "UX"],
+  },
+  {
+    title: "UI Skills",
+    url: "https://www.ui-skills.com",
+    description: "Skills modulaires pour polir les interfaces créées par des agents IA",
+    category: "Inspiration",
+    tags: ["AI", "UI", "Dev"],
+  },
+  {
     title: "Impeccable",
     url: "https://impeccable.style",
     description: "Skills de design frontend pour assistants IA — vocabulaire et commandes pro",
@@ -744,6 +759,13 @@ const bookmarks: BookmarkItem[] = [
     description: "API de données web pour l'AI",
     category: "Dev · Outils",
     tags: ["JS", "AI"],
+  },
+  {
+    title: "Context7",
+    url: "https://context7.com",
+    description: "Documentation à jour pour librairies, intégrée aux assistants IA",
+    category: "Dev · Outils",
+    tags: ["AI", "Référence"],
   },
   {
     title: "Shader AI",
@@ -1070,6 +1092,12 @@ const CATEGORY_COLORS: Record<string, string> = {
 };
 
 const Bookmarks = () => {
+  useSEO({
+    title: "Bookmarks — Chloé Halloin",
+    description:
+      "Ma collection de ressources design & dev — outils, inspiration, librairies et extensions.",
+  });
+
   const [activeTags, setActiveTags] = useState<string[]>([]);
 
   const toggleTag = (tag: string) => {
