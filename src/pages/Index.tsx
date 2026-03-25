@@ -30,7 +30,7 @@ const Index = () => {
         <div className="nav-content">
           <div className="nav-logo">
             <span className="status-dot" aria-hidden="true" />
-            <h2>Open to work</h2>
+            <span className="nav-logo-text">Open to work</span>
           </div>
           <div className="nav-actions">
             <SectorNavigation

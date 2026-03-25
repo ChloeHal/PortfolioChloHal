@@ -64,7 +64,8 @@
   gap: 0.5rem;
 }
 
-.nav-logo h2 {
+.nav-logo h2,
+.nav-logo .nav-logo-text {
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--p-text-muted);

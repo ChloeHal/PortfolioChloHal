@@ -206,12 +206,12 @@ const CLIP_REVEAL_HTML = `
   </div>
   <div class="cr-cards">
     <div class="cr-card">
-      <h4><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg> Design</h4>
+      <h4><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg> Design</h4>
       <p>Dual render light &amp; dark. Le clip-path rétracte l'ancien thème.</p>
       <div style="margin-top:0.4rem"><span class="cr-badge">clip-path</span><span class="cr-badge">inset()</span><span class="cr-badge cr-badge-outline">dual render</span></div>
     </div>
     <div class="cr-card">
-      <h4><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> Technique</h4>
+      <h4><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> Technique</h4>
       <p>L'overlay se rétracte de <code>inset(0)</code> à <code>inset(100% 0 0 0)</code>.</p>
       <div style="margin-top:0.4rem"><span class="cr-badge">HTML</span><span class="cr-badge">CSS</span><span class="cr-badge cr-badge-outline">vanilla JS</span></div>
     </div>
@@ -442,15 +442,15 @@ const MorphCheckboxDemo = () => {
         <div class="morph-card-header"><h2 class="morph-card-title">Task</h2></div>
         <div class="morph-card-content">
           ${tasks.map(t => `
-            <div class="morph-task" data-morph-task>
-              <div class="morph-cb-wrap"><svg viewBox="0 0 28 28" width="22" height="22"></svg></div>
+            <div class="morph-task" data-morph-task role="checkbox" aria-checked="false" tabindex="0">
+              <div class="morph-cb-wrap" aria-hidden="true"><svg viewBox="0 0 28 28" width="22" height="22"></svg></div>
               <span class="morph-task-label">${t}<span class="morph-strike"></span></span>
             </div>
           `).join("")}
           <div class="morph-divider"></div>
           <div class="morph-switch-row">
             <label>Slow motion</label>
-            <button class="morph-switch"><span class="morph-thumb"></span></button>
+            <button class="morph-switch" aria-label="Slow motion" aria-pressed="false"><span class="morph-thumb"></span></button>
           </div>
         </div>
       </div>
@@ -511,10 +511,18 @@ const MorphCheckboxDemo = () => {
         animId = requestAnimationFrame(tick);
       }
 
-      row.addEventListener("click", () => {
+      const toggle = () => {
         checked = !checked;
         label.classList.toggle("done", checked);
+        row.setAttribute("aria-checked", String(checked));
         animate();
+      };
+      row.addEventListener("click", toggle);
+      row.addEventListener("keydown", (e: Event) => {
+        if ((e as KeyboardEvent).key === "Enter" || (e as KeyboardEvent).key === " ") {
+          (e as KeyboardEvent).preventDefault();
+          toggle();
+        }
       });
 
       render(0);
@@ -525,6 +533,7 @@ const MorphCheckboxDemo = () => {
     switchBtn.addEventListener("click", () => {
       slow = !slow;
       switchBtn.classList.toggle("on", slow);
+      switchBtn.setAttribute("aria-pressed", String(slow));
       wrapper.classList.toggle("morph-slow", slow);
     });
 
@@ -1011,7 +1020,7 @@ const ChatFlapDemo = () => {
           </div>
           <div class="cf-bot-content">
             <div class="cf-response-card">
-              <div class="cf-status-line" id="cf-status-line"></div>
+              <div class="cf-status-line" id="cf-status-line" aria-hidden="true"></div>
               <div class="cf-skeleton-lines">
                 <div class="cf-skeleton-line" style="width:92%"></div>
                 <div class="cf-skeleton-line" style="width:78%"></div>
@@ -1023,9 +1032,9 @@ const ChatFlapDemo = () => {
         </div>
         <div class="cf-input-area">
           <div class="cf-input-container">
-            <div class="cf-icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="cf-fake-input">Ask anything...</div>
-            <div class="cf-send-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 19V5m0 0-5 5m5-5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="cf-icon-btn" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="cf-fake-input" aria-hidden="true">Ask anything...</div>
+            <div class="cf-send-btn" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 19V5m0 0-5 5m5-5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           </div>
         </div>
       </div>
